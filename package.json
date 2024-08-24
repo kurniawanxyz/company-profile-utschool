@@ -5,7 +5,6 @@
     "email": "kurniawanadi4556@gmail.com",
     "url": "https://kaitodecode.vercel.app"
   },
-  "private": "true",
   "contributors": [
     {
       "name": "Adi Kurniawan",
@@ -40,5 +39,6 @@
   },
   "dependencies": {
     "concurrently": "^8.2.2"
-  }
+  },
+  "packageManager": "yarn@4.4.0"
 }

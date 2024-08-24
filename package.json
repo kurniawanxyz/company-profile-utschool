@@ -1,0 +1,44 @@
+{
+  "name": "utschool-company-profile",
+  "author": {
+    "name": "Adi Kurniawan",
+    "email": "kurniawanadi4556@gmail.com",
+    "url": "https://kaitodecode.vercel.app"
+  },
+  "private": "true",
+  "contributors": [
+    {
+      "name": "Adi Kurniawan",
+      "email": "kurniawanadi4556@gmail.com",
+      "url": "https://kaitodecode.vercel.app"
+    },
+    {
+      "name": "Sofyan Gio Verdiansyah",
+      "email": "gio@gmail.com",
+      "url": "https://kaitodecode.vercel.app"
+    },
+    {
+      "name": "Rehan Septya Ramadhan",
+      "email": "rehan@gmail.com",
+      "url": "https://kaitodecode.vercel.app"
+    }
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start:frontend": "npm run dev --prefix frontend",
+    "start:backend": "cd backend && php artisan serve --host=127.0.0.1 --port=8000",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+  },
+  "devDependencies": {
+    "eslint": "^9.9.1",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

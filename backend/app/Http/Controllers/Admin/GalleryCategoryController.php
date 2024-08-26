@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGalleryCategoryRequest;
 use App\Http\Requests\UpdateGalleryCategoryRequest;
 use App\Models\GalleryCategory;
+use DB;
 use Illuminate\Http\Request;
 
 class GalleryCategoryController extends Controller
@@ -35,10 +36,13 @@ class GalleryCategoryController extends Controller
     public function store(StoreGalleryCategoryRequest $request)
     {
         try {
+            DB::beginTransaction();
             GalleryCategory::create($request->all());
 
+            DB::commit();
             return HandleJsonResponseHelpers::res("Successfully insert a new gallery category!");
         } catch (\Exception $e) {
+            DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }
@@ -66,6 +70,7 @@ class GalleryCategoryController extends Controller
     public function update(UpdateGalleryCategoryRequest $request, string $id)
     {
         try {
+            DB::beginTransaction();
             $gc = GalleryCategory::where('id', $id);
             if(!$gc->first()){
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
@@ -73,8 +78,10 @@ class GalleryCategoryController extends Controller
 
             $gc->update($request->all());
 
+            DB::commit();
             return HandleJsonResponseHelpers::res("Successfully update gallery category!");
         } catch (\Exception $e) {
+            DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }
@@ -85,6 +92,7 @@ class GalleryCategoryController extends Controller
     public function destroy(string $id)
     {
         try {
+            DB::beginTransaction();
             $gc = GalleryCategory::where('id', $id);
             if (!$gc->first()) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
@@ -92,8 +100,10 @@ class GalleryCategoryController extends Controller
 
             $gc->delete();
 
+            DB::commit();
             return HandleJsonResponseHelpers::res("Successfully delete gallery category!");
         } catch (\Exception $e) {
+            DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }

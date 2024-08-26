@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('gallery_category_id')->constrained()->cascadeOnDelete();
+            $table->string('image_path');
             $table->timestamps();
         });
     }

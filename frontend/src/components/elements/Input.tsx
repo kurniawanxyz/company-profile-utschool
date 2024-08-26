@@ -1,4 +1,5 @@
 import React, { HTMLInputTypeAttribute } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 type Props = {
     label: string,
@@ -6,7 +7,7 @@ type Props = {
     placeholder?: string,
     type?: HTMLInputTypeAttribute,
     isDirectionColoum?: boolean,
-    onChange?: (e:React.ChangeEvent) => void
+    className?: string
 }
 
 const Input = ({
@@ -15,18 +16,13 @@ const Input = ({
     name,
     placeholder,
     type,
-    onChange
+    className,
 }:Props ) => {
- const isChange:boolean = onChange != null
- function handleOnchange(e: React.ChangeEvent){
-   
- }
   return (
     <label className={`flex ${isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `} htmlFor={label}>
         <span className='text-neutral-900'>{label}</span>
         <input
-            
-            className='border-primary outline-none border rounded px-3 py-1 mt-1 text-neutral-600'
+            className={`${twMerge('border-primary outline-none border rounded px-3 py-1 mt-1 text-neutral-600',className)}`}
             id={label}
             name={name}
             placeholder={placeholder}

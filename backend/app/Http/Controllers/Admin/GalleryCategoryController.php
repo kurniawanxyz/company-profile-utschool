@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\HandleJsonResponseHelpers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GalleryCategoryRequest;
+use App\Http\Requests\StoreGalleryCategoryRequest;
+use App\Http\Requests\UpdateGalleryCategoryRequest;
 use App\Models\GalleryCategory;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class GalleryCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(GalleryCategoryRequest $request)
+    public function store(StoreGalleryCategoryRequest $request)
     {
         try {
             GalleryCategory::create($request->all());
@@ -62,7 +63,7 @@ class GalleryCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGalleryCategoryRequest $request, string $id)
     {
         try {
             $gc = GalleryCategory::where('id', $id);

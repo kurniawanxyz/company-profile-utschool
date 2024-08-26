@@ -6,7 +6,7 @@ use App\Helpers\HandleJsonResponseHelpers;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class GalleryCategoryRequest extends FormRequest
+class UpdateGalleryCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,9 @@ class GalleryCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('gallery_category');
         return [
-            "text" => "required",
+            "text" => "required|unique:gallery_categories,text," . $id . "id",
             "description" => "required"
         ];
     }

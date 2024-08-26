@@ -25,8 +25,11 @@ class VerifyAPIKey
 
         // abort_if(!$apiKeyIsValid, 403, 'Access denied');
 
-        if (!$apiKeyIsValid) {
+        if (!$request->header('x-api-key')) {
             return HandleJsonResponseHelpers::res("Missing API key", "Access denied for route " . $request->route()->uri(), Response::HTTP_FORBIDDEN, false);
+        }
+        if (!$apiKeyIsValid) {
+            return HandleJsonResponseHelpers::res("Invalid API key", "Access denied for route " . $request->route()->uri(), Response::HTTP_FORBIDDEN, false);
         }
 
         return $next($request);

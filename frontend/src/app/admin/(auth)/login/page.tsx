@@ -1,11 +1,11 @@
-import LoginPage from '@/components/pages/LoginPage'
-import { useMetadata } from '@/utils'
+import { LoginPage } from '@/components/pages'
+import { handleMetadata } from '@/utils'
 import { Metadata } from 'next'
 import React from 'react'
 
 type Props = {}
 
-export const metadata:Metadata = useMetadata({
+export const metadata:Metadata = handleMetadata({
     title: "Login"
 })
 

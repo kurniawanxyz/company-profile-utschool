@@ -1,7 +1,7 @@
-import useFetch from "./useFetch";
-import useMetadata from "./useMetadata";
+import handleFetch from "./handleFetch";
+import handleMetadata from "./handleMetadata";
 
 export{
-    useFetch,
-    useMetadata
+    handleFetch,
+    handleMetadata
 }

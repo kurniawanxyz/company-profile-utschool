@@ -1,6 +1,8 @@
 "use server"
 
-import { useFetch } from "@/utils"
+import { handleFetch } from "@/utils"
+import { cookies } from "next/headers"
+
 
 export async function handleLogin(formData:FormData) {
 
@@ -13,6 +15,9 @@ export async function handleLogin(formData:FormData) {
         method: "POST",
         body: JSON.stringify(data)
     }
-    const response = await useFetch('/login',option)
-    console.log(response)
+    const [status,msg,result] = await handleFetch('/admin/login',option)
+    if(status){
+        cookies().set("token",result.token)
+    }
+    return [status,msg,result]
 }

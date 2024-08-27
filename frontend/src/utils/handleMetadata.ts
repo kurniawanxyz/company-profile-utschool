@@ -6,7 +6,7 @@ type useMetadataType ={
 
 }
 
-export default function useMetadata({
+export default function handleMetadata({
     title = "UT SCHOOL",
     description = "description of utschool", 
 }:useMetadataType):Metadata

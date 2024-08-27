@@ -1,7 +1,9 @@
+"use client"
 import React from 'react'
 import { Input } from '../elements'
 import Button from '../elements/Button'
 import Image from 'next/image'
+import { handleLogin } from '@/actions/LoginAction'
 
 type Props = {}
 
@@ -19,12 +21,13 @@ const LoginPage = (props: Props) => {
                     alt='UTSCHOOL'
                     width={500}
                     height={500}
+                    priority
                 />
             </div>
         </article>
-        <article className="w-1/3 rounded-xl border flex flex-col items-center justify-center ">
+        <div className="w-1/3 rounded-xl border flex flex-col items-center justify-center ">
             <h1 className='text-neutral-950 font-bold text-4xl'>Sign In</h1>
-            <form action="" method="post" className='w-2/3 mt-7 flex flex-col gap-3'>
+            <form action={handleLogin}  className='w-2/3 mt-7 flex flex-col gap-3'>
                 <Input
                     label='Email'
                     name='email'
@@ -37,9 +40,9 @@ const LoginPage = (props: Props) => {
                     placeholder='Your password'
                     type='password'
                 />
+                <Button type='submit' className='w-full' >Submit</Button>
             </form>
-            <Button>Submit</Button>
-        </article>
+        </div>
     </div>
   )
 }

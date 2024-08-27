@@ -15,20 +15,20 @@ const Input = ({
     label,
     name,
     placeholder,
-    type,
+    type = "text",
     className,
 }:Props ) => {
   return (
-    <label className={`flex ${isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `} htmlFor={label}>
-        <span className='text-neutral-900'>{label}</span>
+    <div className={`flex ${isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
+        <label className='text-neutral-900' htmlFor={label}>{label}</label>
         <input
             className={`${twMerge('border-primary outline-none border rounded px-3 py-1 mt-1 text-neutral-600',className)}`}
             id={label}
             name={name}
             placeholder={placeholder}
-            type={type??"text"}
+            type={type}
         />
-    </label>
+    </div>
   )
 }
 

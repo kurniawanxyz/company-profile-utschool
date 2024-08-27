@@ -6,6 +6,7 @@ use App\Helpers\HandleJsonResponseHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminLoginRequest;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -14,9 +15,12 @@ class LoginController extends Controller
     {
         try{
             if (auth()->attempt($request->all(), false)) {
+                $expired = Carbon::now()->addDay();
+
                 $user = auth()->user();
-                $success['token'] = $user->createToken(config('app.name'))->plainTextToken;
+                $success['token'] = $user->createToken(config('app.name'), ['*'], $expired)->plainTextToken;
                 $success['name'] = $user->name;
+                $success['expired'] = Carbon::parse($expired)->format("d-m-Y H:i:s");
 
                 return HandleJsonResponseHelpers::res("Successfully login", $success);
             }

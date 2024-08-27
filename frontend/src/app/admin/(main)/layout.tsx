@@ -1,3 +1,4 @@
+"use client"
 import Sidebar from '@/components/fragments/Sidebar'
 import Topbar from '@/components/fragments/Topbar'
 import React from 'react'
@@ -12,7 +13,9 @@ const layout = (props: Props) => {
         <Sidebar/>
         <div className='flex flex-col px-5 py-2 w-full'>
             <Topbar/>
-            {props.children}
+            <main className='mt-5'>
+                {props.children}
+            </main>
         </div>
     </div>
   )

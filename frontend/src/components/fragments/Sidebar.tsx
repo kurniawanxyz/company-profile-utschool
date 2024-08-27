@@ -1,11 +1,8 @@
 "use client"
 import { useSidebarStore } from '@/stores/useSidebarStore'
 import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
-import ToggleSidebar from '../elements/ToggleSidebar'
 import { Button } from '../elements'
 
 type Props = {}
@@ -15,7 +12,9 @@ type ListLink = {
 }
 
 const Sidebar = (props: Props) => {
+  const router = useRouter()
   const {isOpen,toggleSidebar} = useSidebarStore()
+  const nowPath = usePathname() 
   const listLink: ListLink[] = [
     {
         url: '/admin/dashboard',
@@ -39,18 +38,19 @@ const Sidebar = (props: Props) => {
     <>
         <div className={`w-80 h-screen bg-white shadow-sm flex flex-col ${!isOpen && 'hidden'} z-50 md:sticky fixed top-0 px-3 md:px-0 `}>
         <article className='bg-slate-900 p-6 mt-5 rounded-lg shadow'>
-            <Image
-                src={'/images/logo/uts/1.png'}
-                alt='UT School'
-                width={500}
-                height={500}
-            />
+                <Image
+                    src={'/images/logo/uts/1.png'}
+                    alt='UT School'
+                    width={100}
+                    height={100}
+                    loading='lazy'
+                />
         </article>
         <ul className='flex flex-col text-slate-900 px-3 mt-5 gap-5'>
             {
                 listLink && listLink.map((item:ListLink,index:number)=>(
-                    <li key={`sidebar-${index}`} className={`${twMerge(defaultStyle,usePathname() == item.url && 'bg-slate-900 text-primary')}`}>
-                        <Link href={item.url}>{item.text}</Link>
+                    <li onClick={()=>router.push(item.url)} key={`sidebar-${index}`} className={`${twMerge(defaultStyle, nowPath == item.url && 'bg-slate-900 text-primary')}`}>
+                        {item.text}
                     </li>
                 ))
             }

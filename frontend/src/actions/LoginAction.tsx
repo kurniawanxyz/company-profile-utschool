@@ -2,6 +2,7 @@
 
 import { handleFetch } from "@/utils"
 import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
 
 export async function handleLogin(formData:FormData) {
@@ -18,6 +19,7 @@ export async function handleLogin(formData:FormData) {
     const [status,msg,result] = await handleFetch('/admin/login',option)
     if(status){
         cookies().set("token",result.token)
+        redirect('/admin/dashboard')
     }
     return [status,msg,result]
 }

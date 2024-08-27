@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DirectorController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LoginController;
@@ -18,4 +19,5 @@ Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     Route::apiResource('/gallery-category', GalleryCategoryController::class);
     Route::apiResource('/gallery', GalleryController::class);
     Route::apiResource('/news', NewsController::class);
+    Route::apiResource('/director', DirectorController::class);
 });

@@ -22,6 +22,6 @@ class AdminIniMiddleware
             return $next($request);
         }
 
-        return HandleJsonResponseHelpers::res("Access denied", "You don't have access to {$request->route()->uri()} route!", 403, false);
+        return HandleJsonResponseHelpers::res("Access denied", "You don't have access to {$request->route()->uri()} route! Check your token is valid and not expired!", 403, false);
     }
 }

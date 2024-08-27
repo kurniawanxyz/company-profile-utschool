@@ -15,6 +15,7 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
+Route::get('/top-news', [LandingPageController::class, 'topNews']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);

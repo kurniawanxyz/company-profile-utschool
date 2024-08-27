@@ -80,20 +80,18 @@ class GalleryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $gallery = Gallery::where('id', $id);
-            if (!$gallery->first()) {
+            $gallery = Gallery::where('id', $id)->first();
+            if (!$gallery) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            $image_path = $gallery->first()->image_path;
+            $image_path = $gallery->image_path;
             $data = array_filter([
                 'gallery_category_id' => $request->gallery_category_id,
             ]);
 
             if($request->hasFile('image')){
-                if(Storage::exists($image_path)){
-                    Storage::delete($image_path);
-                }
+                Storage::exists($image_path) && Storage::delete($image_path);
 
                 $fileName = $request->file('image')->hashName();
                 $data['image_path'] = $request->file('image')->storeAs('gallery', $fileName);
@@ -116,15 +114,14 @@ class GalleryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $gallery = Gallery::where('id', $id);
-            if (!$gallery->first()) {
+            $gallery = Gallery::where('id', $id)->first();
+            if (!$gallery) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            $image_path = $gallery->first()->image_path;
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
-            }
+            $image_path = $gallery->image_path;
+            Storage::exists($image_path) && Storage::delete($image_path);
+
             $gallery->delete();
 
             DB::commit();

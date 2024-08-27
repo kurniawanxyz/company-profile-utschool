@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\HandleJsonResponseHelpers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreGalleryCategoryRequest;
-use App\Http\Requests\UpdateGalleryCategoryRequest;
-use App\Models\GalleryCategory;
+use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\UpdateNewsRequest;
+use App\Models\News;
 use DB;
 use Illuminate\Http\Request;
+use Storage;
 
-class GalleryCategoryController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +19,13 @@ class GalleryCategoryController extends Controller
     public function index(Request $request)
     {
         try {
-            $gc = GalleryCategory::latest();
+            $news = News::latest();
             if($req = $request->input('query')){
-                $gc->where('text', "LIKE", "%". $req ."%");
+                $news->where('title', 'LIKE', "%". $req ."%");
             }
 
-            $gc = $gc->paginate(10);
-            return HandleJsonResponseHelpers::res("Successfully get gallery category data!", $gc);
+            $news = $news->paginate(10);
+            return HandleJsonResponseHelpers::res("Successfully get data!", $news);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
@@ -33,14 +34,20 @@ class GalleryCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGalleryCategoryRequest $request)
+    public function store(StoreNewsRequest $request)
     {
         try {
             DB::beginTransaction();
-            GalleryCategory::create($request->all());
+
+            $data = [...$request->all()];
+
+            $fileName = $request->file('thumbnail')->hashName();
+            $data['thumbnail'] = $request->file('thumbnail')->storeAs('news_thumbnail', $fileName);
+
+            News::create($data);
 
             DB::commit();
-            return HandleJsonResponseHelpers::res("Successfully insert a new gallery category!");
+            return HandleJsonResponseHelpers::res("Successfully insert a new news data!");
         } catch (\Exception $e) {
             DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
@@ -53,12 +60,12 @@ class GalleryCategoryController extends Controller
     public function show(string $id)
     {
         try {
-            $gc = GalleryCategory::where('id', $id)->first();
-            if (!$gc) {
+            $news = News::where('id', $id)->first();
+            if (!$news) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            return HandleJsonResponseHelpers::res("Successfully get gallery category!", $gc);
+            return HandleJsonResponseHelpers::res("Successfully get news!", $news);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
@@ -67,19 +74,30 @@ class GalleryCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGalleryCategoryRequest $request, string $id)
+    public function update(UpdateNewsRequest $request, string $id)
     {
         try {
             DB::beginTransaction();
-            $gc = GalleryCategory::where('id', $id)->first();
-            if(!$gc){
+
+            $news = News::where('id', $id)->first();
+            if (!$news) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            $gc->update($request->all());
+            $thumbnail_path = $news->thumbnail;
+            $data = [...$request->all()];
+
+            if($request->hasFile('thumbnail')){
+                Storage::exists($thumbnail_path) && Storage::delete($thumbnail_path);
+
+                $fileName = $request->file('thumbnail')->hashName();
+                $data['thumbnail'] = $request->file('thumbnail')->storeAs('news_thumbnail', $fileName);
+            }
+
+            $news->update($data);
 
             DB::commit();
-            return HandleJsonResponseHelpers::res("Successfully update gallery category!");
+            return HandleJsonResponseHelpers::res("Successfully update news data!");
         } catch (\Exception $e) {
             DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
@@ -93,15 +111,20 @@ class GalleryCategoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $gc = GalleryCategory::where('id', $id)->first();
-            if (!$gc) {
+
+            $news = News::where('id', $id)->first();
+            if (!$news) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            $gc->delete();
+            $thumbnail_path = $news->thumbnail;
+
+            Storage::exists($thumbnail_path) && Storage::delete($thumbnail_path);
+
+            $news->delete();
 
             DB::commit();
-            return HandleJsonResponseHelpers::res("Successfully delete gallery category!");
+            return HandleJsonResponseHelpers::res("Successfully delete news data!");
         } catch (\Exception $e) {
             DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);

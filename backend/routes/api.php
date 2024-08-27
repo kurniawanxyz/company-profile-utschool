@@ -5,12 +5,16 @@ use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\LandingPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);

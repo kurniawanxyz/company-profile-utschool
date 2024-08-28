@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "start:frontend": "cd frontend && pnpm dev",
-    "start:backend": "cd backend && php artisan serve --host=127.0.0.1 --port=8000",
+    "start:backend": "cd backend && php artisan serve --host=127.0.0.1 ",
     "start": "concurrently \"pnpm run start:frontend\" \"pnpm run start:backend\""
   },
   "devDependencies": {

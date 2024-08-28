@@ -26,4 +26,5 @@ export async function handleCreateDirector(formdata:FormData){
     }else{
         redirect("/admin/directors")
     }
+    return
 }

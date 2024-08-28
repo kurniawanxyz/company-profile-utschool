@@ -1,20 +1,34 @@
 "use client"
-import { Input } from "@/components/elements"
+import { Button, Input, TextArea } from "@/components/elements"
 import Banner from "@/components/elements/Banner"
 import Card from "@/components/elements/Card"
 import dynamic from "next/dynamic";
 import { useRichEditor } from "@/stores/useRichEditor";
+import { useAvatar } from "@/stores/useAvatar"
+import Avatar from "@/components/fragments/Avatar"
+import { handleCreateDirector } from "@/services/DirectorService";
 const RichEditor = dynamic(()=>import("@/components/fragments/RichEditor"),{ssr:false})
 
 
 
 type Props = {}
 
-  
-
 const CreateDirector = (props: Props) => {
     const {value} = useRichEditor()
-    console.log(value)
+    const {avatar,setAvatar} = useAvatar();
+
+    const handleImageChange = (event:any) => {
+        const file = event.target.files[0];
+        console.log(event)
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setAvatar(imageUrl);
+        }
+    };
+
+
+
+
 return (
     <>
         <Banner
@@ -23,16 +37,22 @@ return (
             urlKembali="/admin/directors"
         />
 
-        <div className="text-slate-900" dangerouslySetInnerHTML={{ __html: value }} />
-
         <Card className="mt-5">
-            <form action="">
+            <form action={handleCreateDirector} className="flex flex-col gap-5">
+                <div className="w-full flex justify-center">
+                    <Avatar label="The Director foto" className="w-32 h-32 object-cover" size={150} name="photo_profile" img={avatar} setImg={(e)=>handleImageChange(e)}/>
+                </div>
                 <Input
                     label="Name"
                     name="name"
                 />
-                
+                <TextArea label="Description" name="description"/>
+                <input type="text" name="message" className="hidden" value={value} />
                 <RichEditor title="Message"/>
+                <div className="flex justify-end mt-10">
+                    <Button className="w-32" type="submit">Submit</Button>
+                </div>
+
             </form>
         </Card>
         

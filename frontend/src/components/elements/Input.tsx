@@ -22,7 +22,7 @@ const Input = ({
     <div className={`flex ${isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
         <label className='text-neutral-900' htmlFor={label}>{label}</label>
         <input
-            className={`${twMerge('border-primary outline-none border rounded px-3 py-1 mt-1 text-neutral-600',className)}`}
+            className={`${twMerge('border-slate-300 focus:border-primary outline-none border rounded px-3 py-1 mt-1 text-neutral-600',className)}`}
             id={label}
             name={name}
             placeholder={placeholder}

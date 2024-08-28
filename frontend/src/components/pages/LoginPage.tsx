@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import { Input } from '../elements'
-import Button from '../elements/Button'
 import Image from 'next/image'
 import { handleLogin } from '@/actions/LoginAction'
+import Input from '../elements/Input'
+import Button from '../elements/Button'
 
 type Props = {}
 

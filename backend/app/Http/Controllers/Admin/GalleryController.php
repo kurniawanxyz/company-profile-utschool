@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\HandleJsonResponseHelpers;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostImageRequest;
 use App\Http\Requests\StoreGalleryRequest;
 use App\Http\Requests\UpdateGalleryRequest;
 use App\Models\Gallery;

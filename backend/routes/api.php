@@ -16,7 +16,11 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
+Route::get('/news', [NewsController::class, 'index']);
 Route::get('/top-news', [LandingPageController::class, 'topNews']);
+Route::get('/director', [DirectorController::class, 'index']);
+Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
+Route::get('/gallery', [GalleryController::class, 'index']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);

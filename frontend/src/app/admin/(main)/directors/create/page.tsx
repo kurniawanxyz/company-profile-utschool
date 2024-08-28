@@ -1,9 +1,9 @@
+import CreateDirector from "@/components/pages/Directors/CreateDirector"
+
 type Props = {}
 
 const page = (props: Props) => {
-  return (
-    <div>page</div>
-  )
+  return <CreateDirector/>
 }
 
 export default page

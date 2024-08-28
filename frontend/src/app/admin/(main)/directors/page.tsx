@@ -7,7 +7,7 @@ const DirectorsRoute = (props: Props) => {
     <Banner
         title="Directors"
         btnTambah={true}
-        btnKembali={true}
+        urlTambah="/admin/directors/create"
     />
   )
 }

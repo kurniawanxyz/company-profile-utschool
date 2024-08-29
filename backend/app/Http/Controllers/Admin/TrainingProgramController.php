@@ -20,7 +20,7 @@ class TrainingProgramController extends Controller
         try {
             $tp = TrainingProgram::latest();
             if ($req = $request->input('query')) {
-                $tp->where('name', "LIKE", "%" . $req . "%");
+                $tp = $tp->where('name', "LIKE", "%" . $req . "%");
             }
 
             $tp = $tp->paginate(10);

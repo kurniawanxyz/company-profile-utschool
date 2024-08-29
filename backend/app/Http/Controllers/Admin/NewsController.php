@@ -21,7 +21,7 @@ class NewsController extends Controller
         try {
             $news = News::latest();
             if($req = $request->input('query')){
-                $news->where('title', 'LIKE', "%". $req ."%");
+                $news = $news->where('title', 'LIKE', "%". $req ."%");
             }
 
             $news = $news->paginate(10);

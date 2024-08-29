@@ -20,7 +20,7 @@ class GalleryCategoryController extends Controller
         try {
             $gc = GalleryCategory::latest();
             if($req = $request->input('query')){
-                $gc->where('text', "LIKE", "%". $req ."%");
+                $gc = $gc->where('text', "LIKE", "%". $req ."%");
             }
 
             $gc = $gc->paginate(10);

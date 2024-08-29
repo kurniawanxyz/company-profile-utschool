@@ -22,7 +22,7 @@ class GalleryController extends Controller
         try {
             $gallery = Gallery::latest()->with(["gallery_category"]);
             if ($req = $request->input('query')) {
-                $gallery->whereHas('gallery_category', function ($query) use ($req) {
+                $gallery = $gallery->whereHas('gallery_category', function ($query) use ($req) {
                     $query->where('text', 'LIKE', "%" . $req . "%");
                 });
             }

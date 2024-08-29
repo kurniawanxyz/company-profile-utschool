@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('registration_forms', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('personal_data_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('personal_data_id')->constrained('personal_data')->cascadeOnDelete();
             $table->foreignUuid('training_program_id')->constrained()->cascadeOnDelete();
             $table->string('learning_pattern');
             $table->boolean('is_willing_to_relocate');

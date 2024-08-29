@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('health_information', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('personal_data_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('personal_data_id')->constrained('personal_data')->cascadeOnDelete();
         });
     }
 

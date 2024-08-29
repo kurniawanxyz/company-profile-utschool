@@ -26,6 +26,7 @@ class StoreDirectorRequest extends FormRequest
         return [
             "photo_profile" => "required|file|mimes:png,jpg,jpeg",
             "name" => "required|string|unique:directors,name",
+            "position" => "required|string",
             "description" => "required",
             "message" => "nullable|string"
         ];

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('photo_profile');
             $table->string('name');
+            $table->string('position');
             $table->text('message')->nullable();
             $table->longText('description');
         });

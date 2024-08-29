@@ -27,6 +27,7 @@ class UpdateDirectorRequest extends FormRequest
         return [
             "photo_profile" => "required|file|mimes:png,jpg,jpeg",
             "name" => "required|string|unique:directors,name,". $id .",id",
+            "position" => "required|string",
             "description" => "required",
             "message" => "nullable|string"
         ];

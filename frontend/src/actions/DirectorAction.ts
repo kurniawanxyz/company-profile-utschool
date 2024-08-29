@@ -1,8 +1,7 @@
 "use server"
 
 import handleActionFetch from "@/utils/handleActionFetch"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 export type storeDirectorType = {
     photo_profile: any | null,
@@ -17,6 +16,11 @@ export async function getDirectors(){
         method: "GET",
     }
     const [status,msg,result] = await handleActionFetch('/admin/director',option,false,true)
-    console.log(status,msg,result)
     return [status,msg,result]
+}
+
+export async function deleteDirectors(url:string){
+    const [status,msg,result] = await handleActionFetch(url,{method: "DELETE"},false,true)
+    revalidatePath("/admin/directors")
+    return [status,msg,result]    
 }

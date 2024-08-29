@@ -46,6 +46,10 @@ return (
                     label="Name"
                     name="name"
                 />
+                 <Input
+                    label="Position"
+                    name="position"
+                />
                 <TextArea label="Description" name="description"/>
                 <input type="text" name="message" className="hidden" value={value} />
                 <RichEditor title="Message"/>

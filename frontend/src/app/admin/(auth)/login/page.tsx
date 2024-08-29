@@ -1,5 +1,5 @@
 import { LoginPage } from '@/components/pages'
-import { handleMetadata } from '@/utils'
+import handleMetadata from '@/utils/handleMetadata'
 import { Metadata } from 'next'
 import React from 'react'
 

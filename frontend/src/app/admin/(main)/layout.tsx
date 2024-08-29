@@ -1,6 +1,8 @@
 "use client"
+const DeleteModal = dynamic(()=>import('@/components/fragments/DeleteModal'))
 import Sidebar from '@/components/fragments/Sidebar'
 import Topbar from '@/components/fragments/Topbar'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
 type Props = {
@@ -17,6 +19,7 @@ const layout = (props: Props) => {
                 {props.children}
             </div>
         </div>
+        <DeleteModal />
     </div>
   )
 }

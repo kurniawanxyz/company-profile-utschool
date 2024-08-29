@@ -4,5 +4,6 @@ export type DirectorType = {
     name: string
     message: string
     description: string
+    position: string
   }
   

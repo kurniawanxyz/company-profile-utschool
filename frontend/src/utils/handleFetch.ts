@@ -1,5 +1,5 @@
 import Cookie from "js-cookie"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import { handleUpdateToast } from "./handleUpdateToast"
 
@@ -20,7 +20,9 @@ export type responseType = {
 export default async function handleFetch(url: string, option: RequestInit, isUploadFile: boolean = false, needToken: boolean = false, activetoas: boolean = true) {
     let loading;
     if (activetoas) {
-        loading = toast.loading('Loading...');
+        if(option.method != "GET"){
+            loading = toast.loading('Loading...');
+        }
     }
 
     const token = Cookie.get('token');
@@ -47,9 +49,10 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
     }
 
     if (activetoas) {
-        handleUpdateToast(loading, result.meta.success, result.meta.message, result.data);
+        if(option.method != "GET" || !result.meta.success){
+            handleUpdateToast(loading, result.meta.success, result.meta.message, result.data);
+        }
     }
-
     return [result.meta.success, result.meta.message, result.data];
 }
 

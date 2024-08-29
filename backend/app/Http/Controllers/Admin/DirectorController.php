@@ -24,7 +24,7 @@ class DirectorController extends Controller
                 $director->where('title', 'LIKE', "%" . $req . "%");
             }
 
-            $director = $director->paginate(10);
+            $director = $director->paginate(4);
             return HandleJsonResponseHelpers::res("Successfully get data!", $director);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);

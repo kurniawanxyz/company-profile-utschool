@@ -1,18 +1,20 @@
 
 import { getDirectors } from "@/actions/DirectorAction";
-import handleFetch from "@/utils/handleFetch";
 import { create } from "zustand";
-type link = {
-    url: string,
+
+
+export type linkPaginate = {
+    url: string|null,
     label: string,
     active: boolean
 }
-type PaginateData = {
+
+export type PaginateData = {
     current_page: number,   
     data:any,
     first_page_url: string,
     last_page_url: string,
-    links: link[],
+    links: linkPaginate[],
     next_page_url: string|null
     prev_page_url: string|null,
     path: string,
@@ -21,7 +23,7 @@ type PaginateData = {
 export type usePaginateStoreType = {
     paginate: PaginateData
     fetchPaginateData: (url: string) => Promise<void>
-    setPaginateData: (data: PaginateData) => void,  
+    setPaginateData: (url: string|null) => void,  
 }
 
 export const usePaginateStore = create<usePaginateStoreType>((set)=>({
@@ -37,8 +39,21 @@ export const usePaginateStore = create<usePaginateStoreType>((set)=>({
         prev_page_url: null
     },
     fetchPaginateData: async(url:string)=>{
-        const [,,data] =  await getDirectors()
+        const [,,data] =  await getDirectors({url:null})
         set({paginate:data})
     },
-    setPaginateData: (data) => set({paginate:data})
+    setPaginateData: async(url:string|null)=>{
+        function getPathAfterApi(url: string) {
+            const parts = url.split('/api/');
+            if (parts.length > 1) {
+              return parts[1]; // Mengembalikan bagian setelah 'api'
+            }
+            return null; // Jika 'api' tidak ditemukan
+        }
+        if(typeof url != null ){
+            const newUrl = getPathAfterApi(url as string)
+            const [,,data] =  await getDirectors({url:newUrl})
+            set({paginate:data})
+        }
+    } 
 }))

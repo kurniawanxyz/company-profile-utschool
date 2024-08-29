@@ -21,7 +21,7 @@ class DirectorController extends Controller
         try {
             $director = new Director();
             if ($req = $request->input('query')) {
-                $director->where('name', 'LIKE', "%" . $req . "%");
+                $director = $director->where('name', 'LIKE', "%" . $req . "%");
             }
 
             $director = $director->paginate(4);

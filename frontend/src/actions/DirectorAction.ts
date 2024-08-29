@@ -9,13 +9,15 @@ export type storeDirectorType = {
     description: string | null,
     message: string | null
 } 
-
-export async function getDirectors(){
+export type getDirectorsType ={
+    url?: string|null
+}
+export async function getDirectors(props: getDirectorsType){
 
     const option:RequestInit = {
         method: "GET",
     }
-    const [status,msg,result] = await handleActionFetch('/admin/director',option,false,true)
+    const [status,msg,result] = await handleActionFetch(`/${props.url||'admin/director'}`,option,false,true)
     return [status,msg,result]
 }
 

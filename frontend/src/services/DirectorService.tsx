@@ -1,13 +1,12 @@
 "use client"
 
-import { handleFetch } from "@/utils"
+import handleFetch from "@/utils/handleFetch";
 import { handleUpdateToast } from "@/utils/handleUpdateToast";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 
 export async function handleCreateDirector(formdata:FormData){
-    const loading = toast.loading('Loading...');
 
     const option:RequestInit = {
         method: "POST",
@@ -15,7 +14,6 @@ export async function handleCreateDirector(formdata:FormData){
     }
     const [status,msg,result] = await handleFetch('/admin/director',option,true,true)
     // console.log(status,msg,result)
-    handleUpdateToast(loading,status,msg)
     if(!status){
         for (const i in result) {
             if (Object.prototype.hasOwnProperty.call(result, i)) {

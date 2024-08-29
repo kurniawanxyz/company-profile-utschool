@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
-import { handleLogin } from '@/actions/LoginAction'
+import { handleLogin } from '@/services/AuthService'
 import Input from '../elements/Input'
 import Button from '../elements/Button'
 

@@ -1,9 +1,8 @@
-"use server"
-
-import handleActionFetch from "@/utils/handleActionFetch"
-import { cookies } from "next/headers"
+import handleFetch from "@/utils/handleFetch";
+import { handleUpdateToast } from "@/utils/handleUpdateToast";
+import Cookie from "js-cookie"
 import { redirect } from "next/navigation"
-
+import { toast } from "react-toastify";
 
 export async function handleLogin(formData:FormData) {
 
@@ -16,10 +15,9 @@ export async function handleLogin(formData:FormData) {
         method: "POST",
         body: JSON.stringify(data)
     }
-    const [status,msg,result] = await handleActionFetch('/admin/login',option)
+    const [status,msg,result] = await handleFetch('/admin/login',option)
     if(status){
-        cookies().set("token",result.token)
+        Cookie.set("token",result.token)
         redirect('/admin/dashboard')
     }
-    return [status,msg,result]
 }

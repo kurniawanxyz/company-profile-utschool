@@ -1,6 +1,6 @@
 "use server"
 
-import { handleFetch } from "@/utils"
+import handleActionFetch from "@/utils/handleActionFetch"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
@@ -11,17 +11,12 @@ export type storeDirectorType = {
     message: string | null
 } 
 
-export async function storeDirector(data:storeDirectorType){
+export async function getDirectors(){
 
     const option:RequestInit = {
-        method: "POST",
-        body: JSON.stringify(data)
+        method: "GET",
     }
-    const [status,msg,result] = await handleFetch('/admin/director',option,true)
-    if(status){
-        cookies().set("token",result.token)
-        redirect('/admin/dashboard')
-    }
+    const [status,msg,result] = await handleActionFetch('/admin/director',option,false,true)
     console.log(status,msg,result)
     return [status,msg,result]
 }

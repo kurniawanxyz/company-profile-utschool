@@ -1,7 +1,5 @@
-import Cookie from "js-cookie"
 import { redirect } from "next/navigation"
-import { toast } from "react-toastify"
-import { handleUpdateToast } from "./handleUpdateToast"
+import { cookies } from "next/headers"
 
 type metaType = {
     success: boolean,
@@ -17,13 +15,10 @@ export type responseType = {
 
 
 
-export default async function handleFetch(url: string, option: RequestInit, isUploadFile: boolean = false, needToken: boolean = false, activetoas: boolean = true) {
-    let loading;
-    if (activetoas) {
-        loading = toast.loading('Loading...');
-    }
+export default async function handleActionFetch(url: string, option: RequestInit, isUploadFile: boolean = false, needToken: boolean = false) {
 
-    const token = Cookie.get('token');
+
+    const token = cookies().get("token")?.value;
     const headers = {
         ...option.headers,
         "x-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
@@ -42,12 +37,8 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
     const result: responseType = await response.json();
 
     if (result.meta.status === 403) {
-        Cookie.remove('token');
+        cookies().delete('token');
         redirect("/admin/login");
-    }
-
-    if (activetoas) {
-        handleUpdateToast(loading, result.meta.success, result.meta.message, result.data);
     }
 
     return [result.meta.success, result.meta.message, result.data];

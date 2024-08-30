@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useRichEditor } from "@/stores/useRichEditor";
 import { useAvatar } from "@/stores/useAvatar"
 import Avatar from "@/components/fragments/Avatar"
-import { handleCreateDirector, handleUpdateDirector } from "@/services/DirectorService";
+import { handleUpdateDirector } from "@/services/DirectorService";
 import { DirectorType } from "@/types/DirectorType";
 import { useEffect } from "react";
 const RichEditor = dynamic(()=>import("@/components/fragments/RichEditor"),{ssr:false})
@@ -24,7 +24,7 @@ const EditDirector = (props: Props) => {
     const {avatar,setAvatar} = useAvatar();
 
     useEffect(()=>{
-        // console.log(props.data)
+        console.log(props.data) 
         setValue(props.data.message)
         setAvatar(`${process.env.NEXT_PUBLIC_BACKEND_URL + props.data.photo_profile}`)
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -33,7 +33,7 @@ const DirectorPage = () => {
   }
 
   function handleSubmitSearch(){
-    const url = `${paginate.path}?page=${paginate.current_page}&query=${search}`
+    const url = `${paginate.path}?query=${search}`
     setPaginateData(url)
   }
 

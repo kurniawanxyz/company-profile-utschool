@@ -17,7 +17,7 @@ const useModalStore = create<ModalState>((set) => ({
   isDeleteModalOpen: false,
   urlToDelete: '',
   isDeleted: false,
-  openDeleteModal: (url:string) => set({ isDeleteModalOpen: true, urlToDelete:url}),
+  openDeleteModal: (url:string) => set({ isDeleteModalOpen: true, urlToDelete:url,isDeleted:false}),
   closeDeleteModal: () => set({ isDeleteModalOpen: false,isDeleted:false }),
   handleConfirm: async(url) => {
 

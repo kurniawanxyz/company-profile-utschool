@@ -46,10 +46,10 @@ const GalleryCategoriesPage = (props: Props) => {
       <table className="table w-full mt-3">
         <thead className="bg-slate-900">
           <tr>
-            <th>No</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Action</th>
+            <th className="p-2">No</th>
+            <th className="p-2">Category</th>
+            <th className="p-2">Description</th>
+            <th className="p-2">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +72,7 @@ const GalleryCategoriesPage = (props: Props) => {
               <td className="border p-2">{item.description}</td>
               <td className="border p-2">
                 <div className="flex justify-center gap-8">
-                  <button className="hover:text-red-500 delay-75 transition-all text-xl">
+                  <button onClick={()=>openDeleteModal('/admin/gallery-category/'+item.id)} className="hover:text-red-500 delay-75 transition-all text-xl">
                     <FaTrashCan />
                   </button>
                   <button className="hover:text-primary delay-75 transition-all text-xl">

@@ -1,5 +1,5 @@
 "use client";
-import { DirectorType } from "@/app/types/DirectorType";
+import { DirectorType } from "@/types/DirectorType";
 import Banner from "@/components/elements/Banner";
 import Card from "@/components/elements/Card";
 import DataNotFound from "@/components/fragments/DataNotFound";

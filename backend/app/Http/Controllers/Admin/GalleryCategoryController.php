@@ -29,6 +29,20 @@ class GalleryCategoryController extends Controller
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }
+    public function simpleIndex(Request $request)
+    {
+        try {
+            $gc = GalleryCategory::latest();
+            if($req = $request->input('query')){
+                $gc = $gc->where('text', "LIKE", "%". $req ."%");
+            }
+
+            $gc = $gc->get(['id', 'text']);
+            return HandleJsonResponseHelpers::res("Successfully get gallery category data!", $gc);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

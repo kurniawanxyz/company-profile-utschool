@@ -29,8 +29,9 @@ Route::post('/admin/login', [LoginController::class, 'login']);
 Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     Route::post("/logout", [LoginController::class, 'logout']);
 
-    Route::apiResource('/gallery-category', GalleryCategoryController::class);
     Route::apiResource('/gallery', GalleryController::class);
+    Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+    Route::apiResource('/gallery-category', GalleryCategoryController::class);
     Route::apiResource('/news', NewsController::class);
     Route::apiResource('/director', DirectorController::class);
     Route::apiResource('/training-program', TrainingProgramController::class);

@@ -45,7 +45,7 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
 
     if (result.meta.status === 403) {
         Cookie.remove('token');
-        redirect("/admin/login");
+        window.location.href = '/admin/login'
     }
 
     if (activetoas) {

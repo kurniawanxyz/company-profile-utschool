@@ -1,11 +1,8 @@
 import handleFetch from "@/utils/handleFetch";
-import { handleUpdateToast } from "@/utils/handleUpdateToast";
 import Cookie from "js-cookie"
 import { redirect } from "next/navigation"
-import { toast } from "react-toastify";
 
 export async function handleLogin(formData:FormData) {
-
     const data = {
         email: formData.get("email"),
         password: formData.get("password")
@@ -21,3 +18,4 @@ export async function handleLogin(formData:FormData) {
         redirect('/admin/dashboard')
     }
 }
+

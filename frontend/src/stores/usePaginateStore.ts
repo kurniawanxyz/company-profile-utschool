@@ -1,5 +1,6 @@
 
 import { getDirectors } from "@/actions/DirectorAction";
+import handleFetch from "@/utils/handleFetch";
 import { create } from "zustand";
 
 
@@ -39,7 +40,7 @@ export const usePaginateStore = create<usePaginateStoreType>((set)=>({
         prev_page_url: null
     },
     fetchPaginateData: async(url:string)=>{
-        const [,,data] =  await getDirectors({url:null})
+        const [,,data] =  await handleFetch(url,{method:"GET"},false,true)
         set({paginate:data})
     },
     setPaginateData: async(url:string|null)=>{

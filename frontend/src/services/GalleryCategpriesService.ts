@@ -1,4 +1,6 @@
+"use client"
 import handleFetch from "@/utils/handleFetch"
+import { redirect } from "next/navigation"
 
 export async function handleStore(formdata: FormData){
     const option:RequestInit = {
@@ -8,6 +10,6 @@ export async function handleStore(formdata: FormData){
     const [status,msg,result] = await handleFetch('/admin/gallery-category',option,true,true)
     // console.log(status,msg,result)
     if(status){
-        window.location.href = "/admin/gallery-categories"
+        redirect("/admin/gallery-categories")  
     }
 }

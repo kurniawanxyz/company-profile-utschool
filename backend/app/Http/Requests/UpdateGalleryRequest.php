@@ -25,7 +25,7 @@ class UpdateGalleryRequest extends FormRequest
     {
         return [
             "gallery_category_id" => "nullable|uuid|exists:gallery_categories,id",
-            "image" => "required|file|mimes:png,jpg,jpeg"
+            "image" => "nullable|file|mimes:png,jpg,jpeg"
         ];
     }
 

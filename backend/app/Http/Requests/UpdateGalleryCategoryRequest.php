@@ -25,8 +25,8 @@ class UpdateGalleryCategoryRequest extends FormRequest
     {
         $id = $this->route('gallery_category');
         return [
-            "text" => "required|unique:gallery_categories,text," . $id . "id",
-            "description" => "required"
+            "text" => "nullable|unique:gallery_categories,text," . $id . "id",
+            "description" => "nullable"
         ];
     }
 

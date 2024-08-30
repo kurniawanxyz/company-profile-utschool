@@ -1,0 +1,4 @@
+user-agent: 
+*Allow: /
+Disallow: /admin
+Sitemap: https://company-profile-utschool.vercel.app/sitemap.xml

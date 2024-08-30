@@ -21,6 +21,15 @@ export async function getDirectors(props: getDirectorsType){
     return [status,msg,result]
 }
 
+export async function findDirector(id: string){
+
+    const option:RequestInit = {
+        method: "GET",
+    }
+    const [status,msg,result] = await handleActionFetch(`/admin/director/${id}`,option,false,true)
+    return [status,msg,result]
+}
+
 export async function deleteDirectors(url:string){
     const [status,msg,result] = await handleActionFetch(url,{method: "DELETE"},false,true)
     revalidatePath("/admin/directors")

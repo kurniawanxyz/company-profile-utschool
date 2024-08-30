@@ -19,3 +19,19 @@ export async function handleCreateDirector(formdata:FormData){
     }
     return
 }
+
+export async function handleUpdateDirector(formdata:FormData){
+
+    const id = formdata.get("id")
+    formdata.append("_method","PUT")
+    const option:RequestInit = {
+        method: "POST",
+        body: formdata
+    }
+    const [status,msg,result] = await handleFetch('/admin/director/'+id,option,true,true)
+    // console.log(status,msg,result)
+    if(status){
+        redirect("/admin/directors")
+    }
+    
+}

@@ -7,17 +7,18 @@ import SearchInput from "@/components/fragments/SearchInput";
 import useModalStore from "@/stores/useModalStore";
 import { linkPaginate, usePaginateStore } from "@/stores/usePaginateStore";
 import Image from "next/image";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
-import { FaPen,FaSearch } from "react-icons/fa";
+import { ChangeEvent, useEffect, useState } from "react";
+import { FaPen } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import { twMerge } from "tailwind-merge";
-type Props = {};
+import { useRouter } from "next/navigation";
 
-const DirectorPage = (props: Props) => {
+const DirectorPage = () => {
   const [search,setSearch] = useState<string>('');
   const { fetchPaginateData, paginate, setPaginateData } = usePaginateStore();
   const { openDeleteModal, isDeleted } = useModalStore();
   const backendurl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const router = useRouter();
   useEffect(() => {
     fetchPaginateData(`/admin/director`);
   }, [fetchPaginateData, isDeleted]);
@@ -73,7 +74,7 @@ const DirectorPage = (props: Props) => {
                 <p className="text-slate-400 text-center">{item.position}</p>
               </div>
               <div className="w-full rounded h-10 bg-slate-900 flex justify-around mt-5">
-                <button className="flex items-center gap-1 hover:text-primary cursor-pointer">
+                <button onClick={()=>router.push("/admin/directors/edit/"+item.id)} className="flex items-center gap-1 hover:text-primary cursor-pointer">
                   <FaPen /> Edit
                 </button>
                 <button

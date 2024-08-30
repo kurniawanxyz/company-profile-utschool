@@ -7,7 +7,9 @@ type Props = {
     placeholder?: string,
     type?: HTMLInputTypeAttribute,
     isDirectionColoum?: boolean,
-    className?: string
+    className?: string,
+    value?: string,
+    defaultValue?: string
 }
 
 const Input = ({
@@ -17,6 +19,8 @@ const Input = ({
     placeholder,
     type = "text",
     className,
+    value,
+    defaultValue
 }:Props ) => {
   return (
     <div className={`flex ${isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
@@ -27,6 +31,8 @@ const Input = ({
             name={name}
             placeholder={placeholder}
             type={type}
+            value={value}
+            defaultValue={defaultValue}
         />
     </div>
   )

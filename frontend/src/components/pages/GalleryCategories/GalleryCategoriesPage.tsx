@@ -75,7 +75,7 @@ const GalleryCategoriesPage = (props: Props) => {
                   <button onClick={()=>openDeleteModal('/admin/gallery-category/'+item.id)} className="hover:text-red-500 delay-75 transition-all text-xl">
                     <FaTrashCan />
                   </button>
-                  <button className="hover:text-primary delay-75 transition-all text-xl">
+                  <button onClick={()=>router.push('gallery-categories/edit/'+item.id)} className="hover:text-primary delay-75 transition-all text-xl">
                     <FaPen />
                   </button>
                 </div>

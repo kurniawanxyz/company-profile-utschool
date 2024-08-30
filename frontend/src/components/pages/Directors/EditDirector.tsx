@@ -66,7 +66,7 @@ return (
                     name="position"
                     defaultValue={props.data.position}
                 />
-                <TextArea label="Description" name="description" value={props.data.description}/>
+                <TextArea label="Description" name="description" defaultValue={props.data.description}/>
                 <input type="text" name="message" className="hidden" value={value} />
                 <RichEditor title="Message"/>
                 <div className="flex justify-end mt-10">

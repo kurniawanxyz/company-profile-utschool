@@ -23,10 +23,6 @@ const DirectorPage = () => {
     fetchPaginateData(`/admin/director`);
   }, [fetchPaginateData, isDeleted]);
   
-  // useEffect(()=>{
-  //   fetchPaginateData(`/admin/director`);    
-  // },[search])
-  console.log(paginate.current_page)
 
   function handleChangeSearch(e:ChangeEvent<HTMLInputElement>){
     setSearch(e.target.value)

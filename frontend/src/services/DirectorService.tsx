@@ -29,7 +29,6 @@ export async function handleUpdateDirector(formdata:FormData){
         body: formdata
     }
     const [status,msg,result] = await handleFetch('/admin/director/'+id,option,true,true)
-    // console.log(status,msg,result)
     if(status){
         redirect("/admin/directors")
     }

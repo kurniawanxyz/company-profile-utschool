@@ -1,5 +1,7 @@
-"version": "1.0.0"
-"git-lfs": "https://git-lfs.github.com/spec/"
-
-
-
+{
+  "name": "api-company-profile-utschool",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

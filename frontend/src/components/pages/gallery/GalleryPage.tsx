@@ -28,6 +28,7 @@ const GalleryPage = ({ category }: Props) => {
 
   const [categoryState,setCategoryState] = useState<GalleryCategoryListType[]>(category)
   const [search,setSearch] = useState<string>()
+  const [realSearch,setRealSearch] = useState<string>()
 
   useEffect(()=>{
     setCategoryState((prevState) => {
@@ -45,7 +46,7 @@ const GalleryPage = ({ category }: Props) => {
     }
   },[])
 
-  const { fetchPaginateData, paginate, setPaginateData } = usePaginateStore();
+  const { fetchPaginateData, paginate, setPaginateData, handlePaginate } = usePaginateStore();
   const { openDeleteModal, isDeleted } = useModalStore();
   const backendurl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const router = useRouter();
@@ -58,6 +59,7 @@ const GalleryPage = ({ category }: Props) => {
     const name = categoryState.find((item)=> item.id == search)
     const url = `${paginate.path}?query=${name?.text === "ALL" ? "" : name?.text}`
     setPaginateData(url)
+    setRealSearch(name?.text)
   }
 
   
@@ -112,7 +114,7 @@ const GalleryPage = ({ category }: Props) => {
         {paginate.links &&
           paginate.links.map((item: linkPaginate, index: number) => (
             <button
-              onClick={() => item.url && setPaginateData(item.url)}
+              onClick={() => item.url && handlePaginate(item.url,"query",realSearch)}
               className={`${twMerge("bg-slate-700/80 hover:bg-slate-700 shadow rounded-full p-2 w-10 h-10 duration-75 ease-in-out transition-all", item.active && "bg-primary/80 hover:bg-primary", item.url === null && "opacity-50 cursor-not-allowed")}`}
               key={`button-paginate-${index}`}
               disabled={item.url === null}

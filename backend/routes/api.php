@@ -38,4 +38,5 @@ Route::prefix('/admin')->middleware('admin-ini')->group(function(){
 
     // post image
     Route::post('/post-image', PostImageController::class);
+    Route::delete('/delete-image', [PostImageController::class, 'delete']);
 });

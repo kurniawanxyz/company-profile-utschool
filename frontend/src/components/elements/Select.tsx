@@ -14,30 +14,35 @@ type Props = {
     type?: HTMLInputTypeAttribute,
     isDirectionColoum?: boolean,
     className?: string,
-    value?: string,
     defaultValue?: string
 }
 const Select = (props: Props) => {
+    let defaultVal;
+    if(props.defaultValue){
+        defaultVal = props.defaultValue 
+    }
+    if( props.list.length <= 0 ){
+        defaultVal = "not-found"
+    }
+    console.log(defaultVal)
   return (
-<div className={`flex ${props.isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
+    <div className={`flex ${props.isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
         <label className='text-neutral-900' htmlFor={props.label}>{props.label}</label>
         <select
             className={`${twMerge('border-slate-300 focus:border-primary outline-none border rounded px-3 py-1 mt-1 text-neutral-600',props.className)}`}
             id={props.label}
             name={props.name}
-            value={props.value}
-            defaultValue={props.defaultValue}
+            defaultValue={defaultVal}
         >
-            <option value="default" disabled selected >Choose {props.label}</option>
+            <option value="default" disabled  >Choose {props.label}</option>
             {
-            (props.list && props.list.length > 0) ? 
+            (props.list && props.list.length > 0) &&
                 props.list.map((item:optionSelect,index:number)=>(
                     <option key={`select-option-${index}`} value={item.id}>{item.text}</option>
-            ))
-            :
-            (
-                <option value="" disabled selected >Data was not found</option>
-            )
+            ))            
+            }
+            {
+                props.list.length <= 0 && <option value="not-found" disabled  >Data was not found</option> 
             }
         </select>
     </div>

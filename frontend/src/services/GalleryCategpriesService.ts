@@ -14,18 +14,3 @@ export async function handleStore(formdata: FormData){
     }
 }
 
-export async function handleUpdate(formdata: FormData){
-    const id = formdata.get("id")
-    const data = {
-        text: formdata.get("text"),
-        description: formdata.get("description")
-    }
-    const option:RequestInit = {
-        method: "PUT",
-        body: JSON.stringify(data)
-    }
-    const [status,msg,result] = await handleFetch('/admin/gallery-category/'+id,option,false,true)
-    if(status){
-        redirect("/admin/gallery-categories")  
-    }
-}

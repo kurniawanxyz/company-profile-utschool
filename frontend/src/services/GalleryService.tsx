@@ -13,3 +13,16 @@ export async function handleCreate(formdata:FormData){
         redirect("/admin/galleries")
     }
 }
+
+export async function handleUpdate(formdata:FormData){
+    const id = formdata.get("id")
+    formdata.append("_method","PUT")
+    const option:RequestInit = {
+        method: "POST",
+        body: formdata
+    }
+    const [status,msg,result] = await handleFetch('/admin/gallery/'+id,option,true,true)
+    if(status){
+        redirect("/admin/galleries")
+    }
+}

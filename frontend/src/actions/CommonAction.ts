@@ -5,5 +5,6 @@ export async function getDataAction(url:string){
         method: "GET",
     }
     const [status,msg,result] = await handleActionFetch(`${url}`,option,false,true)
+    console.log({result})
     return [status,msg,result]
 }

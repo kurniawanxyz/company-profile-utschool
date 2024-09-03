@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from 'react'
+import React, { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
     className?: string,
     value?: string,
     defaultValue?: string
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
 const Input = ({
     isDirectionColoum = true,
@@ -20,7 +20,8 @@ const Input = ({
     type = "text",
     className,
     value,
-    defaultValue
+    defaultValue,
+    ...rest
 }:Props ) => {
   return (
     <div className={`flex ${isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
@@ -33,6 +34,7 @@ const Input = ({
             type={type}
             value={value}
             defaultValue={defaultValue}
+            {...rest}
         />
     </div>
   )

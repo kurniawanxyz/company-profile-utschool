@@ -7,6 +7,7 @@ import { useRichEditor } from "@/stores/useRichEditor";
 import { useAvatar } from "@/stores/useAvatar"
 import Avatar from "@/components/fragments/Avatar"
 import { handleCreateDirector } from "@/services/DirectorService";
+import { useEffect } from "react";
 const RichEditor = dynamic(()=>import("@/components/fragments/RichEditor"),{ssr:false})
 
 
@@ -16,6 +17,10 @@ type Props = {}
 const CreateDirector = (props: Props) => {
     const {value} = useRichEditor()
     const {avatar,setAvatar} = useAvatar();
+
+    useEffect(()=>{
+        setAvatar(undefined);
+    },[])
 
     const handleImageChange = (event:any) => {
         const file = event.target.files[0];

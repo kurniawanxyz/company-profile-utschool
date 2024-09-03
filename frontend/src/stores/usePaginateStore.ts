@@ -25,9 +25,10 @@ export type usePaginateStoreType = {
     paginate: PaginateData
     fetchPaginateData: (url: string) => Promise<void>
     setPaginateData: (url: string|null) => void,  
+    handlePaginate:(url: string,keywordSearch: string,valueSearch?:string)=> void,
 }
 
-export const usePaginateStore = create<usePaginateStoreType>((set)=>({
+export const usePaginateStore = create<usePaginateStoreType>((set,get)=>({
     paginate: {
         current_page: 1,
         data: [],
@@ -56,5 +57,10 @@ export const usePaginateStore = create<usePaginateStoreType>((set)=>({
             const [,,data] =  await getDirectors({url:newUrl})
             set({paginate:data})
         }
-    } 
+    },
+    handlePaginate: async (url, keywordSearch,valueSearch = "") => {
+        const {setPaginateData} = get()
+        const updatedUrl = url.includes('?') ? `${url}&${keywordSearch}=${valueSearch}` : `${url}?${keywordSearch}=${valueSearch}`;
+        setPaginateData(updatedUrl)
+    },
 }))

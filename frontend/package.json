@@ -11,6 +11,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^43.0.0",
     "@ckeditor/ckeditor5-react": "^9.0.0",
+    "OrbitControls": "link:three/examples/jsm/controls/OrbitControls",
     "font-awesome": "^4.7.0",
     "froala-editor": "^4.2.1",
     "js-cookie": "^3.0.5",
@@ -23,6 +24,7 @@
     "react-medium-image-zoom": "^5.2.9",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "2.5.2",
+    "three": "^0.168.0",
     "zod": "^3.23.8",
     "zustand": "^4.5.5"
   },
@@ -32,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.168.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "postcss": "^8",

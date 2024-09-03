@@ -1,8 +1,8 @@
 import { create } from "zustand"
 
 type useAvatartype = {
-    avatar: string,
-    setAvatar: (avatar:string)=> void 
+    avatar: string|undefined,
+    setAvatar: (avatar:string|undefined)=> void 
 }
 
 export const useAvatar = create<useAvatartype>((set)=>({

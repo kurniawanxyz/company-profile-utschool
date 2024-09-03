@@ -41,12 +41,12 @@ const Sidebar = (props: Props) => {
   return (
     <>
         <div className={`w-80 h-screen bg-white shadow-sm flex flex-col ${!isOpen && 'hidden'} z-50 md:sticky fixed top-0 px-3 md:px-0 `}>
-        <article className='bg-slate-900 p-6 mt-5 rounded-lg shadow'>
+        <article className='bg-white p-6 mt-5 rounded-lg'>
                 <Image
-                    src={'/images/logo/uts/1.png'}
+                    src={'/images/logo/uts/2.png'}
                     alt='UT School'
-                    width={100}
-                    height={100}
+                    width={200}
+                    height={200}
                     loading='lazy'
                 />
         </article>

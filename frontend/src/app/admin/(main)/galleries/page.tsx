@@ -1,13 +1,13 @@
+import { getDataAction } from '@/actions/CommonAction'
 import GalleryPage from '@/components/pages/gallery/GalleryPage'
-import dynamic from 'next/dynamic'
 import React from 'react'
 
 type Props = {}
 
-// const GalleryPage = dynamic(import('@/components/pages/gallery/GalleryPage'))
 
-const GalleryRoute = (props: Props) => {
-  return <GalleryPage/>
+const GalleryRoute = async(props: Props) => {
+  const category = await getDataAction('/admin/gallery-category') 
+  return <GalleryPage category={category}/>
 }
 
 export default GalleryRoute

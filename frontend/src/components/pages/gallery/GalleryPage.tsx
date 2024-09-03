@@ -3,7 +3,7 @@ import Banner from '@/components/elements/Banner'
 import Card from '@/components/elements/Card'
 import DataNotFound from '@/components/fragments/DataNotFound'
 import useModalStore from '@/stores/useModalStore'
-import { usePaginateStore } from '@/stores/usePaginateStore'
+import { linkPaginate, usePaginateStore } from '@/stores/usePaginateStore'
 import { GalleriesType } from '@/types/GalleriesType'
 import { GalleryCategoriesType } from '@/types/GalleryCategoriesType'
 import Image from 'next/image'
@@ -14,6 +14,7 @@ import { FaTrashCan } from 'react-icons/fa6'
 
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
+import { twMerge } from 'tailwind-merge'
 
 type Props = {
   category: GalleryCategoriesType[]
@@ -78,6 +79,24 @@ const GalleryPage = ({ category }: Props) => {
             : <DataNotFound />
         }
       </div>
+
+
+      <div className="flex gap-3 border justify-center mt-4">
+        {paginate.links &&
+          paginate.links.map((item: linkPaginate, index: number) => (
+            <button
+              onClick={() => item.url && setPaginateData(item.url)}
+              className={`${twMerge("bg-slate-700/80 hover:bg-slate-700 shadow rounded-full p-2 w-10 h-10 duration-75 ease-in-out transition-all", item.active && "bg-primary/80 hover:bg-primary", item.url === null && "opacity-50 cursor-not-allowed")}`}
+              key={`button-paginate-${index}`}
+              disabled={item.url === null}
+            >
+              {index != 0 && index != paginate.links.length - 1 && item.label}
+              {index === 0 && "<"}
+              {index === paginate.links.length - 1 && ">"}
+            </button>
+          ))}
+      </div>
+
     </>
   )
 }

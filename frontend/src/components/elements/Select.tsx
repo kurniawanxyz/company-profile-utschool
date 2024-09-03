@@ -1,4 +1,5 @@
-import { HTMLInputTypeAttribute } from 'react'
+"use client"
+import { HTMLInputTypeAttribute, SelectHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export type optionSelect = {
@@ -15,8 +16,12 @@ type Props = {
     isDirectionColoum?: boolean,
     className?: string,
     defaultValue?: string
-}
+} & SelectHTMLAttributes<HTMLSelectElement>
 const Select = (props: Props) => {
+    const {
+        name,
+        ...rest
+    } = props
     let defaultVal;
     if(props.defaultValue){
         defaultVal = props.defaultValue 
@@ -33,6 +38,7 @@ const Select = (props: Props) => {
             id={props.label}
             name={props.name}
             defaultValue={defaultVal}
+            {...rest}
         >
             <option value="default" disabled  >Choose {props.label}</option>
             {

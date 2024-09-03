@@ -6,7 +6,7 @@ type Props = {}
 
 
 const GalleryRoute = async(props: Props) => {
-  const category = await getDataAction('/admin/gallery-category') 
+  const [,,category] = await getDataAction('/admin/list/category') 
   return <GalleryPage category={category}/>
 }
 

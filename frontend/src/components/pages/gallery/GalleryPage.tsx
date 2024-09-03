@@ -1,11 +1,14 @@
 "use client"
+import { Button } from '@/components/elements'
 import Banner from '@/components/elements/Banner'
 import Card from '@/components/elements/Card'
+const Select = dynamic(()=>import('@/components/elements/Select'),{ssr:false})
 import DataNotFound from '@/components/fragments/DataNotFound'
 import useModalStore from '@/stores/useModalStore'
 import { linkPaginate, usePaginateStore } from '@/stores/usePaginateStore'
 import { GalleriesType } from '@/types/GalleriesType'
-import { GalleryCategoriesType } from '@/types/GalleryCategoriesType'
+import { GalleryCategoryListType } from '@/types/GalleryCategoriesType'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useEffect, useState } from 'react'
@@ -17,12 +20,31 @@ import 'react-medium-image-zoom/dist/styles.css'
 import { twMerge } from 'tailwind-merge'
 
 type Props = {
-  category: GalleryCategoriesType[]
+  category: GalleryCategoryListType[]
 }
 
 const GalleryPage = ({ category }: Props) => {
 
-  const [search, setSearch] = useState<string>('');
+
+  const [categoryState,setCategoryState] = useState<GalleryCategoryListType[]>(category)
+  const [search,setSearch] = useState<string>()
+
+  useEffect(()=>{
+    setCategoryState((prevState) => {
+      return [
+        ...prevState,
+        {
+          id: "ALL",
+          text: "ALL",
+        }
+      ];
+    })
+
+    return ()=>{
+      setCategoryState(category)
+    }
+  },[])
+
   const { fetchPaginateData, paginate, setPaginateData } = usePaginateStore();
   const { openDeleteModal, isDeleted } = useModalStore();
   const backendurl = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -32,14 +54,13 @@ const GalleryPage = ({ category }: Props) => {
   }, [fetchPaginateData, isDeleted]);
 
 
-  function handleChangeSearch(e: ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value)
-  }
-
-  function handleSubmitSearch() {
-    const url = `${paginate.path}?query=${search}`
+  async function handleSubmitSearch() {
+    const name = categoryState.find((item)=> item.id == search)
+    const url = `${paginate.path}?query=${name?.text === "ALL" ? "" : name?.text}`
     setPaginateData(url)
   }
+
+  
 
   return (
     <>
@@ -49,9 +70,14 @@ const GalleryPage = ({ category }: Props) => {
         urlTambah='galleries/create'
       />
 
+      <div className='flex items-center gap-3 mt-3'>
+        <Select label='Category' name='category' onChange={(e)=>setSearch(e.currentTarget.value)}  list={categoryState} defaultValue='ALL'/>
+        <Button onClick={handleSubmitSearch} className='w-28'>Search</Button>
+      </div>
+
       <div className='grid grid-cols-3 gap-3 mt-5'>
         {
-          (paginate.data.length >= 0 && paginate.links.length >= 0) ?
+          (paginate.data.length > 0 && paginate.links.length > 0) &&
             paginate.data.map((item: GalleriesType, index: number) => (
               <Zoom key={index}>
                 <Card className='h-80 group overflow-hidden relative'>
@@ -76,10 +102,11 @@ const GalleryPage = ({ category }: Props) => {
                 </Card>
               </Zoom>
             ))
-            : <DataNotFound />
         }
       </div>
-
+        {
+          paginate.data.length === 0 && <DataNotFound />
+        }
 
       <div className="flex gap-3 border justify-center mt-4">
         {paginate.links &&

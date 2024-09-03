@@ -50,7 +50,7 @@ const Sidebar = (props: Props) => {
                     loading='lazy'
                 />
         </article>
-        <ul className='flex flex-col text-slate-900 px-3 mt-5 gap-5'>
+        <ul className='flex flex-col text-slate-900 px-3 mt-5 gap-2'>
             {
                 listLink && listLink.map((item:ListLink,index:number)=>(
                     <li onClick={()=>router.push(item.url)} key={`sidebar-${index}`} className={`${twMerge(defaultStyle, nowPath.startsWith(item.url) && 'bg-slate-900 text-primary')}`}>

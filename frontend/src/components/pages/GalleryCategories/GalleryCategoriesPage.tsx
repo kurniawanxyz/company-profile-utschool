@@ -15,7 +15,7 @@ type Props = {};
 
 const GalleryCategoriesPage = (props: Props) => {
   const [search, setSearch] = useState<string>();
-  const { fetchPaginateData, paginate, setPaginateData } = usePaginateStore();
+  const { fetchPaginateData, paginate, setPaginateData,handlePaginate } = usePaginateStore();
   const { openDeleteModal, isDeleted } = useModalStore();
   const backendurl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const router = useRouter();
@@ -89,7 +89,7 @@ const GalleryCategoriesPage = (props: Props) => {
         {(paginate.links && paginate.data.length > 0) &&
           paginate.links.map((item: linkPaginate, index: number) => (
             <button
-              onClick={() => item.url && setPaginateData(item.url)}
+              onClick={() => item.url && handlePaginate(item.url,"query",search)}
               className={`${twMerge("bg-slate-700/80 hover:bg-slate-700 shadow rounded-full p-2 w-10 h-10 duration-75 ease-in-out transition-all", item.active && "bg-primary/80 hover:bg-primary", item.url === null && "opacity-50 cursor-not-allowed")}`}
               key={`button-paginate-${index}`}
               disabled={item.url === null}

@@ -50,7 +50,7 @@ const DirectorPage = () => {
       {paginate.data.length == 0 && <DataNotFound className="mt-5" />}
 
       <div className="grid grid-cols-4 gap-3 mt-5">
-        {paginate.data.length > 0 &&
+        {paginate.data.length >= 0 &&
           paginate.data.map((item: DirectorType, index: number) => (
             <Card
               key={index}

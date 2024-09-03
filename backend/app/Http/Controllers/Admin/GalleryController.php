@@ -27,7 +27,7 @@ class GalleryController extends Controller
                 });
             }
 
-            $gallery = $gallery->paginate(10);
+            $gallery = $gallery->paginate(9);
             return HandleJsonResponseHelpers::res("Successfully get gallery data!", $gallery);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);

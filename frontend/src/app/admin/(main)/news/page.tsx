@@ -1,11 +1,8 @@
-import React from 'react'
+import NewsPage from '@/components/pages/news/NewsPage'
 
 type Props = {}
 
 const NewsRoute = (props: Props) => {
-  return (
-    <div>NewsRoute</div>
-  )
+  return <NewsPage/>
 }
-
 export default NewsRoute

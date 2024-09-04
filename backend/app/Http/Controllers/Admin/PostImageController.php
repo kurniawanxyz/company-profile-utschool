@@ -18,7 +18,7 @@ class PostImageController extends Controller
             $path = $request->file('image')->storeAs('post_images', $fileName);
 
             // return HandleJsonResponseHelpers::res("Successfully post image!", config('app.url') . '/storage/' . $path);
-            return response()->json(["success"=> true,"file"=> ["url"=> config('app.url') . '/storage/' . $path]]);
+            return response()->json(["location"=> config('app.url') . '/storage/' . $path]);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }

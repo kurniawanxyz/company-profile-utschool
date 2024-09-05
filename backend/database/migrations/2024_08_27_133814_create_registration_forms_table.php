@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_data', function (Blueprint $table) {
+        Schema::create('registration_forms', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('batch_id')->constrained();
+            $table->foreignUuid('sobat_school_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('learning_point_id')->constrained()->cascadeOnDelete();
+            $table->enum('approval', ['approved', 'rejected'])->nullable();
+            $table->string('learning_pattern');
+            $table->boolean('is_willing_to_relocate');
+            $table->boolean('compliance_agreement');
             $table->string('full_name');
             $table->string('place_of_birth');
             $table->string('date_of_birth');
@@ -24,13 +31,6 @@ return new class extends Migration
             $table->string('hobby');
             $table->enum('school_type', ['SMK', "SLTA"]);
             $table->string('school_of_origin');
-            $table->string('major_name');
-            $table->string('other_majors');
-            $table->integer('avg_report_card');
-            $table->integer('avg_math');
-            $table->integer('number_of_siblings');
-            $table->integer('order_in_family');
-            $table->integer('youngest_sibling_age');
             $table->timestamps();
         });
     }
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_data');
+        Schema::dropIfExists('registration_forms');
     }
 };

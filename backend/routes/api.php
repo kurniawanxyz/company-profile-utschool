@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DirectorController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PostImageController;
+use App\Http\Controllers\Admin\RegistrationController;
+use App\Http\Controllers\Admin\RegistrationScheduleController;
 use App\Http\Controllers\Admin\TrainingProgramController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Http\Request;
@@ -22,6 +25,7 @@ Route::get('/top-news', [LandingPageController::class, 'topNews']);
 Route::get('/director', [DirectorController::class, 'index']);
 Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
 Route::get('/gallery', [GalleryController::class, 'index']);
+Route::post('/registration', [RegistrationController::class, 'registration']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);
@@ -35,6 +39,9 @@ Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     Route::apiResource('/news', NewsController::class);
     Route::apiResource('/director', DirectorController::class);
     Route::apiResource('/training-program', TrainingProgramController::class);
+    Route::apiResource('/batch', BatchController::class);
+    Route::apiResource('/registration/schedule', RegistrationScheduleController::class);
+    Route::get('/registration', [RegistrationController::class, 'index']);
 
     // post image
     Route::post('/post-image', PostImageController::class);

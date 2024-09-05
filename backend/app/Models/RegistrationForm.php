@@ -6,19 +6,27 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RegistrationForm extends Model
 {
     use HasFactory, HasUuids;
     protected $guarded = [];
-    public $timestamps = false;
 
-    public function personal_data(): BelongsTo
+    public function batch(): BelongsTo
     {
-        return $this->belongsTo(PersonalData::class);
+        return $this->belongsTo(Batch::class);
     }
-    public function training_program(): BelongsTo
+    public function sobat_school(): BelongsTo
     {
-        return $this->belongsTo(TrainingProgram::class);
+        return $this->belongsTo(SobatSchool::class);
+    }
+    public function learning_point(): BelongsTo
+    {
+        return $this->belongsTo(LearningPoint::class);
+    }
+    public function health_info(): HasOne
+    {
+        return $this->hasOne(HealthInformation::class);
     }
 }

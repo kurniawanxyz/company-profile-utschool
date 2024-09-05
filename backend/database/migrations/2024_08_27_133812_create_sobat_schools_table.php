@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('health_information', function (Blueprint $table) {
+        Schema::create('sobat_schools', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('personal_data_id')->constrained('personal_data')->cascadeOnDelete();
+            $table->string('name');
+            $table->string('location');
+            $table->timestamps();
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('health_information');
+        Schema::dropIfExists('sobat_schools');
     }
 };

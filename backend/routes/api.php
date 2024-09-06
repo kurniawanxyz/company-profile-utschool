@@ -40,8 +40,12 @@ Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     Route::apiResource('/director', DirectorController::class);
     Route::apiResource('/training-program', TrainingProgramController::class);
     Route::apiResource('/batch', BatchController::class);
-    Route::apiResource('/registration/schedule', RegistrationScheduleController::class);
     Route::get('/registration', [RegistrationController::class, 'index']);
+    Route::apiResource('/registration/schedule', RegistrationScheduleController::class);
+    Route::get("/registration/export", [RegistrationController::class, 'exportData']);
+    Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
+    Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
+    Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
 
     // post image
     Route::post('/post-image', PostImageController::class);

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Helpers\HandleJsonResponseHelpers;
-use App\Models\Batch;
 use App\Models\RegistrationSchedule;
 use App\Models\TrainingProgram;
 use Illuminate\Foundation\Http\FormRequest;

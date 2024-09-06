@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Helpers\HandleJsonResponseHelpers;
+use App\Models\RegistrationSchedule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Validator;
 
 class RegistrationRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class RegistrationRequest extends FormRequest
     {
         return [
             // registration_forms
-            'batch_id' => 'required|uuid|exists:batches,id',
+            'training_program_id' => 'required|uuid|exists:training_programs,id',
             'learning_pattern' => 'required|string|max:255',
             'is_willing_to_relocate' => 'required|boolean',
             'compliance_agreement' => 'required|boolean',
@@ -55,6 +57,42 @@ class RegistrationRequest extends FormRequest
             'diploma_photo' => 'required|image|max:2048',
             'identity_photo' => 'required|image|max:2048',
         ];
+    }
+
+    protected function withValidator(Validator $validator)
+    {
+        $validator->after(function ($validator) {
+            $programId = $this->input('training_program_id');
+            $sobat_school_id = $this->input('sobat_school_id');
+            $learning_point_id = $this->input('learning_point_id');
+
+            $reg_schedule = RegistrationSchedule::where('training_program_id', $programId)->first();
+
+            if (!$reg_schedule || empty($reg_schedule->toArray())) {
+                $validator->errors()->add('training_program_id', 'Training Program is not available in registration schedule!');
+            }
+
+            if ($reg_schedule) {
+                $sobatSchoolExists = RegistrationSchedule::where('training_program_id', $programId)
+                    ->whereHas('sobatSchool', function ($query) use ($sobat_school_id) {
+                        $query->where('sobat_schools.id', $sobat_school_id);
+                    })->exists();
+
+                if (!$sobatSchoolExists) {
+                    $validator->errors()->add('sobat_school_id', 'Sobat School is not available in registration schedule!');
+                }
+
+                $learningPointExists = RegistrationSchedule::where('training_program_id', $programId)
+                    ->whereHas('learningPoint', function ($query) use ($learning_point_id) {
+                        $query->where('learning_points.id', $learning_point_id);
+                    })->exists();
+
+
+                if (!$learningPointExists) {
+                    $validator->errors()->add('learning_point_id', 'Learning point is not available in registration schedule!');
+                }
+            }
+        });
     }
 
     public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)

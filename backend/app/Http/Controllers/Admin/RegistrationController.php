@@ -2,27 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\FormRegistrationExport;
+use App\Exports\PassedRegistrationFormExport;
 use App\Helpers\HandleJsonResponseHelpers;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApprovalRegistrationFormRequest;
+use App\Http\Requests\FileApprovalRegistrationFormRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Imports\RegistrationFormImport;
+use App\Models\Batch;
 use App\Models\HealthInformation;
-use App\Models\PersonalData;
+use App\Models\LearningPoint;
 use App\Models\RegistrationForm;
-use App\Models\RegistrationSchedule;
+use App\Models\SobatSchool;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Storage;
 
 class RegistrationController extends Controller
 {
     public function registration(RegistrationRequest $request)
     {
-        try{
+        try {
             DB::beginTransaction();
 
             // registration_forms
             $form = new RegistrationForm();
-            $form->batch_id = $request->batch_id;
+            $form->batch_id = Batch::where('training_program_id', $request->training_program_id)->latest()->first()->id;
             $form->learning_pattern = $request->learning_pattern;
             $form->is_willing_to_relocate = $request->is_willing_to_relocate;
             $form->compliance_agreement = $request->compliance_agreement;
@@ -69,7 +77,7 @@ class RegistrationController extends Controller
 
             DB::commit();
             return HandleJsonResponseHelpers::res("Successfully submit registration form");
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
@@ -78,12 +86,69 @@ class RegistrationController extends Controller
     public function index(Request $request)
     {
         try {
-            $from = RegistrationForm::latest();
+            $form = RegistrationForm::latest();
 
-            if($req = $request->has('query')){
-                // $form = $from->where('name', "LIKE", "%". $req ."%")->orWhere();
+            if ($req = $request->input('query')) {
+                $form = $form->where('full_name', "LIKE", "%" . $req . "%");
             }
+
+            $form = $form->paginate(10);
+
+            return HandleJsonResponseHelpers::res("Successfully get registration data!", $form);
         } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+
+    public function exportData()
+    {
+        try {
+            return Excel::download(new FormRegistrationExport, 'Data siswa pendaftaran ' . date("Y-m") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+    public function passedExportData()
+    {
+        try {
+            return Excel::download(new PassedRegistrationFormExport, 'Data siswa lolos pendaftaran ' . date("Y-m") . '.xlsx');
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+
+    public function autoApproval(FileApprovalRegistrationFormRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            Excel::import(new RegistrationFormImport, $request->file('registration_file'));
+
+            DB::commit();
+
+            return HandleJsonResponseHelpers::res("Successfully submit approval registration form!");
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+    public function manualApproval(ApprovalRegistrationFormRequest $request, string $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $reg = RegistrationForm::where('id', $id)->first();
+
+            if (!$reg) {
+                return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
+            }
+            $reg->update($request->all());
+            DB::commit();
+
+            return HandleJsonResponseHelpers::res("Successfully " . $request->approval . $reg->full_name . " form!");
+        } catch (\Exception $e) {
+            DB::rollBack();
+
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }

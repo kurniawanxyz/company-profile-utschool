@@ -47,6 +47,7 @@ class FormRegistrationExport implements FromCollection, WithHeadings
             ], [
                 'Nama lengkap' => $item['full_name'],
                 'Asal sekolah' => $item['school_of_origin'],
+                'Jurusan' => $item['major'],
                 'Batch' => $batch->number,
                 "Pelatihan program" => $batch->training_program->name,
                 'Tempat pendaftaran' => SobatSchool::where('id', $item['sobat_school_id'])->first()->name,

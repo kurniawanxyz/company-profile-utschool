@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('hobby');
             $table->enum('school_type', ['SMK', "SLTA"]);
             $table->string('school_of_origin');
+            $table->string('major');
             $table->timestamps();
         });
     }

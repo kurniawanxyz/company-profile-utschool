@@ -45,6 +45,7 @@ class RegistrationController extends Controller
             $form->hobby = $request->hobby;
             $form->school_type = $request->school_type;
             $form->school_of_origin = $request->school_of_origin;
+            $form->major = $request->major;
             $form->sobat_school_id = $request->sobat_school_id;
             $form->learning_point_id = $request->learning_point_id;
             $form->save();

@@ -42,6 +42,7 @@ class RegistrationRequest extends FormRequest
             'hobby' => 'required|string|max:255',
             'school_type' => 'required|in:SMK,SLTA',
             'school_of_origin' => 'required|string|max:255',
+            'major' => 'required|string|max:255',
             'sobat_school_id' => 'required|uuid|exists:sobat_schools,id',
             'learning_point_id' => 'required|uuid|exists:learning_points,id',
 

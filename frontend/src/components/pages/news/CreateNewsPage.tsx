@@ -43,9 +43,10 @@ export default function CreateNewsPage({}: Props) {
                 <input type="hidden" name="content" value={value} />
 
                 <RichEditorNews
-                    title="Content"
-                    className=""
-                    
+                // title="tes"
+
+                    // value={value}
+                    // onChange={setValue}
                 />
 
                 <div className="flex justify-end w-full">

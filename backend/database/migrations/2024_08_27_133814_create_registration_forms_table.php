@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('id_card');
             $table->string('hobby');
-            $table->enum('school_type', ['SMK', "SLTA"]);
+            $table->enum('school_type', ['SMK', "SMA"]);
             $table->string('school_of_origin');
             $table->string('major');
             $table->timestamps();

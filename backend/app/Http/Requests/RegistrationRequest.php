@@ -40,7 +40,7 @@ class RegistrationRequest extends FormRequest
             'email' => 'required|email|unique:registration_forms,email',
             'id_card' => 'required|string|max:255',
             'hobby' => 'required|string|max:255',
-            'school_type' => 'required|in:SMK,SLTA',
+            'school_type' => 'required|in:SMK,SMA',
             'school_of_origin' => 'required|string|max:255',
             'major' => 'required|string|max:255',
             'sobat_school_id' => 'required|uuid|exists:sobat_schools,id',

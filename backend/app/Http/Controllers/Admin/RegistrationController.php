@@ -15,6 +15,7 @@ use App\Models\HealthInformation;
 use App\Models\LearningPoint;
 use App\Models\RegistrationForm;
 use App\Models\SobatSchool;
+use App\Models\TrainingProgram;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -152,5 +153,23 @@ class RegistrationController extends Controller
 
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
+    }
+
+    public function registrationFields()
+    {
+        try {
+            $programs = TrainingProgram::get()->makeHidden(['created_at', 'updated_at'])->toArray();
+            $lp = LearningPoint::get()->makeHidden(['created_at', 'updated_at'])->toArray();
+            $school = SobatSchool::get()->makeHidden(['created_at', 'updated_at'])->toArray();
+
+            return HandleJsonResponseHelpers::res("Successfully get data!", [
+                "learning_programs" => $programs,
+                "learning_points" => $lp,
+                "test_location" => $school
+            ]);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+
     }
 }

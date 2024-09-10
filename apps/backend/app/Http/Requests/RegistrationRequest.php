@@ -62,6 +62,10 @@ class RegistrationRequest extends FormRequest
 
     protected function withValidator(Validator $validator)
     {
+        if ($validator->fails()) {
+            return;
+        }
+
         $validator->after(function ($validator) {
             $programId = $this->input('training_program_id');
             $sobat_school_id = $this->input('sobat_school_id');

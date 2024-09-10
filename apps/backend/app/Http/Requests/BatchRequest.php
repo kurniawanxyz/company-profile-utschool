@@ -38,6 +38,10 @@ class BatchRequest extends FormRequest
 
     protected function withValidator(Validator $validator)
     {
+        if ($validator->fails()) {
+            return;
+        }
+
         $validator->after(function ($validator) {
             $batchNumber = $this->input('number');
             $programId = $this->input('training_program_id');

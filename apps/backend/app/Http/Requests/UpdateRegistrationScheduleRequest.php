@@ -29,10 +29,9 @@ class UpdateRegistrationScheduleRequest extends FormRequest
     {
         return [
             'training_program_id' => "required|exists:training_programs,id",
+            'learning_point_id' => "required|uuid|exists:learning_points,id",
             'sobat_school' => "required|array",
-            'learning_point' => "required|array",
             'sobat_school.*' => "required|uuid|exists:sobat_schools,id|distinct",
-            'learning_point.*' => "required|uuid|exists:learning_points,id|distinct",
             'start' => "required|date",
             "end" => "required|date|after:start"
         ];
@@ -40,12 +39,22 @@ class UpdateRegistrationScheduleRequest extends FormRequest
 
     protected function withValidator(Validator $validator)
     {
+        if ($validator->fails()) {
+            return;
+        }
+
         $validator->after(function ($validator) {
             $programId = $this->input('training_program_id');
             $id = $this->route('schedule');
 
-            $programExists = RegistrationSchedule::where('training_program_id', $programId)
-                ->where('id', '!=', $id)
+            $programExists = RegistrationSchedule::where('id', $id)->first();
+            if (!$programExists) {
+                $validator->errors()->add('id', "Schedule ID is not found!");
+                return;
+            }
+
+            $programExists = RegistrationSchedule::where('id', '!=', $id)
+                ->where('training_program_id', $programId)
                 ->first();
 
             if ($programExists) {

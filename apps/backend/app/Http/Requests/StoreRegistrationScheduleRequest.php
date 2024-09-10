@@ -28,10 +28,9 @@ class StoreRegistrationScheduleRequest extends FormRequest
     {
         return [
             'training_program_id' => "required|exists:training_programs,id",
+            'learning_point_id' => "required|uuid|exists:learning_points,id",
             'sobat_school' => "required|array",
-            'learning_point' => "required|array",
-            'sobat_school.*' => "required|uuid|exists:sobat_schools,id",
-            'learning_point.*' => "required|uuid|exists:learning_points,id",
+            'sobat_school.*' => "required|uuid|exists:sobat_schools,id|distinct",
             'start' => "required|date",
             "end" => "required|date|after:start"
         ];
@@ -39,6 +38,10 @@ class StoreRegistrationScheduleRequest extends FormRequest
 
     protected function withValidator(Validator $validator)
     {
+        if ($validator->fails()) {
+            return;
+        }
+
         $validator->after(function ($validator) {
             $programId = $this->input('training_program_id');
 

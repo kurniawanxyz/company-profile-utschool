@@ -49,10 +49,10 @@ class RegistrationScheduleController extends Controller
             $register = new RegistrationSchedule();
             $register->training_program_id = $request->training_program_id;
             $register->batch_id = Batch::where('training_program_id', $request->training_program_id)->first()->id;
+            $register->learning_point_id = $request->learning_point_id;
             $register->start = Carbon::parse($request->start)->format('Y-m-d');
             $register->end = Carbon::parse($request->end)->format('Y-m-d');
             $register->save();
-            $register->learningPoint()->sync($request->learning_point);
             $register->sobatSchool()->sync($request->sobat_school);
 
             DB::commit();
@@ -95,10 +95,10 @@ class RegistrationScheduleController extends Controller
             }
 
             $register->training_program_id = $request->training_program_id;
+            $register->learning_point_id = $request->learning_point_id;
             $register->start = Carbon::parse($request->start)->format('Y-m-d');
             $register->end = Carbon::parse($request->end)->format('Y-m-d');
             $register->save();
-            $register->learningPoint()->sync($request->learning_point);
             $register->sobatSchool()->sync($request->sobat_school);
 
             DB::commit();

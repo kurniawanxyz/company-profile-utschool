@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('registration_schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('training_program_id')->constrained();
+            $table->foreignUuid('learning_point_id')->constrained();
             $table->foreignUuid('batch_id')->constrained();
+            $table->foreignUuid('training_program_id')->constrained();
             $table->date('start');
             $table->date('end');
             $table->timestamps();

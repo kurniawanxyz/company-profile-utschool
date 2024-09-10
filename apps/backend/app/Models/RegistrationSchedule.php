@@ -19,14 +19,9 @@ class RegistrationSchedule extends Model
     {
         return $this->belongsTo(TrainingProgram::class);
     }
-
-    public function learningPoint()
-    {
-        return $this->belongsToMany(LearningPoint::class, 'registration_schedule_learning_point', "reg_sched_id");
-    }
-
     public function sobatSchool()
     {
-        return $this->belongsToMany(SobatSchool::class, 'registration_schedule_sobat_school', 'reg_sched_id');
+        return $this->belongsToMany(SobatSchool::class, 'registration_schedule_sobat_school', 'reg_schedule_id', 'sobat_school_id');
     }
+
 }

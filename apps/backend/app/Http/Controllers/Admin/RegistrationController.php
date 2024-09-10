@@ -159,9 +159,14 @@ class RegistrationController extends Controller
     public function registrationFields()
     {
         try {
-            $schedule = RegistrationSchedule::with(['training_program', 'learningPoint', 'sobatSchool'])->get()->toArray();
+            $training_program = TrainingProgram::get(["id", "name"]);
+            $batch = Batch::latest()->whereIn('training_program_id', $training_program->pluck('id'))->pluck('id');
+            $schedule = RegistrationSchedule::whereDate('end', ">=", Carbon::now("Asia/Jakarta"))->whereIn('batch_id', $batch)->with(['training_program', 'sobatSchool'])->get()->toArray();
 
-            return HandleJsonResponseHelpers::res("Successfully get data!", $schedule);
+            return HandleJsonResponseHelpers::res("Successfully get data!", [
+                "training_programs" => $training_program->toArray(),
+                "schedules" => $schedule
+            ]);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }

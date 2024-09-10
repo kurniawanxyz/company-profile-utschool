@@ -25,12 +25,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "workspaces": [
-    "backend",
-    "frontend"
+    "apps/backend",
+    "apps/frontend"
   ],
   "scripts": {
-    "start:frontend": "cd frontend && pnpm dev",
-    "start:backend": "cd backend && php artisan serve --host=127.0.0.1 ",
+    "start:frontend": "cd apps/frontend && pnpm dev",
+    "start:backend": "cd apps/backend && php artisan serve --host=127.0.0.1 ",
     "start": "concurrently \"pnpm run start:frontend\" \"pnpm run start:backend\""
   },
   "devDependencies": {

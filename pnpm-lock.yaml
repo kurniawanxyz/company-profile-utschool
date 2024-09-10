@@ -19,13 +19,13 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
 
-  backend:
+  apps/backend:
     dependencies:
       axios:
         specifier: ^0.18.0
         version: 0.18.1
 
-  frontend:
+  apps/frontend:
     dependencies:
       '@ckeditor/ckeditor5-build-classic':
         specifier: ^43.0.0

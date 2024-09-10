@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BatchSeeder::class);
         $this->call(SobatSchoolSeeder::class);
         $this->call(LearningPointSeeder::class);
+        $this->call(RegistrationScheduleSeeder::class);
     }
 }

@@ -3,13 +3,11 @@
 namespace App\Http\Middleware;
 
 use App\Helpers\HandleJsonResponseHelpers;
-use Auth;
 use Closure;
 use Illuminate\Http\Request;
-use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminIniMiddleware
+class SuperAdminIniMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +16,7 @@ class AdminIniMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth('sanctum')->check() && auth('sanctum')->user()->role == 'admin') {
+        if (auth('sanctum')->check() && auth('sanctum')->user()->role == 'super_admin') {
             return $next($request);
         }
 

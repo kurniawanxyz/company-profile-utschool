@@ -6,7 +6,7 @@ use App\Helpers\HandleJsonResponseHelpers;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateGalleryCategoryRequest extends FormRequest
+class UpdateAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,14 @@ class UpdateGalleryCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('gallery_category');
+        $id = $this->route("admin");
         return [
-            "text" => "required|unique:gallery_categories,text," . $id . "id",
-            "description" => "required"
+            "name" => "required|string",
+            "email" => "required|email:rfc,dns|unique:users,email," . $id . ",id",
+            "role" => "required|in:admin,super_admin",
+            "password" => "nullable|min:6"
         ];
     }
-
 
     public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {

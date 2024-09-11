@@ -22,6 +22,7 @@ class LoginController extends Controller
                 $user = auth()->user();
                 $success['token'] = $user->createToken(config('app.name'), ['*'], $expired)->plainTextToken;
                 $success['name'] = $user->name;
+                $success['role'] = $user->role;
                 $success['expired'] = Carbon::parse($expired)->format("d-m-Y H:i:s");
 
                 DB::commit();

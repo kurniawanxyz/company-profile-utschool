@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PostImageController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\RegistrationScheduleController;
 use App\Http\Controllers\Admin\TrainingProgramController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,12 @@ Route::get('/registration/fields', [RegistrationController::class, 'registration
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);
+
+Route::prefix('/super-admin')->middleware('super-admin-ini')->group(function(){
+    Route::post("/logout", [LoginController::class, 'logout']);
+
+    Route::apiResource('/admin', AdminController::class);
+});
 
 Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     Route::post("/logout", [LoginController::class, 'logout']);

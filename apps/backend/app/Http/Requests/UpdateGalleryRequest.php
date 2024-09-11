@@ -24,8 +24,8 @@ class UpdateGalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "gallery_category_id" => "nullable|uuid|exists:gallery_categories,id",
-            "image" => "nullable|file|mimes:png,jpg,jpeg"
+            "gallery_category_id" => "required|uuid|exists:gallery_categories,id",
+            "image" => "required|file|mimes:png,jpg,jpeg"
         ];
     }
 

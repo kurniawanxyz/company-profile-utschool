@@ -26,7 +26,8 @@
   "license": "MIT",
   "workspaces": [
     "apps/backend",
-    "apps/admin"
+    "apps/admin",
+    "apps/landingpage-1"
   ],
   "scripts": {
     "start:admin": "cd apps/admin && pnpm dev",

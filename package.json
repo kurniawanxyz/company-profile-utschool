@@ -31,8 +31,9 @@
   ],
   "scripts": {
     "start:admin": "cd apps/admin && pnpm dev",
+    "start:app1": "cd apps/landingpage-1 && pnpm dev",
     "start:backend": "cd apps/backend && php artisan serve --host=127.0.0.1 ",
-    "start": "concurrently \"pnpm run start:admin\" \"pnpm run start:backend\""
+    "start": "concurrently \"pnpm run start:admin\" \"pnpm run start:backend\" \"pnpm run start:app1\" "
   },
   "devDependencies": {
     "eslint": "^9.9.1",

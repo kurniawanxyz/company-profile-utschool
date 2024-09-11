@@ -18,7 +18,7 @@
     },
     {
       "name": "Rehan Septya Ramadhan",
-      "email": "rehan@gmail.com",
+      "email": "reyhanxdkv3@gmail.com",
       "url": "https://kaitodecode.vercel.app"
     }
   ],
@@ -26,12 +26,12 @@
   "license": "MIT",
   "workspaces": [
     "apps/backend",
-    "apps/frontend"
+    "apps/admin"
   ],
   "scripts": {
-    "start:frontend": "cd apps/frontend && pnpm dev",
+    "start:admin": "cd apps/admin && pnpm dev",
     "start:backend": "cd apps/backend && php artisan serve --host=127.0.0.1 ",
-    "start": "concurrently \"pnpm run start:frontend\" \"pnpm run start:backend\""
+    "start": "concurrently \"pnpm run start:admin\" \"pnpm run start:backend\""
   },
   "devDependencies": {
     "eslint": "^9.9.1",

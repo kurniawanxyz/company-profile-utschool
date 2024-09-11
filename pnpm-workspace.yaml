@@ -1,3 +1,3 @@
-packages:  
-  - 'apps/frontend'  
-  - 'apps/backend'
+packages:
+  - "apps/admin"
+  - "apps/backend"

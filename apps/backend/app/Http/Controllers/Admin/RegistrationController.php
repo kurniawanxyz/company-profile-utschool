@@ -161,7 +161,7 @@ class RegistrationController extends Controller
         try {
             $training_program = TrainingProgram::get(["id", "name"]);
             $batch = Batch::latest()->whereIn('training_program_id', $training_program->pluck('id'))->pluck('id');
-            $schedule = RegistrationSchedule::whereDate('end', ">=", Carbon::now("Asia/Jakarta"))->whereIn('batch_id', $batch)->with(['training_program', 'sobatSchool'])->get()->toArray();
+            $schedule = RegistrationSchedule::with('learning_point:id,name,location')->whereDate('end', ">=", Carbon::now("Asia/Jakarta"))->whereIn('batch_id', $batch)->with(['training_program', 'sobatSchool'])->get()->toArray();
 
             return HandleJsonResponseHelpers::res("Successfully get data!", [
                 "training_programs" => $training_program->toArray(),

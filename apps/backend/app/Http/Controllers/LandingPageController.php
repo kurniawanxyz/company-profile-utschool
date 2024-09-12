@@ -32,4 +32,13 @@ class LandingPageController extends Controller
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }
+
+    public function chatBot()
+    {
+        try {
+
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
 }

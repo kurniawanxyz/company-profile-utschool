@@ -28,6 +28,7 @@ Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
 Route::get('/gallery', [GalleryController::class, 'index']);
 Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::get('/registration/fields', [RegistrationController::class, 'registrationFields']);
+Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);

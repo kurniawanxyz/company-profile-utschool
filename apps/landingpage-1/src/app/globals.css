@@ -25,3 +25,15 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Mengizinkan scroll tapi menyembunyikan scrollbar */
+html, body {
+  overflow: auto;
+  -ms-overflow-style: none;  /* Untuk Internet Explorer dan Edge */
+  scrollbar-width: none;     /* Untuk Firefox */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;  /* Untuk Chrome, Safari, dan Opera */
+}
+

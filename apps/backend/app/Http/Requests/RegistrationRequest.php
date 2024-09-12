@@ -29,6 +29,7 @@ class RegistrationRequest extends FormRequest
             // registration_forms
             'training_program_id' => 'required|uuid|exists:training_programs,id',
             'learning_pattern' => 'required|string|max:255',
+            'motivation' => 'required',
             'is_willing_to_relocate' => 'required|boolean',
             'compliance_agreement' => 'required|boolean',
             'full_name' => 'required|string|max:255',

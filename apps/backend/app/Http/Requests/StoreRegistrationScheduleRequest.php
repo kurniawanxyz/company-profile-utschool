@@ -47,18 +47,12 @@ class StoreRegistrationScheduleRequest extends FormRequest
         $validator->after(function ($validator) {
             $programId = $this->input('training_program_id');
             $learningPoint = $this->input('learning_point_id');
-            $batchId = Batch::where('training_program_id', $programId)->latest()->first()->id;
-
-            $existingProgramsInRegSchedule = RegistrationSchedule::where('training_program_id', $programId)
-                ->exists();
+            $batchId = Batch::where('training_program_id', $programId)->first()->id;
 
             $existingLearnPointInRegSchedule = RegistrationSchedule::where('learning_point_id', $learningPoint)
                 ->where('batch_id', $batchId)
                 ->exists();
 
-            if ($existingProgramsInRegSchedule) {
-                $validator->errors()->add('training_program_id', 'Training program ' . TrainingProgram::where('id', $programId)->first()->name . ' already taken in this batch registration schedule.');
-            }
             if ($existingLearnPointInRegSchedule) {
                 $validator->errors()->add('learning_point_id', 'Learning point ' . LearningPoint::where('id', $learningPoint)->first()->name . ' already taken in this batch registration schedule.');
             }

@@ -94,6 +94,7 @@ class RegistrationScheduleController extends Controller
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
+            $register->batch_id = Batch::where('training_program_id', $request->training_program_id)->first()->id;
             $register->training_program_id = $request->training_program_id;
             $register->learning_point_id = $request->learning_point_id;
             $register->start = Carbon::parse($request->start)->format('Y-m-d');

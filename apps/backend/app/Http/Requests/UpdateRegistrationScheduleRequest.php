@@ -48,26 +48,12 @@ class UpdateRegistrationScheduleRequest extends FormRequest
             $id = $this->route('schedule');
             $programId = $this->input('training_program_id');
             $learningPoint = $this->input('learning_point_id');
-            $batchId = Batch::where('training_program_id', $programId)->latest()->first()->id;
-
-            $programExists = RegistrationSchedule::where('id', $id)->first();
-            if (!$programExists) {
-                $validator->errors()->add('id', "Schedule ID is not found!");
-                return;
-            }
-
-            $programExists = RegistrationSchedule::where('id', '!=', $id)
-                ->where('training_program_id', $programId)
-                ->first();
+            $batchId = Batch::where('training_program_id', $programId)->first()->id;
 
             $learningPointExist = RegistrationSchedule::where('id', '!=', $id)
                 ->where('learning_point_id', $learningPoint)
                 ->where('batch_id', $batchId)
-                ->first();
-
-            if ($programExists) {
-                $validator->errors()->add('training_program_id', 'Training program ' . TrainingProgram::where('id', $programId)->first()->name . ' already taken in this registration schedule.');
-            }
+                ->exists();
 
             if ($learningPointExist) {
                 $validator->errors()->add('learning_point_id', 'Learning point ' . LearningPoint::where('id', $learningPoint)->first()->name . ' already taken in this registration schedule.');

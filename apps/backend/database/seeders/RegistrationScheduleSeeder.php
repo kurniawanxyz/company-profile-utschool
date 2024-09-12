@@ -22,35 +22,31 @@ class RegistrationScheduleSeeder extends Seeder
         $start = Carbon::now();
         $end = $start->copy()->addMonth();
 
-        foreach (TrainingProgram::all() as $tp) {
-            $usedBatchIds = RegistrationSchedule::pluck('batch_id')->toArray();
-            $usedLearningPointIds = RegistrationSchedule::pluck('training_program_id')->toArray();
-            // dd($usedBatchIds);
+        for ($i = 1; $i <= 3; $i++) {
+            foreach (TrainingProgram::all() as $tp) {
+                $usedLearningPointIds = RegistrationSchedule::pluck('learning_program_id')->toArray();
 
-            if (empty($usedBatchIds)) {
-                $batchId = Batch::first()->id;
-            } else {
-                $batchId = Batch::whereNotIn('id', $usedBatchIds)->inRandomOrder()->first()->id;
+                $batchId = Batch::inRandomOrder()->first()->id;
+
+                if (empty($usedLearningPointIds)) {
+                    $learningPointId = LearningPoint::first()->id;
+                } else {
+                    $learningPointId = LearningPoint::whereNotIn('id', $usedLearningPointIds)->inRandomOrder()->first()->id;
+                }
+
+                $registrationSchedule = RegistrationSchedule::create([
+                    "training_program_id" => $tp->id,
+                    "batch_id" => $batchId,
+                    "learning_point_id" => $learningPointId,
+                    "start" => $start,
+                    "end" => $end
+                ]);
+
+                $this->attachRandomSobatSchools($registrationSchedule);
+
+                $start = $start->copy()->addMonth();
+                $end = $start->copy()->addMonth();
             }
-
-            if (empty($usedLearningPointIds)) {
-                $learningPointId = LearningPoint::first()->id;
-            } else {
-                $learningPointId = LearningPoint::whereNotIn('id', $usedLearningPointIds)->inRandomOrder()->first()->id;
-            }
-
-            $registrationSchedule = RegistrationSchedule::create([
-                "training_program_id" => $tp->id,
-                "batch_id" => $batchId,
-                "learning_point_id" => $learningPointId,
-                "start" => $start,
-                "end" => $end
-            ]);
-
-            $this->attachRandomSobatSchools($registrationSchedule);
-
-            $start = $start->copy()->addMonth();
-            $end = $start->copy()->addMonth();
         }
     }
     private function attachRandomSobatSchools($registrationSchedule)

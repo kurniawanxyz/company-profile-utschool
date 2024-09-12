@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('color_blindness');
             $table->string('address_and_phone_number');
             $table->boolean('school_transfer_option');
+            $table->text('additional_information')->nullable();
             $table->string('student_photo');
             $table->string('diploma_photo');
             $table->string('identity_photo');

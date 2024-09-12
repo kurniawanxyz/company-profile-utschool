@@ -59,6 +59,7 @@ class PassedRegistrationFormExport implements FromCollection, WithHeadings
                 'Hobi' => $item['hobby'],
                 'Jenis sekolah' => $item['school_type'],
                 'Tanggal daftar' => Carbon::parse($item['created_at'])->format("d-m-Y H:i:s"),
+                'Informasi tambahan' => $item['additional_information'],
                 'motivasi' => $item['motivation']
             ], $healthInfo);
         });

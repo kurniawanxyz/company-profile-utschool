@@ -63,6 +63,7 @@ class RegistrationController extends Controller
             $healthInfo->color_blindness = $request->color_blindness;
             $healthInfo->address_and_phone_number = $request->address_and_phone_number;
             $healthInfo->school_transfer_option = $request->school_transfer_option;
+            $healthInfo->additional_information = $request->additional_information;
 
             if ($request->hasFile('student_photo')) {
                 $fileName = $request->file('student_photo')->hashName();

@@ -55,6 +55,7 @@ class RegistrationRequest extends FormRequest
             'color_blindness' => 'required|boolean',
             'address_and_phone_number' => 'required|string|max:255',
             'school_transfer_option' => 'required|boolean',
+            'additional_information' => 'nullable|string',
             'student_photo' => 'required|image|max:2048',
             'diploma_photo' => 'required|image|max:2048',
             'identity_photo' => 'required|image|max:2048',

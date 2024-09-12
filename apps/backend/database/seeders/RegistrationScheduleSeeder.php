@@ -24,7 +24,7 @@ class RegistrationScheduleSeeder extends Seeder
 
         for ($i = 1; $i <= 3; $i++) {
             foreach (TrainingProgram::all() as $tp) {
-                $usedLearningPointIds = RegistrationSchedule::pluck('learning_program_id')->toArray();
+                $usedLearningPointIds = RegistrationSchedule::pluck('learning_point_id')->toArray();
 
                 $batchId = Batch::inRandomOrder()->first()->id;
 

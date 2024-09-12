@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('learning_pattern');
             $table->boolean('is_willing_to_relocate');
             $table->boolean('compliance_agreement');
+            $table->text("motivation");
             $table->string('full_name');
             $table->string('place_of_birth');
             $table->string('date_of_birth');

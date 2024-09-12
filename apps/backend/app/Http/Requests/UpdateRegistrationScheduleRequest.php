@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Helpers\HandleJsonResponseHelpers;
 use App\Models\Batch;
+use App\Models\LearningPoint;
 use App\Models\RegistrationSchedule;
 use App\Models\TrainingProgram;
 use Illuminate\Foundation\Http\FormRequest;
@@ -44,8 +45,10 @@ class UpdateRegistrationScheduleRequest extends FormRequest
         }
 
         $validator->after(function ($validator) {
-            $programId = $this->input('training_program_id');
             $id = $this->route('schedule');
+            $programId = $this->input('training_program_id');
+            $learningPoint = $this->input('learning_point_id');
+            $batchId = Batch::where('training_program_id', $programId)->latest()->first()->id;
 
             $programExists = RegistrationSchedule::where('id', $id)->first();
             if (!$programExists) {
@@ -57,8 +60,17 @@ class UpdateRegistrationScheduleRequest extends FormRequest
                 ->where('training_program_id', $programId)
                 ->first();
 
+            $learningPointExist = RegistrationSchedule::where('id', '!=', $id)
+                ->where('learning_point_id', $learningPoint)
+                ->where('batch_id', $batchId)
+                ->first();
+
             if ($programExists) {
-                $validator->errors()->add('training_program_id', 'Training Program ' . TrainingProgram::where('id', $programId)->first()->name . ' already taken in this registration schedule.');
+                $validator->errors()->add('training_program_id', 'Training program ' . TrainingProgram::where('id', $programId)->first()->name . ' already taken in this registration schedule.');
+            }
+
+            if ($learningPointExist) {
+                $validator->errors()->add('learning_point_id', 'Learning point ' . LearningPoint::where('id', $learningPoint)->first()->name . ' already taken in this registration schedule.');
             }
         });
     }

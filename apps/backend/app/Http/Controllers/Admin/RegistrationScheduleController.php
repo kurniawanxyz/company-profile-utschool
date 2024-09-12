@@ -20,7 +20,7 @@ class RegistrationScheduleController extends Controller
     public function index(Request $request)
     {
         try {
-            $schedule = RegistrationSchedule::latest()->with(['batch', 'training_program', 'learningPoint', 'sobatSchool']);
+            $schedule = RegistrationSchedule::latest()->with(['batch', 'training_program:id,name', 'learning_point:id,name,location', 'sobatSchool']);
             if ($request->has('query')) {
                 $input = $request->input('query');
 

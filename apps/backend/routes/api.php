@@ -37,13 +37,8 @@ Route::prefix('/super-admin')->middleware('super-admin-ini')->group(function(){
     Route::post("/logout", [LoginController::class, 'logout']);
 
     Route::apiResource('/admin', AdminController::class);
-});
-
-Route::prefix('/admin')->middleware('admin-ini')->group(function(){
-    Route::post("/logout", [LoginController::class, 'logout']);
-
-    Route::apiResource('/gallery', GalleryController::class);
     Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+    Route::apiResource('/gallery', GalleryController::class);
     Route::apiResource('/gallery-category', GalleryCategoryController::class);
     Route::apiResource('/news', NewsController::class);
     Route::apiResource('/director', DirectorController::class);
@@ -59,4 +54,18 @@ Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     // post image
     Route::post('/post-image', PostImageController::class);
     Route::delete('/delete-image', [PostImageController::class, 'delete']);
+});
+
+Route::prefix('/admin')->middleware('admin-ini')->group(function(){
+    Route::post("/logout", [LoginController::class, 'logout']);
+
+    Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+    Route::apiResource('/gallery', GalleryController::class);
+    Route::apiResource('/news', NewsController::class);
+    Route::get('/registration', [RegistrationController::class, 'index']);
+    Route::apiResource('/registration/schedule', RegistrationScheduleController::class);
+    Route::get("/registration/export", [RegistrationController::class, 'exportData']);
+    Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
+    Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
+    Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
 });

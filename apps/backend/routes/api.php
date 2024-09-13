@@ -60,6 +60,7 @@ Route::prefix('/admin')->middleware('admin-ini')->group(function(){
     Route::post("/logout", [LoginController::class, 'logout']);
 
     Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+    Route::apiResource('/gallery-category', GalleryCategoryController::class);
     Route::apiResource('/gallery', GalleryController::class);
     Route::apiResource('/news', NewsController::class);
     Route::get('/registration', [RegistrationController::class, 'index']);

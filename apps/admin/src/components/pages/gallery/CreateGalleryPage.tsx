@@ -12,6 +12,7 @@ type Props = {
 }
 
 const CreateGalleryPage = (props: Props) => {
+    console.log(props.list)
   return (
     <>
         <Banner

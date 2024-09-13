@@ -39,8 +39,8 @@ Route::prefix('/admin')->group(function () {
         Route::post("/logout", [LoginController::class, 'logout']);
 
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->only(['index', 'show']);
-        Route::apiResource('/gallery', GalleryController::class)->only(['index', 'show']);
-        Route::apiResource('/news', NewsController::class)->only(['index', 'show']);
+        Route::apiResource('/gallery', GalleryController::class);
+        Route::apiResource('/news', NewsController::class);
         Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->only(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
         Route::apiResource('/director', DirectorController::class)->only(['index', 'show']);
@@ -60,10 +60,7 @@ Route::prefix('/admin')->group(function () {
     // SUPER ADMIN
     Route::middleware('super-admin-ini')->group(function () {
         Route::apiResource('/admin', AdminController::class);
-        Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
-        Route::apiResource('/gallery', GalleryController::class);
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->except(['index', 'show']);
-        Route::apiResource('/news', NewsController::class)->except(['index', 'show']);
         Route::apiResource('/director', DirectorController::class)->except(['index', 'show']);
         Route::apiResource('/training-program', TrainingProgramController::class)->except(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->except(['index', 'show']);

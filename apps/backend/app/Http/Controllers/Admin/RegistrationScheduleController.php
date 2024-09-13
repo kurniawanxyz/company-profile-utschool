@@ -70,7 +70,7 @@ class RegistrationScheduleController extends Controller
     public function show(string $id)
     {
         try {
-            $reg = RegistrationSchedule::with(['batch', 'training_program', 'learningPoint', 'sobatSchool'])->where('id', $id)->first();
+            $reg = RegistrationSchedule::with(['batch', 'training_program', 'learning_point', 'sobatSchool'])->where('id', $id)->first();
             if (!$reg) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
@@ -124,7 +124,6 @@ class RegistrationScheduleController extends Controller
                 return HandleJsonResponseHelpers::res("Registration schedule not found!", [], 404, false);
             }
 
-            $registrationSchedule->learningPoint()->detach();
             $registrationSchedule->sobatSchool()->detach();
             $registrationSchedule->delete();
 

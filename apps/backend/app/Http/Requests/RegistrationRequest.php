@@ -90,7 +90,7 @@ class RegistrationRequest extends FormRequest
                 }
 
                 $learningPointExists = RegistrationSchedule::where('training_program_id', $programId)
-                    ->whereHas('learningPoint', function ($query) use ($learning_point_id) {
+                    ->whereHas('learning_point', function ($query) use ($learning_point_id) {
                         $query->where('learning_points.id', $learning_point_id);
                     })->exists();
 

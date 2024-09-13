@@ -18,13 +18,14 @@ class AdminIniMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth('sanctum')->check()) {
-            if (auth('sanctum')->user()->role == 'admin') {
-                return $next($request);
-            }
-            return HandleJsonResponseHelpers::res("Access denied", "You don't have access to {$request->route()->uri()} route! Check your token is valid and not expired!", 499, false);
+        if (!auth('sanctum')->check()) {
+            return HandleJsonResponseHelpers::res("Access denied", "You don't have access!", 403, false);
         }
 
-        return HandleJsonResponseHelpers::res("Access denied", "You don't have access!", 403, false);
+        if (auth('sanctum')->user()->role != 'admin') {
+            return HandleJsonResponseHelpers::res("Access denied", "You don't have access to {$request->route()->uri()} route! Check your token is valid and not expired!", 499, false);
+        }
+        return $next($request);
+
     }
 }

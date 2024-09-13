@@ -33,40 +33,42 @@ Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 
 Route::post('/admin/login', [LoginController::class, 'login']);
 
-Route::prefix('/super-admin')->middleware('super-admin-ini')->group(function(){
-    Route::post("/logout", [LoginController::class, 'logout']);
+Route::prefix('/admin')->group(function () {
 
-    Route::apiResource('/admin', AdminController::class);
-    Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
-    Route::apiResource('/gallery', GalleryController::class);
-    Route::apiResource('/gallery-category', GalleryCategoryController::class);
-    Route::apiResource('/news', NewsController::class);
-    Route::apiResource('/director', DirectorController::class);
-    Route::apiResource('/training-program', TrainingProgramController::class);
-    Route::apiResource('/batch', BatchController::class);
-    Route::get('/registration', [RegistrationController::class, 'index']);
-    Route::apiResource('/registration/schedule', RegistrationScheduleController::class);
-    Route::get("/registration/export", [RegistrationController::class, 'exportData']);
-    Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
-    Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
-    Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
+    // PUBLIC ADMIN
+    Route::middleware('public-admin')->group(function(){
+        Route::post("/logout", [LoginController::class, 'logout']);
 
-    // post image
-    Route::post('/post-image', PostImageController::class);
-    Route::delete('/delete-image', [PostImageController::class, 'delete']);
-});
+        Route::get('/registration', [RegistrationController::class, 'index']);
+        Route::get("/registration/export", [RegistrationController::class, 'exportData']);
+        Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
+        Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
+        Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
 
-Route::prefix('/admin')->middleware('admin-ini')->group(function(){
-    Route::post("/logout", [LoginController::class, 'logout']);
+        // post image
+        Route::post('/post-image', PostImageController::class);
+        Route::delete('/delete-image', [PostImageController::class, 'delete']);
 
-    Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
-    Route::apiResource('/gallery-category', GalleryCategoryController::class);
-    Route::apiResource('/gallery', GalleryController::class);
-    Route::apiResource('/news', NewsController::class);
-    Route::get('/registration', [RegistrationController::class, 'index']);
-    Route::apiResource('/registration/schedule', RegistrationScheduleController::class);
-    Route::get("/registration/export", [RegistrationController::class, 'exportData']);
-    Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
-    Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
-    Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
+        Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+        Route::apiResource('/gallery-category', GalleryCategoryController::class)->only(['index', 'show']);
+        Route::apiResource('/gallery', GalleryController::class)->only(['index', 'show']);
+        Route::apiResource('/news', NewsController::class)->only(['index', 'show']);
+        Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->only(['index', 'show']);
+        Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
+        Route::apiResource('/director', DirectorController::class)->only(['index', 'show']);
+        Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
+    });
+
+    // SUPER ADMIN
+    Route::middleware('super-admin-ini')->group(function () {
+        Route::apiResource('/admin', AdminController::class);
+        Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+        Route::apiResource('/gallery', GalleryController::class);
+        Route::apiResource('/gallery-category', GalleryCategoryController::class)->except(['index', 'show']);
+        Route::apiResource('/news', NewsController::class)->except(['index', 'show']);
+        Route::apiResource('/director', DirectorController::class)->except(['index', 'show']);
+        Route::apiResource('/training-program', TrainingProgramController::class)->except(['index', 'show']);
+        Route::apiResource('/batch', BatchController::class)->except(['index', 'show']);
+        Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->except(['index', 'show']);
+    });
 });

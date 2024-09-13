@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'verifyKey' => App\Http\Middleware\VerifyAPIKey::class,
+            'public-admin' => App\Http\Middleware\PublicAdminMiddleware::class,
             'admin-ini' => App\Http\Middleware\AdminIniMiddleware::class,
             'super-admin-ini' => App\Http\Middleware\SuperAdminIniMiddleware::class
         ]);

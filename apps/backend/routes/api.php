@@ -34,22 +34,10 @@ Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::prefix('/admin')->group(function () {
-
     // PUBLIC ADMIN
     Route::middleware('public-admin')->group(function(){
         Route::post("/logout", [LoginController::class, 'logout']);
 
-        Route::get('/registration', [RegistrationController::class, 'index']);
-        Route::get("/registration/export", [RegistrationController::class, 'exportData']);
-        Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
-        Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
-        Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
-
-        // post image
-        Route::post('/post-image', PostImageController::class);
-        Route::delete('/delete-image', [PostImageController::class, 'delete']);
-
-        Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->only(['index', 'show']);
         Route::apiResource('/gallery', GalleryController::class)->only(['index', 'show']);
         Route::apiResource('/news', NewsController::class)->only(['index', 'show']);
@@ -57,6 +45,16 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
         Route::apiResource('/director', DirectorController::class)->only(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
+        Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+        Route::get('/registration', [RegistrationController::class, 'index']);
+        Route::get("/registration/export", [RegistrationController::class, 'exportData']);
+        Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);
+        Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
+        Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
+
+        // post image
+        Route::post('/post-image', PostImageController::class);
+        Route::delete('/delete-image', [PostImageController::class, 'delete']);
     });
 
     // SUPER ADMIN

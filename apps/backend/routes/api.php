@@ -31,6 +31,8 @@ Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
 Route::get('/gallery', [GalleryController::class, 'index']);
 Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::get('/registration/fields', [RegistrationController::class, 'registrationFields']);
+Route::get('/list/training-program', [TrainingProgramController::class, 'simpleIndex']);
+Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
 Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 
 
@@ -51,7 +53,6 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/training-program', TrainingProgramController::class)->only(['index', 'show']);
         Route::apiResource('/learning-point', LearingPointController::class)->only(['index', 'show']);
         Route::apiResource('/sobat-school', SobatSchoolController::class)->only(['index', 'show']);
-        Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
         Route::get('/registration', [RegistrationController::class, 'index']);
         Route::get("/registration/export", [RegistrationController::class, 'exportData']);
         Route::put("/registration/approval", [RegistrationController::class, 'autoApproval']);

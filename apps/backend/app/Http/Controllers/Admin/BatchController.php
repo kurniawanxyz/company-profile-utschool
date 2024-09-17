@@ -18,7 +18,7 @@ class BatchController extends Controller
     public function index(Request $request)
     {
         try {
-            $batch = Batch::latest();
+            $batch = Batch::with('training_program:id,name')->latest();
             if ($req = $request->input('query')) {
                 $batch = $batch->where('number', "LIKE", "%" . $req . "%")->orWhereHas('training_program', function ($query) use ($req) {
                     $query->where('name', 'LIKE', "%" . $req . "%");

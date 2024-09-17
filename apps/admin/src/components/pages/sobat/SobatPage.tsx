@@ -13,7 +13,7 @@ import { twMerge } from "tailwind-merge";
 
 type Props = {};
 
-const TrainingProgramPage = (props: Props) => {
+export default function SobatPage({}: Props) {
   const [search, setSearch] = useState<string>();
   const { fetchPaginateData, paginate, setPaginateData, handlePaginate } =
     usePaginateStore();
@@ -22,7 +22,7 @@ const TrainingProgramPage = (props: Props) => {
   const router = useRouter();
 
   useEffect(() => {
-    fetchPaginateData(`/admin/training-program`);
+    fetchPaginateData(`/admin/sobat-school`);
   }, [fetchPaginateData, isDeleted]);
 
   function handleSubmitSearch() {
@@ -32,11 +32,7 @@ const TrainingProgramPage = (props: Props) => {
 
   return (
     <>
-      <Banner
-        title="Training Program"
-        btnTambah
-        urlTambah="/admin/training-program/create/"
-      />
+      <Banner title="Sobat" btnTambah urlTambah="/admin/sobat/create" />
 
       <SearchInput
         className="mt-3"
@@ -56,7 +52,7 @@ const TrainingProgramPage = (props: Props) => {
           {paginate.data.length == 0 && (
             <tr
               className="bg-slate-400 w-full text-slate-200 text-center"
-              key={`training-program`}
+              key={`sobat`}
             >
               <td className="border p-2" colSpan={4}>
                 Data was not found
@@ -66,7 +62,7 @@ const TrainingProgramPage = (props: Props) => {
           {paginate.data.map((item: TrainingProgramtype, index: number) => (
             <tr
               className="bg-slate-400 w-full text-slate-200 text-center"
-              key={`training-program-${index}`}
+              key={`sobat-${index}`}
             >
               <td className="border p-2">{index + 1}</td>
               <td className="border p-2">{item.name}</td>
@@ -74,7 +70,7 @@ const TrainingProgramPage = (props: Props) => {
                 <div className="flex justify-center gap-8">
                   <button
                     onClick={() =>
-                      openDeleteModal("/admin/training-program/" + item.id)
+                      openDeleteModal("/admin/sobat-school/" + item.id)
                     }
                     className="hover:text-red-500 delay-75 transition-all text-xl"
                   >
@@ -82,7 +78,7 @@ const TrainingProgramPage = (props: Props) => {
                   </button>
                   <button
                     onClick={() =>
-                      router.push("training-program/edit/" + item.id)
+                      router.push("sobat/edit/" + item.id)
                     }
                     className="hover:text-primary delay-75 transition-all text-xl"
                   >
@@ -115,6 +111,4 @@ const TrainingProgramPage = (props: Props) => {
       </div>
     </>
   );
-};
-
-export default TrainingProgramPage;
+}

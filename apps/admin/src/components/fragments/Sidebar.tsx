@@ -46,7 +46,7 @@ const Sidebar = (props: Props) => {
     },
     {
         url: '/admin/batch',
-        text: 'batch'
+        text: 'Batch'
     },
     {
         url: '/admin/enrollment-schedule',

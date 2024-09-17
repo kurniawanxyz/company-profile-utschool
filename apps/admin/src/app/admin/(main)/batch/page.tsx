@@ -1,9 +1,8 @@
-import React from 'react'
+import BatchPage from "@/components/pages/batch/BatchPage"
+
 
 type Props = {}
 
 export default function page({}: Props) {
-  return (
-    <div>page</div>
-  )
+  return <BatchPage />
 }

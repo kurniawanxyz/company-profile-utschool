@@ -4,7 +4,6 @@ import Banner from "@/components/elements/Banner";
 import SearchInput from "@/components/fragments/SearchInput";
 import useModalStore from "@/stores/useModalStore";
 import { linkPaginate, usePaginateStore } from "@/stores/usePaginateStore";
-import { GalleryCategoriesType } from "@/types/GalleryCategoriesType";
 import { TrainingProgramtype } from "@/types/TrainingProgramType";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

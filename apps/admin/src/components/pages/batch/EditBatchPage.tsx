@@ -42,10 +42,11 @@ export default function EditBatchPage({ batch, list }: Props) {
       if(batch){
           setSelectedOption(batch.training_program_id)
       }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
-    <>
+    <>2
       <Banner title="Batch/Create" btnKembali urlKembali="/admin/batch" />
 
       <Card className="mt-5">

@@ -49,9 +49,22 @@ const Sidebar = (props: Props) => {
         text: 'Batch'
     },
     {
+        url: '/admin/sobat',
+        text: 'Sobat School'
+    },
+    {
+        url: '/admin/batch',
+        text: 'Batch'
+    },
+    {
         url: '/admin/enrollment-schedule',
         text: 'Enrollment Schedule'
-    }
+    },
+    {
+        url: '/admin/enrollment-participants',
+        text: 'Enrollment Participants'
+    },
+    
   ]
   const defaultStyle = 'hover:text-primary font-semibold px-3  hover:bg-slate-900 py-2 ease-in-out rounded transition-all delay-100 cursor-pointer border-slate-200'
   return (

@@ -31,3 +31,20 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Untuk browser berbasis WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none; /* Sembunyikan scrollbar */
+}
+
+/* Untuk Firefox */
+* {
+  scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+}
+
+/* Untuk menghindari padding/space ekstra di Mac */
+html {
+  -ms-overflow-style: none; /* Untuk Internet Explorer */
+  scrollbar-width: none; /* Firefox */
+}
+

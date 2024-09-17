@@ -5,6 +5,7 @@ import SearchInput from "@/components/fragments/SearchInput";
 import useModalStore from "@/stores/useModalStore";
 import { linkPaginate, usePaginateStore } from "@/stores/usePaginateStore";
 import { GalleryCategoriesType } from "@/types/GalleryCategoriesType";
+import { TrainingProgramtype } from "@/types/TrainingProgramType";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa";
@@ -48,8 +49,7 @@ const TrainingProgramPage = (props: Props) => {
         <thead className="bg-slate-900">
           <tr>
             <th className="p-2">No</th>
-            <th className="p-2">Category</th>
-            <th className="p-2">Description</th>
+            <th className="p-2">Name</th>
             <th className="p-2">Action</th>
           </tr>
         </thead>
@@ -57,26 +57,25 @@ const TrainingProgramPage = (props: Props) => {
           {paginate.data.length == 0 && (
             <tr
               className="bg-slate-400 w-full text-slate-200 text-center"
-              key={`gallery-categories`}
+              key={`training-program`}
             >
               <td className="border p-2" colSpan={4}>Data was not found</td>
              
             </tr>
           )}
-          {paginate.data.map((item: GalleryCategoriesType, index: number) => (
+          {paginate.data.map((item: TrainingProgramtype, index: number) => (
             <tr
               className="bg-slate-400 w-full text-slate-200 text-center"
-              key={`gallery-categories-${index}`}
+              key={`training-program-${index}`}
             >
               <td className="border p-2">{index + 1}</td>
-              <td className="border p-2">{item.text}</td>
-              <td className="border p-2">{item.description}</td>
+              <td className="border p-2">{item.name}</td>
               <td className="border p-2">
                 <div className="flex justify-center gap-8">
-                  <button onClick={()=>openDeleteModal('/admin/gallery-category/'+item.id)} className="hover:text-red-500 delay-75 transition-all text-xl">
+                  <button onClick={()=>openDeleteModal('/admin/training-program/'+item.id)} className="hover:text-red-500 delay-75 transition-all text-xl">
                     <FaTrashCan />
                   </button>
-                  <button onClick={()=>router.push('gallery-categories/edit/'+item.id)} className="hover:text-primary delay-75 transition-all text-xl">
+                  <button onClick={()=>router.push('training-program/edit/'+item.id)} className="hover:text-primary delay-75 transition-all text-xl">
                     <FaPen />
                   </button>
                 </div>

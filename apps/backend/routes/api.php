@@ -32,6 +32,7 @@ Route::get('/gallery', [GalleryController::class, 'index']);
 Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::get('/registration/fields', [RegistrationController::class, 'registrationFields']);
 Route::get('/list/training-program', [TrainingProgramController::class, 'simpleIndex']);
+Route::get('/list/sobat-school', [SobatSchoolController::class, 'simpleIndex']);
 Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
 Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 

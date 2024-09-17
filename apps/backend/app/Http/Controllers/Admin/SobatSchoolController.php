@@ -30,6 +30,20 @@ class SobatSchoolController extends Controller
         }
     }
 
+    public function simpleIndex()
+    {
+        try {
+            try {
+                $tp = SobatSchool::latest()->get(['id', 'name', 'location']);
+                return HandleJsonResponseHelpers::res("Successfully get training program category data!", $tp);
+            } catch (\Exception $e) {
+                return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+            }
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

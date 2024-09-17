@@ -11,3 +11,18 @@ export async function handleCreate(fd: FormData) {
     redirect("/admin/learning-point")
   }
 }
+
+export async function handleUpdate(fd: FormData) {
+    const option: RequestInit = {
+      method: "PUT",
+      body: JSON.stringify({
+        name: fd.get("name"),
+        location: fd.get("location")
+      })
+    }
+    const id = fd.get("id")
+    const [status,,] = await handleFetch('/admin/learning-point/'+id, option, false, true)
+    if (status) {
+      redirect("/admin/learning-point")
+    }
+  }

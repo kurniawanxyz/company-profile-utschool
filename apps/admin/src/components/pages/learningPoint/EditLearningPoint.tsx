@@ -2,11 +2,14 @@
 import { Button, Input } from '@/components/elements'
 import Banner from '@/components/elements/Banner'
 import Card from '@/components/elements/Card'
-import { handleCreate } from '@/services/LearningPointService'
+import { handleUpdate } from '@/services/LearningPointService'
+import { LearningPointType } from '@/types/LearningPointType'
 
-type Props = {}
+type Props = {
+    data: LearningPointType
+}
 
-export default function EditLearningPoint({}: Props) {
+export default function EditLearningPoint({data}: Props) {
   return (
     <>
           <Banner
@@ -16,16 +19,19 @@ export default function EditLearningPoint({}: Props) {
         />
 
         <Card className='mt-5'>
-            <form action={handleCreate}>
+            <form action={handleUpdate}>
+                <input type="hidden" name="id" value={data.id} />
                 <Input
                     label='Name'
                     name='name'
                     placeholder='ex UTS Madiun'
+                    defaultValue={data.name}
                 />
                 <Input
                     name='location'
                     label='Location'
                     placeholder='ex: Madiun, JawaTimur'
+                    defaultValue={data.location}
                 />
                 <div className="flex justify-end mt-3">
                     <Button type='submit' className='w-20'>Submit</Button>

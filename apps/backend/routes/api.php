@@ -48,6 +48,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
         Route::apiResource('/director', DirectorController::class)->only(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
+        Route::apiResource('/training-program', TrainingProgramController::class)->only(['index', 'show']);
         Route::apiResource('/learning-point', LearingPointController::class)->only(['index', 'show']);
         Route::apiResource('/sobat-school', SobatSchoolController::class)->only(['index', 'show']);
         Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);

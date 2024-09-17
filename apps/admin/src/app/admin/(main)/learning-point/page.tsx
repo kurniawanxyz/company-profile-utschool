@@ -1,9 +1,7 @@
-import React from 'react'
+import LearningPointPage from '@/components/pages/learningPoint/LearningPointPage'
 
 type Props = {}
 
 export default function page({}: Props) {
-  return (
-    <div>page</div>
-  )
+  return <LearningPointPage/>
 }

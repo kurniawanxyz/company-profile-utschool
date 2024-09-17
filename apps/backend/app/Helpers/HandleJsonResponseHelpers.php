@@ -7,7 +7,7 @@ class HandleJsonResponseHelpers
 {
     private static array $struct = [];
     private static int $statusCode;
-    public static function res(string $message, mixed $data = [], int $statusCode = 200, bool $status = true)
+    public static function res(string $message = "Successfully get data!", mixed $data = [], int $statusCode = 200, bool $status = true)
     {
         self::$struct = [
             'meta' => [

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LearingPointController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\PostImageController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\RegistrationScheduleController;
@@ -56,9 +57,7 @@ Route::prefix('/admin')->group(function () {
         Route::get("/registration/passed/export", [RegistrationController::class, 'passedExportData']);
         Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
 
-        // post image
-        Route::post('/post-image', PostImageController::class);
-        Route::delete('/delete-image', [PostImageController::class, 'delete']);
+        Route::apiResource('/image-photo', PhotoController::class)->only(['index', 'show']);
     });
 
     // SUPER ADMIN
@@ -71,5 +70,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/learning-point', LearingPointController::class)->except(['index', 'show']);
         Route::apiResource('/sobat-school', SobatSchoolController::class)->except(['index', 'show']);
         Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->except(['index', 'show']);
+
+        Route::apiResource('/image-photo', PhotoController::class)->only(['store', 'destroy'])->except(['index', 'show']);
     });
 });

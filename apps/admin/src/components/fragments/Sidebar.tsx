@@ -36,6 +36,22 @@ const Sidebar = (props: Props) => {
         url: '/admin/galleries',
         text: 'Galleries'
     },
+    {
+        url: '/admin/training-program',
+        text: 'Training Program'
+    },
+    {
+        url: '/admin/learning-point',
+        text: 'Learning Point'
+    },
+    {
+        url: '/admin/batch',
+        text: 'batch'
+    },
+    {
+        url: '/admin/enrollment-schedule',
+        text: 'Enrollment Schedule'
+    }
   ]
   const defaultStyle = 'hover:text-primary font-semibold px-3  hover:bg-slate-900 py-2 ease-in-out rounded transition-all delay-100 cursor-pointer border-slate-200'
   return (
@@ -50,16 +66,19 @@ const Sidebar = (props: Props) => {
                     loading='lazy'
                 />
         </article>
-        <ul className='flex flex-col text-slate-900 px-3 mt-5 gap-2'>
-            {
-                listLink && listLink.map((item:ListLink,index:number)=>(
-                    <li onClick={()=>router.push(item.url)} key={`sidebar-${index}`} className={`${twMerge(defaultStyle, nowPath.startsWith(item.url) && 'bg-slate-900 text-primary')}`}>
-                        {item.text}
-                    </li>
-                ))
-            }
-        </ul>
-        <Button onClick={toggleSidebar} variants='outline' className='mx-auto md:hidden block w-11/12 absolute bottom-10 left-1/2 -translate-x-1/2' >Close</Button>
+        <div className='flex flex-col w-full overflow-auto space-y-5 pb-5'>
+            <ul className='flex flex-col text-slate-900 px-3 mt-5 gap-2'>
+                {
+                    listLink && listLink.map((item:ListLink,index:number)=>(
+                        <li onClick={()=>router.push(item.url)} key={`sidebar-${index}`} className={`${twMerge(defaultStyle, nowPath.startsWith(item.url) && 'bg-slate-900 text-primary')}`}>
+                            {item.text}
+                        </li>
+                    ))
+                }
+                
+            </ul>
+            <Button onClick={toggleSidebar} variants='outline' className='mx-auto md:hidden block w-11/12' >Close</Button>
+        </div>
     </div>
     <div className={`w-[100vw] h-[100vh] bg-black/40 absolute top-0 bottom-0 left-0 right-0 ${!isOpen && 'hidden'} md:hidden`}>
 

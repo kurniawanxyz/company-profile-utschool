@@ -23,11 +23,13 @@ const Select = (props: Props) => {
         ...rest
     } = props
     let defaultVal;
-    if(props.defaultValue){
-        defaultVal = props.defaultValue 
-    }
-    if( props.list.length <= 0 ){
-        defaultVal = "not-found"
+    if(props.list){
+        if(props.defaultValue){
+            defaultVal = props.defaultValue 
+        }
+        if( props.list.length <= 0 ){
+            defaultVal = "not-found"
+        }
     }
     console.log(defaultVal)
   return (
@@ -48,7 +50,7 @@ const Select = (props: Props) => {
             ))            
             }
             {
-                props.list.length <= 0 && <option value="not-found" disabled  >Data was not found</option> 
+               (props.list &&  props.list.length <= 0 )&& <option value="not-found" disabled  >Data was not found</option> 
             }
         </select>
     </div>

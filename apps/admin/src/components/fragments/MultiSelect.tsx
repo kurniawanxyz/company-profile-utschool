@@ -7,18 +7,24 @@ export type OptionType = {
   label: string;
 };
 
-function MultiSelect({options,name,label}:{options:OptionType[],name:string,label:string}) {
+type Props = {
+  options:OptionType[]
+  name:string
+  label:string  
+  defaultVal?: OptionType[]
+}
+
+function MultiSelect({options,name,label,defaultVal} : Props) {
   const [selectedOptions, setSelectedOptions] = useState<MultiValue<OptionType>>([]);
   const [value,setValue] = useState<string[]>()
 
-  // Data opsi
-//   const options: OptionType[] = [
-//     { value: 'apple', label: 'Apple' },
-//     { value: 'banana', label: 'Banana' },
-//     { value: 'grape', label: 'Grape' },
-//     { value: 'orange', label: 'Orange' },
-//     { value: 'pineapple', label: 'Pineapple' },
-//   ];
+
+  useEffect(()=>{
+    if(defaultVal){
+      setSelectedOptions(defaultVal)
+    }
+  },[defaultVal])
+
 
   // Handler perubahan
   const handleSelectChange = (selected: MultiValue<OptionType>) => {

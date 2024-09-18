@@ -4,7 +4,7 @@ import CreateGalleryPage from "@/components/pages/gallery/CreateGalleryPage"
 type Props = {}
 
 const page = async(props: Props) => {
-    const [,,listCategory] = await getDataAction("/admin/list/category")
+    const [,,listCategory] = await getDataAction("/list/category")
     return <CreateGalleryPage list={listCategory}/>
 }
 

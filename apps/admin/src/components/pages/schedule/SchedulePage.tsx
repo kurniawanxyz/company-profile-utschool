@@ -64,14 +64,14 @@ export default function SchedulePage({}: Props) {
               </td>
             </tr>
           )}
-          {paginate.data.map((item: ScheduleType, index: number) => (
+          {paginate.data && paginate.data.map((item: ScheduleType, index: number) => (
             <tr
               className="bg-slate-400 w-full text-slate-200 text-center"
               key={`enrollment-schedule-${index}`}
             >
               <td className="border p-2">{index + 1}</td>
-              <td className="border p-2">{item.learning_point.name}</td>
-              <td className="border p-2">{item.training_program.name}/{item.batch.number}</td>
+              <td className="border p-2">{item.learning_point?.name}</td>
+              <td className="border p-2">{item.training_program?.name}/{item.batch?.number}</td>
               <td className="border p-2">{item.start}</td>
               <td className="border p-2">{item.end}</td>
               <td className="border p-2">

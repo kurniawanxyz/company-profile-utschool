@@ -5,12 +5,15 @@ export async function handleUpdate(fd:FormData){
     const option:RequestInit = {
         method: "PUT",
         body:JSON.stringify({
-            name: fd.get("name"),
-            location: fd.get("location"),
+            training_program_id: fd.get("training_program_id"),
+            sobat_school: fd.getAll("sobat_school[]"),
+            learning_point_id: fd.get("learning_point_id"),
+            start: fd.get("start"),
+            end: fd.get("end"),
         })
     }
     const id = fd.get("id") 
-    const [status,,] = await handleFetch('/admin/registration/schedule'+id,option,false,true)
+    const [status,,] = await handleFetch('/admin/registration/schedule/'+id,option,false,true)
     if(status){
         redirect("/admin/enrollment-schedule")
     }

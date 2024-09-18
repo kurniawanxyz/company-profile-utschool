@@ -1,9 +1,14 @@
+import { getDataAction } from "@/actions/CommonAction"
+import EditSchedulePage from "@/components/pages/schedule/EditSchedulePage"
 
 
-type Props = {}
+type Props = {
+  params:{
+    id: string
+  }
+}
 
-export default function page({}: Props) {
-  return (
-    <div>page</div>
-  )
+export default async function page({params}: Props) {
+  const [,,data] = await getDataAction('/admin/registration/schedule/'+params.id)
+  return <EditSchedulePage schedule={data}/>
 }

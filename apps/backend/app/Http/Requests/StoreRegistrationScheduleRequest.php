@@ -49,6 +49,11 @@ class StoreRegistrationScheduleRequest extends FormRequest
             $learningPoint = $this->input('learning_point_id');
             $batchId = Batch::where('training_program_id', $programId)->first()->id;
 
+            if(!$batchId){
+                $validator->errors()->add('training_program_id', "Training program is not registered in batch!");
+                return;
+            }
+
             $existingLearnPointInRegSchedule = RegistrationSchedule::where('learning_point_id', $learningPoint)
                 ->where('batch_id', $batchId)
                 ->exists();

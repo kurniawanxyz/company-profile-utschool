@@ -13,7 +13,7 @@ const layout = (props: Props) => {
   return (
     <div className='bg-slate-200 min-h-screen w-full flex'>
         <Sidebar/>
-        <div className='flex flex-col px-5 py-2 w-full'>
+        <div className='flex flex-col px-5 py-2 w-full overflow-auto'>
             <Topbar/>
             <div className='mt-5'>
                 {props.children}

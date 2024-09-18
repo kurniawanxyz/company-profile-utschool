@@ -31,7 +31,11 @@ const Select = (props: Props) => {
             defaultVal = "not-found"
         }
     }
-    console.log(defaultVal)
+
+    const option = props.list.map((item)=>({
+        value: item.id,
+        label: item.text
+    }))
   return (
     <div className={`flex ${props.isDirectionColoum ? 'flex-col': 'flex-row items-center gap-3'} `}>
         <label className='text-neutral-900' htmlFor={props.label}>{props.label}</label>
@@ -46,7 +50,7 @@ const Select = (props: Props) => {
             {
             (props.list && props.list.length > 0) &&
                 props.list.map((item:optionSelect,index:number)=>(
-                    <option key={`select-option-${index}`} value={item.id}>{item.text}</option>
+                    <option className='text-black' key={`select-option-${index}`} value={item.id}>{item.text}</option>
             ))            
             }
             {

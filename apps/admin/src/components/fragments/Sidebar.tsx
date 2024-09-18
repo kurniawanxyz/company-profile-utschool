@@ -53,10 +53,6 @@ const Sidebar = (props: Props) => {
         text: 'Sobat School'
     },
     {
-        url: '/admin/batch',
-        text: 'Batch'
-    },
-    {
         url: '/admin/enrollment-schedule',
         text: 'Enrollment Schedule'
     },

@@ -1,8 +1,13 @@
+import { getDataAction } from "@/actions/CommonAction"
 import CreateSchedulePage from "@/components/pages/schedule/CreateSchedulePage"
+import { SobatType } from "@/types/SobatType"
 
-type Props = {}
+type Props = {
+    params:{
+        id: string
+    }
+}
 
-export default function page({}: Props) {
-    
+export default async function page({}: Props) {
   return <CreateSchedulePage/>
 }

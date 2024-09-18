@@ -1,4 +1,6 @@
 export type SobatType = {
-    name: string,
+    id: string
+    name: string
     location: string
-}
+  }
+  

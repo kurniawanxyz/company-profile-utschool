@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select, { MultiValue } from 'react-select';
 
 // Tentukan tipe untuk opsi
@@ -7,8 +7,9 @@ export type OptionType = {
   label: string;
 };
 
-function MultiSelect({options}:{options:OptionType[]}) {
+function MultiSelect({options,name,label}:{options:OptionType[],name:string,label:string}) {
   const [selectedOptions, setSelectedOptions] = useState<MultiValue<OptionType>>([]);
+  const [value,setValue] = useState<string[]>()
 
   // Data opsi
 //   const options: OptionType[] = [
@@ -23,19 +24,32 @@ function MultiSelect({options}:{options:OptionType[]}) {
   const handleSelectChange = (selected: MultiValue<OptionType>) => {
     setSelectedOptions(selected);
   };
+  useEffect(()=>{
+  if(selectedOptions){
+    const data = selectedOptions.map((item)=>item.value)
+    setValue(data)
+  }
+  },[selectedOptions])
+
+  console.log(value)
 
   return (
     <div>
-      <label>Select multiple values:</label>
+      <label className='text-black'>{label}</label>
+      {
+        value?.map((item,index)=>(
+          <input type="hidden" key={index} name={`${name}[]`} value={item} />
+        ))
+      }
+      <select name="" id=""></select>
       <Select
+
         className='text-black'
         isMulti
         value={selectedOptions}
         onChange={handleSelectChange}
         options={options}
       />
-      
-      <p>Selected values: {selectedOptions.map(option => option.label).join(', ')}</p>
     </div>
   );
 }

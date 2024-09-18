@@ -32,7 +32,7 @@ class StoreRegistrationScheduleRequest extends FormRequest
             'training_program_id' => "required|exists:training_programs,id",
             'learning_point_id' => "required|uuid|exists:learning_points,id",
             'sobat_school' => "required|array",
-            'sobat_school.*' => "required|uuid|exists:sobat_schools,id|distinct",
+            'sobat_school.*' => "required|exists:sobat_schools,id|distinct",
             'start' => "required|date",
             "end" => "required|date|after:start"
         ];
@@ -47,7 +47,7 @@ class StoreRegistrationScheduleRequest extends FormRequest
         $validator->after(function ($validator) {
             $programId = $this->input('training_program_id');
             $learningPoint = $this->input('learning_point_id');
-            $batchId = Batch::where('training_program_id', $programId)->first()->id;
+            $batchId = Batch::where('training_program_id', $programId)->first()->id??null;
 
             if(!$batchId){
                 $validator->errors()->add('training_program_id', "Training program is not registered in batch!");

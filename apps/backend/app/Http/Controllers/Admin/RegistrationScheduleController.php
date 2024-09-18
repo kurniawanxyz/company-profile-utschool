@@ -29,6 +29,8 @@ class RegistrationScheduleController extends Controller
                         ->orWhereHas('training_program', function ($query) use ($input) {
                             $query->where('name', 'LIKE', "%{$input}%");
                         });
+                })->orWhereHas('learning_point', function ($query) use ($input) {
+                    $query->where('name', $input);
                 });
             }
             $schedule = $schedule->paginate(10);

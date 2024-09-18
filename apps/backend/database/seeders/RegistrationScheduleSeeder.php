@@ -23,10 +23,8 @@ class RegistrationScheduleSeeder extends Seeder
         $end = $start->copy()->addMonth();
 
         for ($i = 1; $i <= 3; $i++) {
-            foreach (TrainingProgram::all() as $tp) {
+            foreach (TrainingProgram::with('batch')->get() as $tp) {
                 $usedLearningPointIds = RegistrationSchedule::pluck('learning_point_id')->toArray();
-
-                $batchId = Batch::latest()->where('training_program_id', $tp->id)->first()->id;
 
                 if (empty($usedLearningPointIds)) {
                     $learningPointId = LearningPoint::first()->id;
@@ -36,7 +34,7 @@ class RegistrationScheduleSeeder extends Seeder
 
                 $registrationSchedule = RegistrationSchedule::create([
                     "training_program_id" => $tp->id,
-                    "batch_id" => $batchId,
+                    "batch_id" => $tp->batch->id,
                     "learning_point_id" => $learningPointId,
                     "start" => $start,
                     "end" => $end

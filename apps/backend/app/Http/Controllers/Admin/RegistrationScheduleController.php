@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRegistrationScheduleRequest;
 use App\Http\Requests\UpdateRegistrationScheduleRequest;
 use App\Models\Batch;
+use App\Models\RegistrationForm;
 use App\Models\RegistrationSchedule;
 use Carbon\Carbon;
 use DB;
@@ -73,9 +74,15 @@ class RegistrationScheduleController extends Controller
     {
         try {
             $reg = RegistrationSchedule::with(['batch', 'training_program', 'learning_point', 'sobatSchool'])->where('id', $id)->first();
+
             if (!$reg) {
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
+
+            $batchId = $reg->batch->id;
+            $lp = $reg->learning_point->id;
+            $forms = RegistrationForm::where('batch_id', $batchId)->where('learning_point_id', $lp)->get();
+            $reg['registration_form'] = $forms;
 
             return HandleJsonResponseHelpers::res("Successfully get registration schedule detail data!", $reg);
         } catch (\Exception $e) {

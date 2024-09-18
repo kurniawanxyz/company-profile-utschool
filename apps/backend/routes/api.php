@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DirectorController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
-use App\Http\Controllers\Admin\LearingPointController;
+use App\Http\Controllers\Admin\LearningPointController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PhotoController;
@@ -34,6 +34,7 @@ Route::get('/registration/fields', [RegistrationController::class, 'registration
 Route::get('/list/training-program', [TrainingProgramController::class, 'simpleIndex']);
 Route::get('/list/sobat-school', [SobatSchoolController::class, 'simpleIndex']);
 Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
+Route::get('/list/learning-point', [LearningPointController::class, 'simpleIndex']);
 Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 
 
@@ -52,7 +53,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/director', DirectorController::class)->only(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
         Route::apiResource('/training-program', TrainingProgramController::class)->only(['index', 'show']);
-        Route::apiResource('/learning-point', LearingPointController::class)->only(['index', 'show']);
+        Route::apiResource('/learning-point', LearningPointController::class)->only(['index', 'show']);
         Route::apiResource('/sobat-school', SobatSchoolController::class)->only(['index', 'show']);
         Route::get('/registration', [RegistrationController::class, 'index']);
         Route::get("/registration/export", [RegistrationController::class, 'exportData']);
@@ -70,7 +71,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/director', DirectorController::class)->except(['index', 'show']);
         Route::apiResource('/training-program', TrainingProgramController::class)->except(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->except(['index', 'show']);
-        Route::apiResource('/learning-point', LearingPointController::class)->except(['index', 'show']);
+        Route::apiResource('/learning-point', LearningPointController::class)->except(['index', 'show']);
         Route::apiResource('/sobat-school', SobatSchoolController::class)->except(['index', 'show']);
         Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->except(['index', 'show']);
 

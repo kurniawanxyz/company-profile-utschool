@@ -10,7 +10,7 @@ use App\Models\LearningPoint;
 use DB;
 use Illuminate\Http\Request;
 
-class LearingPointController extends Controller
+class LearningPointController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,6 +26,16 @@ class LearingPointController extends Controller
             $lp = $lp->paginate(10);
             return HandleJsonResponseHelpers::res("Successfully get learning point category data!", $lp);
         } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+
+    public function simpleIndex()
+    {
+        try{
+            $tp = LearningPoint::latest()->get(['id', 'name', 'location']);
+            return HandleJsonResponseHelpers::res("Successfully get training program category data!", $tp);
+        }catch(\Exception $e){
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }

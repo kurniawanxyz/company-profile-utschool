@@ -32,7 +32,7 @@ class RegistrationController extends Controller
 
             // registration_forms
             $form = new RegistrationForm();
-            $form->batch_id = Batch::where('training_program_id', $request->training_program_id)->latest()->first()->id;
+            $form->batch_id = Batch::latest()->where('training_program_id', $request->training_program_id)->latest()->first()->id;
             $form->learning_pattern = $request->learning_pattern;
             $form->motivation = $request->motivation;
             $form->is_willing_to_relocate = $request->is_willing_to_relocate;

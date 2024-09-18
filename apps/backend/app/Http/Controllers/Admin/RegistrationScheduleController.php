@@ -51,7 +51,7 @@ class RegistrationScheduleController extends Controller
             DB::beginTransaction();
             $register = new RegistrationSchedule();
             $register->training_program_id = $request->training_program_id;
-            $register->batch_id = Batch::where('training_program_id', $request->training_program_id)->first()->id;
+            $register->batch_id = Batch::latest()->where('training_program_id', $request->training_program_id)->first()->id;
             $register->learning_point_id = $request->learning_point_id;
             $register->start = Carbon::parse($request->start)->format('Y-m-d');
             $register->end = Carbon::parse($request->end)->format('Y-m-d');
@@ -103,7 +103,7 @@ class RegistrationScheduleController extends Controller
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            $register->batch_id = Batch::where('training_program_id', $request->training_program_id)->first()->id;
+            $register->batch_id = Batch::latest()->where('training_program_id', $request->training_program_id)->first()->id;
             $register->training_program_id = $request->training_program_id;
             $register->learning_point_id = $request->learning_point_id;
             $register->start = Carbon::parse($request->start)->format('Y-m-d');

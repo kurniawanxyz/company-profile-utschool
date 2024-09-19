@@ -8,6 +8,5 @@ type Props = {
 }
 
 export default async function page({params}: Props) {
-  const [,,data] = await getDataAction('/admin/registration/schedule/'+params.id)
-  return <ParticipansPage data={data}/>
+  return <ParticipansPage id={params.id}/>
 }

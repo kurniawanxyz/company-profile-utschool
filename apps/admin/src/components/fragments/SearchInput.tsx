@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 type Props = {
     className? : string,
     onChange: (e:ChangeEvent<HTMLInputElement>) => void,
-    onSubmit: ()=> void
+    onSubmit: (e: React.FormEvent)=> void
 };
 
 const SearchInput = (props: Props) => {

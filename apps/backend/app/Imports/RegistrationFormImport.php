@@ -16,7 +16,7 @@ class RegistrationFormImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $possibleKeys = ['Persetujuan*', 'Persetujuan', 'persetujuan'];
+        $possibleKeys = ['Disetujui/Ditolak', 'disetujui/ditolak', 'diestujuiditolak', 'diestujui ditolak', "Disetujui", 'Ditolak'];
 
         $approvalKey = collect($possibleKeys)->first(function ($key) use ($row) {
             return array_key_exists($key, $row);

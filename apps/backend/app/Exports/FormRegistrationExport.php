@@ -53,7 +53,7 @@ class FormRegistrationExport implements FromCollection, WithHeadings
 
             $batch = Batch::with(['training_program:id,name'])->where('id', $item['batch_id'])->first();
             return array_merge([
-                'Persetujuan*' => $item['approval'] == "approved"
+                'Disetujui/Ditolak' => $item['approval'] == "approved"
                     ? "Disetujui"
                     : ($item['approval'] == "rejected"
                         ? "Ditolak"

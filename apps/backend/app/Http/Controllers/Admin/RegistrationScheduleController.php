@@ -70,7 +70,7 @@ class RegistrationScheduleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         try {
             $reg = RegistrationSchedule::with(['batch', 'training_program', 'learning_point', 'sobatSchool'])->where('id', $id)->first();
@@ -81,8 +81,13 @@ class RegistrationScheduleController extends Controller
 
             $batchId = $reg->batch->id;
             $lp = $reg->learning_point->id;
-            $forms = RegistrationForm::where('batch_id', $batchId)->where('learning_point_id', $lp)->get();
-            $reg['registration_form'] = $forms;
+            $forms = RegistrationForm::where('batch_id', $batchId)->where('learning_point_id', $lp);
+
+            if($req = $request->input('query')){
+                $form = $forms->where("full_name", "LIKE", "%". $req ."%");
+            }
+
+            $reg['registration_form'] = $forms->get();
 
             return HandleJsonResponseHelpers::res("Successfully get registration schedule detail data!", $reg);
         } catch (\Exception $e) {

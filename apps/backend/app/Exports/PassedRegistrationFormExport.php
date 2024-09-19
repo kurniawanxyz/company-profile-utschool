@@ -23,7 +23,7 @@ class PassedRegistrationFormExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        $forms = RegistrationForm::latest();
+        $forms = RegistrationForm::latest()->where('approval', 'approved');
 
         if ($id = $this->id) {
             $reg = RegistrationSchedule::with(['batch', 'learning_point'])->where('id', $id)->first();

@@ -105,18 +105,18 @@ class RegistrationController extends Controller
         }
     }
 
-    public function exportData()
+    public function exportData(Request $request)
     {
         try {
-            return Excel::download(new FormRegistrationExport, 'Data siswa pendaftaran ' . date("Y-m") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new FormRegistrationExport($request->input('query')), 'Data siswa pendaftaran ' . date("Y-m") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }
-    public function passedExportData()
+    public function passedExportData(Request $request)
     {
         try {
-            return Excel::download(new PassedRegistrationFormExport, 'Data siswa lolos pendaftaran ' . date("Y-m") . '.xlsx');
+            return Excel::download(new PassedRegistrationFormExport($request->input('query')), 'Data siswa lolos pendaftaran ' . date("Y-m") . '.xlsx');
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }

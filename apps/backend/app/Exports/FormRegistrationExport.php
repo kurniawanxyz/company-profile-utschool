@@ -6,6 +6,7 @@ use App\Models\Batch;
 use App\Models\HealthInformation;
 use App\Models\LearningPoint;
 use App\Models\RegistrationForm;
+use App\Models\RegistrationSchedule;
 use App\Models\SobatSchool;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -14,12 +15,24 @@ use Storage;
 
 class FormRegistrationExport implements FromCollection, WithHeadings
 {
+    public function __construct(private string|null $id)
+    {
+    }
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        $forms = RegistrationForm::get()->toArray();
+        $forms = RegistrationForm::latest();
+
+        if($id = $this->id){
+            $reg = RegistrationSchedule::with(['batch', 'learning_point'])->where('id', $id)->first();
+            $batchId = $reg->batch->id;
+            $lp = $reg->learning_point->id;
+            $forms = $forms->where('batch_id', $batchId)->where('learning_point_id', $lp);
+        }
+
+        $forms = $forms->get()->toArray();
 
         return collect($forms)->map(function ($item) {
             $personal_health = HealthInformation::where('registration_form_id', $item['id'])->first()->toArray();
@@ -32,6 +45,7 @@ class FormRegistrationExport implements FromCollection, WithHeadings
                 'Buta warna' => $personal_health['color_blindness'] ? 'Ya' : 'Tidak',
                 'Alamat dan nomor telepon' => $personal_health['address_and_phone_number'],
                 'Bersedia di pindah program' => $personal_health['school_transfer_option'] ? 'Ya' : 'Tidak',
+                'Informasi tambahan' => $personal_health['additional_information'],
                 'Foto siswa' => Storage::url($personal_health['student_photo']),
                 'Foto ijazah' => Storage::url($personal_health['diploma_photo']),
                 'Foto identitas' => Storage::url($personal_health['identity_photo']),
@@ -65,7 +79,6 @@ class FormRegistrationExport implements FromCollection, WithHeadings
                 'Hobi' => $item['hobby'],
                 'Jenis sekolah' => $item['school_type'],
                 'Tanggal daftar' => Carbon::parse($item['created_at'])->format("d-m-Y H:i:s"),
-                'Informasi tambahan' => $item['additional_information'],
                 'motivasi' => $item['motivation']
             ], $healthInfo);
         });

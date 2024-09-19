@@ -84,7 +84,7 @@ class RegistrationScheduleController extends Controller
             $forms = RegistrationForm::where('batch_id', $batchId)->where('learning_point_id', $lp);
 
             if($req = $request->input('query')){
-                $form = $forms->where("full_name", "LIKE", "%". $req ."%");
+                $forms = $forms->where("full_name", "LIKE", "%". $req ."%");
             }
 
             $reg['registration_form'] = $forms->get();

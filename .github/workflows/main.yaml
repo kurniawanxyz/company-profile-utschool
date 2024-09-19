@@ -56,7 +56,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: apps/backend  # Adjust to your Laravel app directory
+          local-dir: apps/backend/  # Adjust to your Laravel app directory
           # server-dir: /path/to/remote/directory  # Set this to your hosting directory
 
       # Alternative: Deploy via SSH/SCP

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { Button, Input, TextArea } from "@/components/elements"
 import Banner from "@/components/elements/Banner"
@@ -58,9 +59,7 @@ return (
                 <TextArea label="Description" name="description"/>
                 <input type="text" name="message" className="hidden" value={value} />
                 <RichEditor title="Message"/>
-                <div className="flex justify-end mt-10">
-                    <Button className="w-32" type="submit">Submit</Button>
-                </div>
+
 
             </form>
         </Card>

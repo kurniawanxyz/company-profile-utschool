@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import dynamic from "next/dynamic";
 import { Button, Input, TextArea } from "@/components/elements"

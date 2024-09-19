@@ -50,6 +50,18 @@ export async function handleApproved(id: string, approval: "approved" | "rejecte
     const [,,,] = await handleFetch('/admin/registration/approval/'+id,option,false,true)
 }
 
+export async function handleAutoApproval(fd:FormData){
+    fd.append("_method","PUT")
+    const option:RequestInit = {
+        method: "POST",
+        body: fd
+    }
+    const [status,,,] = await handleFetch('/admin/registration/approval',option,true,true)
+    if(status){
+        redirect("/admin/enrollment-schedule/")
+    }
+}
+
 export async function handleExport(id: string){
 
     if(!id){

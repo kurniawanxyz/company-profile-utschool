@@ -10,6 +10,7 @@ import { FaPen } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import { twMerge } from "tailwind-merge";
 import { FaUser } from "react-icons/fa";
+import { Button } from "@/components/elements";
 
 type Props = {};
 
@@ -37,11 +38,16 @@ export default function SchedulePage({}: Props) {
         urlTambah="/admin/enrollment-schedule/create"
       />
 
+<div className="flex w-full justify-between md:items-center flex-col md:flex-row gap-3 mt-3">
       <SearchInput
-        className="mt-3"
+        className=""
         onChange={(e) => setSearch(e.target.value)}
         onSubmit={handleSubmitSearch}
       />
+    <Button onClick={()=>router.push("/admin/enrollment-schedule/auto-approval")} className="w-40">Auto Approval</Button>
+</div>
+
+
 
       <table className="table w-full mt-3">
         <thead className="bg-slate-900">

@@ -41,7 +41,7 @@ Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::prefix('/admin')->group(function () {
-    // PUBLIC ADMIN 
+    // PUBLIC ADMIN
     Route::middleware('public-admin')->group(function () {
         Route::post("/logout", [LoginController::class, 'logout']);
 
@@ -66,7 +66,7 @@ Route::prefix('/admin')->group(function () {
 
     // SUPER ADMIN
     Route::middleware('super-admin-ini')->group(function () {
-        Route::apiResource('/admin', AdminController::class);
+        Route::apiResource('/users', AdminController::class);
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->except(['index', 'show']);
         Route::apiResource('/director', DirectorController::class)->except(['index', 'show']);
         Route::apiResource('/training-program', TrainingProgramController::class)->except(['index', 'show']);

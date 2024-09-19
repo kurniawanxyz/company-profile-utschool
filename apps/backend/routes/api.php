@@ -41,7 +41,7 @@ Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
 Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::prefix('/admin')->group(function () {
-    // PUBLIC ADMIN asdasd
+    // PUBLIC ADMIN 
     Route::middleware('public-admin')->group(function () {
         Route::post("/logout", [LoginController::class, 'logout']);
 

@@ -3,6 +3,7 @@ import { Raleway } from "next/font/google";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/react"
 
 const raleway = Raleway({ 
   subsets: ["latin"],
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={raleway.className}>
         {children}
         <ToastContainer/>  
+        <Analytics/>
       </body>
     </html>
   );

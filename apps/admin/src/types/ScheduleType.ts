@@ -11,6 +11,7 @@ export interface ScheduleType {
     training_program: TrainingProgram
     learning_point: LearningPoint
     sobat_school: SobatSchool[]
+    registration_form: RegistrationForm[]
   }
   
  interface Batch {
@@ -46,3 +47,29 @@ export interface ScheduleType {
     sobat_school_id: string
   }
   
+
+export interface RegistrationForm {
+  id: string
+  batch_id: string
+  sobat_school_id: string
+  learning_point_id: string
+  approval: any
+  learning_pattern: string
+  is_willing_to_relocate: number
+  compliance_agreement: number
+  motivation: string
+  full_name: string
+  place_of_birth: string
+  date_of_birth: string
+  gender: string
+  address: string
+  telephone_number: string
+  email: string
+  id_card: string
+  hobby: string
+  school_type: string
+  school_of_origin: string
+  major: string
+  created_at: string
+  updated_at: string
+}

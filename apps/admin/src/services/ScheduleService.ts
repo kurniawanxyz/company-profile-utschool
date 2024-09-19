@@ -1,4 +1,5 @@
 import handleFetch from "@/utils/handleFetch"
+import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 export async function handleUpdate(fd:FormData){
@@ -35,4 +36,14 @@ export async function handleCreate(fd:FormData){
     if(status){
         redirect("/admin/enrollment-schedule")
     }
+}
+
+export async function handleApproved(id: string, approval: "approved" | "rejected"){
+    const option:RequestInit = {
+        method: "PATCH",
+        body: JSON.stringify({
+            approval,
+        })
+    }
+    const [,,,] = await handleFetch('/admin/registration/approval/'+id,option,false,true)
 }

@@ -61,7 +61,7 @@ const RichEditorNews = () => (
             
             plugins: 'image code',
             toolbar: 'undo redo | link image | code',
-            images_upload_handler: handleImageUpload,
+            // images_upload_handler: handleImageUpload,
             images_remove_handler: handleImageDelete,  // Handle image delete
         }}
     />

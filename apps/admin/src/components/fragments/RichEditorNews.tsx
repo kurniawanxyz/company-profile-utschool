@@ -1,70 +1,105 @@
-import { Editor } from '@tinymce/tinymce-react';
+"use client"
 import React from 'react';
-import Cookie from "js-cookie";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import handleFetch from '@/utils/handleFetch';
+import { useRichEditor } from '@/stores/useRichEditor';
 
-const handleImageUpload = (blobInfo: any, success: (url: string) => void, failure: (message: string) => void) => {
-    const data = new FormData();
-    data.append('image', blobInfo.blob(), blobInfo.filename());
+const RichEditorNews = ({defaultValue = "<p>Initial content</p>"}:{defaultValue?: string|TrustedHTML}) => {
+    const {value,setValue} = useRichEditor()
+  const handleImageUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/post-image`, {
-        method: 'POST',
-        body: data,
-        headers: {
-            'x-api-key': `${process.env.NEXT_PUBLIC_API_KEY}`,
-            'Authorization': `Bearer ${Cookie.get("token")}`,
-        }
-    })
-    .then(async response => {
-        if (!response.ok) {
-            const text = await response.text();
-            throw new Error(`Failed to upload image. Status: ${response.status}. Response: ${text}`);
-        }
-        return response.json();
-    })
-    .then(result => {
-        if (result && result.location) {
-            success(result.location); // Return image URL to TinyMCE
-        } else {
-            throw new Error('Image upload response does not contain location');
-        }
-    })
-    .catch(err => {
-        console.error('Error uploading image:', err);
-        failure(`Error uploading image: ${err.message}`); // Notify TinyMCE of the failure
-    });
-};
+    const [status,,data] = await handleFetch("/admin/image-photo", {
+        method: "POST",
+        body: formData,
+    }, true, true, true);
 
-
-
-const handleImageDelete = async (src: string) => {
-    try {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/post-image`, {
-            method: 'DELETE',
-            headers: {
-                'x-api-key': `${process.env.NEXT_PUBLIC_API_KEY}`,
-                'Authorization': `Bearer ${Cookie.get("token")}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ imageUrl: src })
-        });
-    } catch (err) {
-        console.error('Error deleting image:', err);
+    if (!status) {
+      throw new Error('Failed to upload image');
     }
-};
 
-const RichEditorNews = () => (
-    <Editor
+    return {
+      default: data, // URL image yang diupload
+    };
+  };
 
-
-    apiKey={process.env.NEXT_PUBLIC_TINYMCE_TOKEN}
-        init={{
-            
-            plugins: 'image code',
-            toolbar: 'undo redo | link image | code',
-            // images_upload_handler: handleImageUpload,
-            images_remove_handler: handleImageDelete,  // Handle image delete
+  return (
+    <div className='text-black'>
+      <CKEditor
+        editor={ClassicEditor}
+        data={defaultValue as string}
+        config={{
+          toolbar: [
+            'heading', 
+            '|', 
+            'fontSize', 
+            'bold', 
+            'italic', 
+            'link', 
+            'imageUpload', 
+            'bulletedList', 
+            'numberedList', 
+            'blockQuote', 
+            'insertTable', // Plugin tabel
+            'undo', 
+            'redo',
+            'codeSnippet' // Plugin untuk memasukkan kode
+          ],
+          fontSize: {
+            options: [
+              9,
+              11,
+              13,
+              17,
+              19,
+              21,
+              'default',
+              'tiny',
+              'small',
+              'big',
+              'huge',
+            ],
+          },
+          image: {
+            toolbar: ['imageTextAlternative', 'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
+          },
+          table: {
+            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+          },
         }}
-    />
-);
+        onReady={editor => {
+          editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+            return {
+              upload: async () => {
+                return new Promise(async (resolve, reject) => {
+                  try {
+                    const file = await loader.file;
+
+                    if (!file) {
+                      reject(new Error('No file found'));
+                      return;
+                    }
+
+                    const data = await handleImageUpload(file);
+                    resolve(data);
+                  } catch (error) {
+                    reject(error);
+                  }
+                });
+              },
+            };
+          };
+        }}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          setValue(data);
+          console.log({ data });
+        }}
+      />
+    </div>
+  );
+};
 
 export default RichEditorNews;

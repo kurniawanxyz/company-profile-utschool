@@ -32,6 +32,7 @@ export default async function handleActionFetch(url: string, option: RequestInit
     const response = await fetch(api_url, {
         ...option,
         headers,
+        cache:"no-store"
     });
 
     const result: responseType = await response.json();

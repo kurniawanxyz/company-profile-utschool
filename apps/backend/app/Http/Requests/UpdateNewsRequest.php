@@ -25,11 +25,11 @@ class UpdateNewsRequest extends FormRequest
     {
         $id = $this->route('news');
         return [
-            "thumbnail" => "required|file|mimes:png,jpg,jpeg",
-            "title" => "required|unique:news,title," . $id . ',id',
+            "thumbnail" => "file|mimes:png,jpg,jpeg",
+            "title" => "unique:news,title," . $id . ',id',
             "visibility" => "nullable|boolean",
-            "description" => "required",
-            "content" => "required",
+            "description" => "max:1000",
+            "content" => "max:1000",
         ];
     }
 

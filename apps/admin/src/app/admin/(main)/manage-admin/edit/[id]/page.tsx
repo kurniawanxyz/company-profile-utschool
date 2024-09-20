@@ -10,6 +10,5 @@ type Props = {
 
 export default async function page({ params }: Props) {
   const [status, , data] = await getDataAction("/admin/users/" + params.id);
-  console.log(data);
   return <EditAdmin data={data} />;
 }

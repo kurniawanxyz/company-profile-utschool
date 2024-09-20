@@ -27,6 +27,7 @@ export default function CreateNewsPage({}: Props) {
 
         <Card className="mt-5 ">
             <form action={handleCreate} className="flex flex-col gap-3">
+                <input name="content" type="text" value={value} />
                 <Input
                     label="Thumbnail"
                     name="thumbnail"
@@ -43,13 +44,7 @@ export default function CreateNewsPage({}: Props) {
                 />
                 <input type="hidden" name="content" value={value} />
 
-                <RichEditorNews
-                // title="tes"
-
-                    // value={value}
-                    // onChange={setValue}
-                />
-
+               <RichEditorNews/>
                 <div className="flex justify-end w-full">
                     <Button type="submit" className="w-32">Submit</Button>
                 </div>

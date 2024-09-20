@@ -11,7 +11,7 @@ export default function Navbar({}: Props) {
   const [isProgramOpen, setIsProgramOpen] = useState(false); // State for Program dropdown in mobile
 
   return (
-    <nav className="fixed top-0 w-full z-10 px-10 bg-black/80 backdrop-blur-lg flex items-center justify-between h-16">
+    <nav className="fixed top-0 w-full z-50 px-10 bg-black/80 backdrop-blur-lg flex items-center justify-between h-16">
       {/* Logo */}
       <Img src="/images/logos/uts/1.png" className="w-28 object-cover" />
 

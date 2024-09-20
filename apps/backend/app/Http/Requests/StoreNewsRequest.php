@@ -25,7 +25,8 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             "thumbnail" => "required|file|mimes:png,jpg,jpeg",
-            "title"  => "required|unique:news,title",
+            "title" => "required|unique:news,title",
+            "visibility" => "nullable|boolean",
             "description" => "required",
             "content" => "required",
         ];

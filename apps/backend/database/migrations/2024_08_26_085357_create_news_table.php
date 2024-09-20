@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->boolean('visibility')->default(false);
             $table->string('thumbnail');
             $table->string('title');
             $table->text('description');

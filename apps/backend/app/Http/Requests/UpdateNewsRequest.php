@@ -27,6 +27,7 @@ class UpdateNewsRequest extends FormRequest
         return [
             "thumbnail" => "required|file|mimes:png,jpg,jpeg",
             "title" => "required|unique:news,title," . $id . ',id',
+            "visibility" => "nullable|boolean",
             "description" => "required",
             "content" => "required",
         ];

@@ -12,9 +12,9 @@ export default function Header({}: Props) {
           autoPlay
           loop
         />
-        <div className="absolute z-10 bottom-20 left-10 w-1/2">
-          <h1 className="text-3xl text-white font-bold uppercase">Lembaga Pendidikan Keterampilan Berwawasan Internasional</h1>
-          <Button/>
+        <div className="absolute z-10 bottom-20 left-10 md:w-2/3 lg:w-1/2">
+          <h1 className="md:text-3xl text-white font-bold uppercase">Lembaga Pendidikan Keterampilan Berwawasan Internasional</h1>
+          <Button className="hover:font-semibold px-1 py-[4px] text-[10px] md:text-base md:px-3 md:py-1">Lebih Lanjut</Button>
         </div>
     </header>
   )

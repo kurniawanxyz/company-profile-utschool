@@ -34,7 +34,7 @@ export default function Button({
 
   return (
     <button
-      className={cn(`${style[variants]} ${sizeStyles[size]} ${className}`)}
+      className={cn(style[variants],sizeStyles[size],className)}
       {...rest}
     >
       {children}

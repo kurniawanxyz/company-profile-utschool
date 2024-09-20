@@ -11,7 +11,7 @@ export default function Header({}: Props) {
           className="w-full h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 object-cover shadow-inner-fade"
           autoPlay
           loop
-          // controls
+          controls
         />
     </header>
   )

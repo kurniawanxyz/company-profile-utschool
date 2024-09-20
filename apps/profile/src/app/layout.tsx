@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import {Raleway} from "next/font/google"
 import "./globals.css";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient, QueryProvider } from "@/libs";
+import { Header } from "@/components";
+import { QueryProvider } from "@/libs";
 
 const raleway = Raleway({
   subsets: ["latin"]
@@ -23,8 +23,11 @@ export default function RootLayout({
       <body
         className={`${raleway.className} antialiased`}
       >
+        <Header/>
         <QueryProvider>
-          {children}
+          <main className="bg-gray-200 min-h-screen">
+            {children}
+          </main>
         </QueryProvider>
       </body>
     </html>

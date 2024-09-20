@@ -1,4 +1,4 @@
 packages:
   - "apps/admin"
   - "apps/backend"
-  - "apps/landingpage-1"
+  - "apps/profile"

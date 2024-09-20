@@ -27,11 +27,11 @@
   "workspaces": [
     "apps/backend",
     "apps/admin",
-    "apps/landingpage-1"
+    "apps/profile"
   ],
   "scripts": {
     "start:admin": "cd apps/admin && pnpm dev",
-    "start:app1": "cd apps/landingpage-1 && pnpm dev",
+    "start:profile": "cd apps/profile && pnpm dev",
     "start:backend": "cd apps/backend && php artisan serve --host=127.0.0.1 ",
     "start": "concurrently \"pnpm run start:admin\" \"pnpm run start:backend\" \"pnpm run start:app1\" "
   },

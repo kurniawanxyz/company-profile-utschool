@@ -56,6 +56,10 @@ const Sidebar = (props: Props) => {
         url: '/admin/enrollment-schedule',
         text: 'Enrollment Schedule'
     },
+    {
+        url: '/admin/manage-admin',
+        text: 'Manage Admin'
+    },
   ]
   const defaultStyle = 'hover:text-primary font-semibold px-3  hover:bg-slate-900 py-2 ease-in-out rounded transition-all delay-100 cursor-pointer border-slate-200'
   return (

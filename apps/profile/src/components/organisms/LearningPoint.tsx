@@ -9,7 +9,7 @@ export default function LearningPoint({}: Props) {
             <h2 className="text-center text-3xl font-extrabold text-primary">Learning Point</h2>
             <Img src="/images/logos/uts/1.png" className="w-40"/>
         </div>
-        <p className="text-center mt-3 w-2/3 mx-auto">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed suscipit, recusandae iste similique qui accusantium cumque illum nemo ratione enim!</p>
+        <p className="text-center mt-3 md:w-2/3 mx-auto">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed suscipit, recusandae iste similique qui accusantium cumque illum nemo ratione enim!</p>
     </article>
   )
 }

@@ -45,10 +45,10 @@ export default function Navbar({}: Props) {
           </span>
           <div className="hidden group-hover:flex flex-col absolute top-full w-48">
           <ul className="w-full rounded bg-black/80 mt-1 text-white shadow-lg transition-all">
-              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Tentang UTS</li>
-              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Partner Industri</li>
-              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Gallery</li>
-              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Unduh</li>
+              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Akademik</li>
+              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Program Pelatihan</li>
+              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Galeri</li>
+              <li className="hover:bg-primary hover:font-semibold hover:text-black p-2 rounded cursor-pointer">Pendaftaran</li>
             </ul>
           </div>
         </li>
@@ -90,7 +90,7 @@ export default function Navbar({}: Props) {
               <ul className="mt-2 bg-black/80 p-2 space-y-1">
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">Tentang UTS</li>
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">Partner Industri</li>
-                <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">Gallery</li>
+                <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">Galeri</li>
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">Unduh</li>
               </ul>
             )}
@@ -107,16 +107,16 @@ export default function Navbar({}: Props) {
             {isProgramOpen && (
               <ul className="mt-2 bg-black/80 p-2 space-y-1">
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">
-                  <Link href="/program/uts">Tentang UTS</Link>
+                  <Link href="/program/uts">Akademik</Link>
                 </li>
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">
-                  <Link href="/program/partner">Partner Industri</Link>
+                  <Link href="/program/partner">Program Pelatihan</Link>
                 </li>
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">
-                  <Link href="/program/gallery">Gallery</Link>
+                  <Link href="/program/gallery">Pembelajaran Online</Link>
                 </li>
                 <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">
-                  <Link href="/program/unduh">Unduh</Link>
+                  <Link href="/program/unduh">Pendaftaraan</Link>
                 </li>
               </ul>
             )}

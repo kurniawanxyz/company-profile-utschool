@@ -1,8 +1,9 @@
-import { LearningPoint, OnlineEnrollment, TopGallery } from "@/components";
+import { Header, LearningPoint, OnlineEnrollment, TopGallery } from "@/components";
 
 export default function Home() {
   return (
     <>
+      <Header/>
       <LearningPoint/>
       <hr  className="border-2 border-black/90"/>
       <OnlineEnrollment/>

@@ -1,4 +1,4 @@
-import { Header, LearningPoint, OnlineEnrollment, TopGallery } from "@/components";
+import { Header, LearningPoint, OnlineEnrollment, TopGallery, TopNews } from "@/components";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
       <OnlineEnrollment/>
       <hr  className="border-2 border-black/90"/>
       <TopGallery/>
+      <TopNews/>
     </>
   );
 }

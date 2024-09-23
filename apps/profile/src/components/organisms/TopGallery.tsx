@@ -1,5 +1,6 @@
 import { FaArrowUp } from "react-icons/fa";
 import { Button, Img } from "../atoms";
+import { GalleryCard } from "../molecules";
 
 type Props = {};
 
@@ -17,22 +18,7 @@ export default function TopGallery({}: Props) {
         <div className="grid grid-cols-1 md:grid-cols-3  gap-5 lg:gap-10 mt-10">
             {
                 ['','',''].map((item,number)=>(
-                    <div key={number} className="card rounded-md overflow-hidden border relative hover:shadow hover:shadow-white p-3">
-                        <div className="bg-black absolute z-0 top-0 left-0 bottom-0 right-0"></div>
-                        <div className="relative z-10">
-                            <Img src="/images/students/1.jpg" className=" rounded-md md:h-40 lg:h-60" />
-                            <div className=" py-3">
-                                <span>
-                                    Kategori
-                                </span>
-                                <div className="flex items-start">
-                                    <h3 className="text-2xl text-primary font-bold w-11/12">Acara Wisuda Nasional UT School</h3>
-                                    <FaArrowUp className="text-primary rotate-45 text-2xl w-1/12  text-center"/>
-                                </div>
-                                <Button className="mt-3"></Button>
-                            </div>
-                        </div>
-                    </div>
+                    <GalleryCard  key={`gallery-${number}`} url={""} title={""} category={""} thumbnail={""}/>
                 ))
             }
         </div>

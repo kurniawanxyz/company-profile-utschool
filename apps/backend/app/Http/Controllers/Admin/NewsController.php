@@ -31,6 +31,21 @@ class NewsController extends Controller
         }
     }
 
+    public function simpleIndex(Request $request)
+    {
+        try {
+            $news = News::latest();
+            if($req = $request->input('query')){
+                $news = $news->where('title', 'LIKE', "%". $req ."%");
+            }
+
+            $news = $news->take(6)->get();
+            return HandleJsonResponseHelpers::res("Successfully get data!", $news);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

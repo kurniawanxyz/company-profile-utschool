@@ -1,20 +1,48 @@
 "use client";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
-import { NewsCard, SectionTitle } from "../molecules"
-import { useQuery } from '@tanstack/react-query'
-import { NewsFetcher } from "@/services"
-
-
-
-
-type Props = {}
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { SectionTitle } from "../molecules";
+import { useQuery } from '@tanstack/react-query';
+import { NewsFetcher } from "@/services";
+import { News } from "@/types";
+import { useState, useEffect } from "react";
+import { Img } from "../atoms";
+import dynamic from "next/dynamic";
+const NewsCard = dynamic(() => import('../molecules/NewsCard'),{ssr:false});
+type Props = {};
 
 export default function TopNews({ }: Props) {
-
   const { data, error, isLoading } = useQuery({
     queryKey: ['news'],
     queryFn: NewsFetcher.getNews
-  })
+  });
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(1);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Set initial value
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? Math.ceil(data.length / itemsPerPage) - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === Math.ceil(data.length / itemsPerPage) - 1 ? 0 : prevIndex + 1));
+  };
 
   if (isLoading) {
     return (
@@ -33,21 +61,39 @@ export default function TopNews({ }: Props) {
   }
 
   return (
-
     <article className="w-full bg-black min-h-screen py-10 px-10">
       <SectionTitle title="Berita & Aktifitas" showImage={false} />
-      <div className="carousel w-full flex gap-3">
-        {data.map((newsItem: any, index: number) => (
-          <div key={index} id={`item${index + 1}`} className="carousel-item w-full grid grid-cols-2 gap-2">
-            <NewsCard title={newsItem.title} content={newsItem.content} />
+      <div className="relative w-full flex items-center mt-5">
+        <button onClick={handlePrev} className="absolute left-0 z-10 p-2 bg-gray-800 rounded-full">
+          <FaChevronLeft className="text-white" />
+        </button>
+        <div className="w-full overflow-hidden">
+          <div
+            className="flex transition-transform duration-300 gap-3"
+            style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
+          >
+            {data.map((newsItem: News, index: number) => (
+              <div key={index} className="w-full flex-shrink-0 h-full" style={{ width: `${100 / itemsPerPage}%` }}>
+                <NewsCard title={newsItem.title} backgroundImageUrl={newsItem.thumbnail} />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+        <button onClick={handleNext} className="absolute right-0 z-10 p-2 bg-gray-800 rounded-full">
+          <FaChevronRight className="text-white" />
+        </button>
       </div>
       <div className="flex w-full justify-center gap-2 py-2">
-        {data.map((_: any, index: number) => (
-          <a key={index} href={`#item${index + 1}`} className="btn btn-xs">{index + 1}</a>
+        {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index: number) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`btn btn-xs ${currentIndex === index ? 'bg-white' : 'bg-gray-500'}`}
+          >
+            {index + 1}
+          </button>
         ))}
       </div>
     </article>
-  )
+  );
 }

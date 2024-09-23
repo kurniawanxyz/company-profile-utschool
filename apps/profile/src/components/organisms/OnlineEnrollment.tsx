@@ -26,7 +26,6 @@ export default function OnlineEnrollment({}: Props) {
 
         {/* Konten tetap berada di atas */}
         <div className="relative z-10 left-0 flex flex-col md:left-10 px-5 text-center md:text-left">
-          {/* <Img src="/images/logos/uts/1.png" className="w-40 mx-auto md:mx-0" /> */}
           <h2 className="text-3xl md:text-5xl font-bold text-primary">Pendaftaran Online</h2>
           <p className="w-full md:w-2/3 text-slate-200 mt-3">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta

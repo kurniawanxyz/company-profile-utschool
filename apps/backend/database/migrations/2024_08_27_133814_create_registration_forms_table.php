@@ -17,10 +17,7 @@ return new class extends Migration
             $table->foreignUuid('sobat_school_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('learning_point_id')->constrained()->cascadeOnDelete();
             $table->enum('approval', ['approved', 'rejected'])->nullable();
-            $table->string('learning_pattern');
             $table->boolean('is_willing_to_relocate');
-            $table->boolean('compliance_agreement');
-            $table->text("motivation");
             $table->string('full_name');
             $table->string('place_of_birth');
             $table->string('date_of_birth');

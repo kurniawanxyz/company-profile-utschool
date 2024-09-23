@@ -20,11 +20,9 @@ return new class extends Migration
             $table->boolean('wear_glasses');
             $table->boolean('color_blindness');
             $table->string('address_and_phone_number');
-            $table->boolean('school_transfer_option');
-            $table->text('additional_information')->nullable();
-            $table->string('student_photo');
+            $table->string('resident_photo');
             $table->string('diploma_photo');
-            $table->string('identity_photo');
+            $table->string('family_card_photo');
         });
     }
 

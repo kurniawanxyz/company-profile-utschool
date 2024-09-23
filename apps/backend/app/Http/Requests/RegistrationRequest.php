@@ -28,10 +28,7 @@ class RegistrationRequest extends FormRequest
         return [
             // registration_forms
             'training_program_id' => 'required|uuid|exists:training_programs,id',
-            'learning_pattern' => 'required|string|max:255',
-            'motivation' => 'required',
             'is_willing_to_relocate' => 'required|boolean',
-            'compliance_agreement' => 'required|boolean',
             'full_name' => 'required|string|max:255',
             'place_of_birth' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
@@ -54,11 +51,9 @@ class RegistrationRequest extends FormRequest
             'wear_glasses' => 'required|boolean',
             'color_blindness' => 'required|boolean',
             'address_and_phone_number' => 'required|string|max:255',
-            'school_transfer_option' => 'required|boolean',
-            'additional_information' => 'nullable|string',
-            'student_photo' => 'required|image|max:2048',
+            'resident_photo' => 'required|image|max:2048',
             'diploma_photo' => 'required|image|max:2048',
-            'identity_photo' => 'required|image|max:2048',
+            'family_card_photo' => 'required|image|max:2048',
         ];
     }
 

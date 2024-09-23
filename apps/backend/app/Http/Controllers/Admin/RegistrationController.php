@@ -33,10 +33,7 @@ class RegistrationController extends Controller
             // registration_forms
             $form = new RegistrationForm();
             $form->batch_id = Batch::latest()->where('training_program_id', $request->training_program_id)->latest()->first()->id;
-            $form->learning_pattern = $request->learning_pattern;
-            $form->motivation = $request->motivation;
             $form->is_willing_to_relocate = $request->is_willing_to_relocate;
-            $form->compliance_agreement = $request->compliance_agreement;
             $form->full_name = $request->full_name;
             $form->place_of_birth = $request->place_of_birth;
             $form->date_of_birth = Carbon::parse($request->date_of_birth)->format('Y-m-d');
@@ -62,20 +59,18 @@ class RegistrationController extends Controller
             $healthInfo->wear_glasses = $request->wear_glasses;
             $healthInfo->color_blindness = $request->color_blindness;
             $healthInfo->address_and_phone_number = $request->address_and_phone_number;
-            $healthInfo->school_transfer_option = $request->school_transfer_option;
-            $healthInfo->additional_information = $request->additional_information;
 
-            if ($request->hasFile('student_photo')) {
-                $fileName = $request->file('student_photo')->hashName();
-                $healthInfo->student_photo = $request->file('student_photo')->storeAs('student_photo', $fileName);
+            if ($request->hasFile('resident_photo')) {
+                $fileName = $request->file('resident_photo')->hashName();
+                $healthInfo->resident_photo = $request->file('resident_photo')->storeAs('resident_photo', $fileName);
             }
             if ($request->hasFile('diploma_photo')) {
                 $fileName = $request->file('diploma_photo')->hashName();
                 $healthInfo->diploma_photo = $request->file('diploma_photo')->storeAs('diploma_photo', $fileName);
             }
-            if ($request->hasFile('identity_photo')) {
-                $fileName = $request->file('identity_photo')->hashName();
-                $healthInfo->identity_photo = $request->file('identity_photo')->storeAs('identity_photo', $fileName);
+            if ($request->hasFile('family_card_photo')) {
+                $fileName = $request->file('family_card_photo')->hashName();
+                $healthInfo->family_card_photo = $request->file('family_card_photo')->storeAs('family_card_photo', $fileName);
             }
 
             $healthInfo->save();

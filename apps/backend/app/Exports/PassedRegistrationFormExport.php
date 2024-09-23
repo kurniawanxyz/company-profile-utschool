@@ -42,12 +42,9 @@ class PassedRegistrationFormExport implements FromCollection, WithHeadings
                 'Tinggi badan' => $personal_health['height'],
                 'Menggunakan kacamata' => $personal_health['wear_glasses'] ? 'Ya' : 'Tidak',
                 'Buta warna' => $personal_health['color_blindness'] ? 'Ya' : 'Tidak',
-                'Alamat dan nomor telepon' => $personal_health['address_and_phone_number'],
-                'Bersedia di pindah program' => $personal_health['school_transfer_option'] ? 'Ya' : 'Tidak',
-                'Informasi tambahan' => $personal_health['additional_information'],
-                'Foto siswa' => Storage::url($personal_health['student_photo']),
+                'Foto KTP' => Storage::url($personal_health['resident_photo']),
                 'Foto ijazah' => Storage::url($personal_health['diploma_photo']),
-                'Foto identitas' => Storage::url($personal_health['identity_photo']),
+                'Foto KK' => Storage::url($personal_health['family_card_photo']),
             ] : [];
 
             $batch = Batch::with(['training_program:id,name'])->where('id', $item['batch_id'])->first();
@@ -59,20 +56,17 @@ class PassedRegistrationFormExport implements FromCollection, WithHeadings
                 "Pelatihan program" => $batch->training_program->name,
                 'Tempat pendaftaran' => SobatSchool::where('id', $item['sobat_school_id'])->first()->name,
                 'Tempat ujian' => LearningPoint::where('id', $item['learning_point_id'])->first()->name,
-                'Pola belajar' => $item['learning_pattern'],
-                'Bersedia pindah' => $item['is_willing_to_relocate'] ? 'Ya' : 'Tidak',
-                'Persetujuan kepatuhan' => $item['compliance_agreement'] ? 'Ya' : 'Tidak',
+                'Bersedia di pindahkan' => $item['is_willing_to_relocate'] ? 'Ya' : 'Tidak',
                 'Tempat lahir' => $item['place_of_birth'],
                 'Tanggal lahir' => $item['date_of_birth'],
                 'Jenis kelamin' => $item['gender'],
                 'Alamat' => $item['address'],
                 'Nomor telepon' => $item['telephone_number'],
                 'Email' => $item['email'],
-                'Nomor KTP' => $item['id_card'],
+                'Kartu Nomor' => $item['id_card'],
                 'Hobi' => $item['hobby'],
                 'Jenis sekolah' => $item['school_type'],
                 'Tanggal daftar' => Carbon::parse($item['created_at'])->format("d-m-Y H:i:s"),
-                'motivasi' => $item['motivation']
             ], $healthInfo);
         });
     }

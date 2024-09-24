@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { NewsFetcher } from "@/services";
 import { News } from "@/types";
 import { useState, useEffect } from "react";
-import { Img } from "../atoms";
+import { Button, Img } from "../atoms";
 import dynamic from "next/dynamic";
 const NewsCard = dynamic(() => import('../molecules/NewsCard'),{ssr:false});
 type Props = {};
@@ -94,6 +94,7 @@ export default function TopNews({ }: Props) {
           </button>
         ))}
       </div>
+      <Button className="mx-auto block mt-5">Lihat Selengkapnya</Button>
     </article>
   );
 }

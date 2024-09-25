@@ -27,8 +27,8 @@ class StoreNewsRequest extends FormRequest
             "thumbnail" => "required|file|mimes:png,jpg,jpeg",
             "title" => "required|unique:news,title",
             "visibility" => "nullable|boolean",
-            "description" => "required",
-            "content" => "required",
+            "description" => "required|max:200",
+            "content" => "required|max:3000",
         ];
     }
 

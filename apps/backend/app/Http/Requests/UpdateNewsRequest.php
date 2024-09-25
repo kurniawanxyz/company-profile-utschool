@@ -28,8 +28,8 @@ class UpdateNewsRequest extends FormRequest
             "thumbnail" => "file|mimes:png,jpg,jpeg",
             "title" => "unique:news,title," . $id . ',id',
             "visibility" => "nullable|boolean",
-            "description" => "max:1000",
-            "content" => "max:1000",
+            "description" => "max:200",
+            "content" => "max:3000",
         ];
     }
 

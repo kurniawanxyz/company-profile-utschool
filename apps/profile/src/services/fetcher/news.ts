@@ -22,3 +22,8 @@ export async function getDetailNews(id:string){
     const { data } = await axios.get(`${api}/news/${id}`,defaultHeader)
     return data.data
 }
+
+export async function getRandomNews(){
+    const { data } = await axios.get(`${api}/news/random`,defaultHeader)
+    return data.data
+}

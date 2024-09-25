@@ -25,6 +25,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
 Route::get('/news', [NewsController::class, 'publicIndex']);
+Route::get('/news/random', [NewsController::class, 'randomNews']);
 Route::get('/news/short', [NewsController::class, 'simpleIndex']);
 Route::get('/news/{id}', [NewsController::class, 'show']);
 Route::get('/top-news', [LandingPageController::class, 'topNews']);

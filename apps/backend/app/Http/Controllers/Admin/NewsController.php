@@ -60,6 +60,16 @@ class NewsController extends Controller
         }
     }
 
+    public function randomNews()
+    {
+        try {
+            $news = News::latest()->where('visibility', 1)->inRandomOrder()->take(4)->get();
+            return HandleJsonResponseHelpers::res("Successfully get data!", $news);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

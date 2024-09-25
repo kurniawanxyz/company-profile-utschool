@@ -20,11 +20,25 @@ class NewsController extends Controller
     {
         try {
             $news = News::latest();
-            if($req = $request->input('query')){
-                $news = $news->where('title', 'LIKE', "%". $req ."%");
+            if ($req = $request->input('query')) {
+                $news = $news->where('title', 'LIKE', "%" . $req . "%");
             }
 
             $news = $news->paginate(10);
+            return HandleJsonResponseHelpers::res("Successfully get data!", $news);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+    public function publicIndex(Request $request)
+    {
+        try {
+            $news = News::latest();
+            if ($req = $request->input('query')) {
+                $news = $news->where('title', 'LIKE', "%" . $req . "%");
+            }
+
+            $news = $news->where('visibility', 1)->paginate(10);
             return HandleJsonResponseHelpers::res("Successfully get data!", $news);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
@@ -35,8 +49,8 @@ class NewsController extends Controller
     {
         try {
             $news = News::latest();
-            if($req = $request->input('query')){
-                $news = $news->where('title', 'LIKE', "%". $req ."%");
+            if ($req = $request->input('query')) {
+                $news = $news->where('title', 'LIKE', "%" . $req . "%");
             }
 
             $news = $news->where('visibility', 1)->take(6)->get();
@@ -102,7 +116,7 @@ class NewsController extends Controller
             $thumbnail_path = $news->thumbnail;
             $data = [...$request->all()];
 
-            if($request->hasFile('thumbnail')){
+            if ($request->hasFile('thumbnail')) {
                 Storage::exists($thumbnail_path) && Storage::delete($thumbnail_path);
 
                 $fileName = $request->file('thumbnail')->hashName();

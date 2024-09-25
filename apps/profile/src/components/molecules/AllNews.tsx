@@ -5,8 +5,10 @@ import { News, NewsApiResponse, PaginationLink } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Img } from "../atoms";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AllNews() {
+    const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
 
     const { data, error, isLoading } = useQuery<NewsApiResponse>({
@@ -43,12 +45,14 @@ export default function AllNews() {
             <h2 className='text-2xl font-bold'>Berita Lainnya</h2>
             <div className="grid grid-cols-2 gap-5 mt-3">
                 {data && data.data.data.map((news: News, index: number) => (
-                    <div key={index} className='w-full h-auto md:h-40 border border-slate-400 rounded relative overflow-hidden flex flex-col md:flex-row'>
+                    <div key={index} className='w-full h-auto md:h-48 border border-slate-400 rounded relative overflow-hidden flex flex-col md:flex-row'>
                         <Img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${news.thumbnail}`} alt={news.title} className='object-cover object-center w-full md:w-1/3 h-40 md:h-full' />
                         <div className='w-full md:w-2/3 p-4 flex flex-col justify-between'>
                             <div>
-                                <h3 className='text-xl font-bold'>{news.title}</h3>
-                                <p className='text-sm text-gray-700 mt-1'>{news.description}</p>
+                                <h3 className={`text-lg font-bold ${news.title.length > 50 ? 'truncate' : ''}`}>{news.title}</h3>
+                                <p className={`text-sm text-gray-700 mt-1 ${news.description.length > 100 ? 'truncate' : ''}`}>
+                                    {news.description}
+                                </p>
                             </div>
                             <div className='mt-2 text-right'>
                                 <p className='text-xs text-gray-500'>{new Date(news.created_at).toLocaleDateString()}</p>
@@ -58,7 +62,7 @@ export default function AllNews() {
                                     variants='default'
                                     className='px-4 py-2 rounded'
                                     onClick={() => {
-                                        window.location.href = `/news/${news.id}`;
+                                        router.push(`/news/${news.id}`);
                                     }}
                                 >
                                     Baca Berita

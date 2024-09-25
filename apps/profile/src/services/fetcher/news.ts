@@ -17,3 +17,8 @@ export async function getAllNews(page:number){
     const { data } = await axios.get(`${api}/news?page=${page}`,defaultHeader)
     return data
 }
+
+export async function getDetailNews(id:string){
+    const { data } = await axios.get(`${api}/news/${id}`,defaultHeader)
+    return data.data
+}

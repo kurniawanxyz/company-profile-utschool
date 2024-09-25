@@ -60,7 +60,7 @@ function NewsPage({}: Props) {
               className="bg-slate-400 w-full text-slate-200 text-center"
               key={`news`}
             >
-              <td className="border p-2" colSpan={4}>
+              <td className="border p-2" colSpan={5}>
                 Data was not found
               </td>
             </tr>

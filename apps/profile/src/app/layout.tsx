@@ -34,7 +34,7 @@ export default async function RootLayout({
       >
           <NextIntlClientProvider messages={messages}>
           <QueryProvider>
-            <main className="bg-gray-200 min-h-screen">
+            <main className="bg-black/95 min-h-screen">
               {children}
             </main>
           </QueryProvider>

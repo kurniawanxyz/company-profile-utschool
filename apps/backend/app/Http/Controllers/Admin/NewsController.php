@@ -39,7 +39,7 @@ class NewsController extends Controller
                 $news = $news->where('title', 'LIKE', "%". $req ."%");
             }
 
-            $news = $news->where('visibility', 1)->take(10)->get();
+            $news = $news->where('visibility', 1)->take(6)->get();
             return HandleJsonResponseHelpers::res("Successfully get data!", $news);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);

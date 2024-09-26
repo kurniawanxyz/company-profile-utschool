@@ -172,6 +172,12 @@ importers:
 
   apps/profile:
     dependencies:
+      '@react-three/drei':
+        specifier: ^9.112.0
+        version: 9.112.0(@react-three/fiber@8.17.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.168.0))(@types/react@18.3.4)(@types/three@0.168.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.168.0)
+      '@react-three/fiber':
+        specifier: ^8.17.6
+        version: 8.17.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.168.0)
       '@tanstack/react-query':
         specifier: ^5.56.2
         version: 5.56.2(react@18.3.1)
@@ -184,6 +190,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      framer-motion:
+        specifier: ^11.7.0
+        version: 11.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
         specifier: 14.2.13
         version: 14.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -202,6 +211,12 @@ importers:
       react-icons:
         specifier: ^5.3.0
         version: 5.3.0(react@18.3.1)
+      three:
+        specifier: ^0.168.0
+        version: 0.168.0
+      three-globe:
+        specifier: ^2.31.1
+        version: 2.31.1(three@0.168.0)
       zustand:
         specifier: ^4.5.5
         version: 4.5.5(@types/react@18.3.4)(react@18.3.1)
@@ -215,6 +230,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
+      '@types/three':
+        specifier: ^0.168.0
+        version: 0.168.0
       daisyui:
         specifier: ^4.12.10
         version: 4.12.10(postcss@8.4.41)
@@ -1838,6 +1856,20 @@ packages:
 
   frame-ticker@1.0.3:
     resolution: {integrity: sha512-E0X2u2JIvbEMrqEg5+4BpTqaD22OwojJI63K7MdKHdncjtAhGRbCR8nJCr2vwEt9NWBPCPcu70X9smPviEBy8Q==}
+
+  framer-motion@11.7.0:
+    resolution: {integrity: sha512-m+1E3mMzDIQ5DsVghMvXyC+jSkZSm5RHBLA2gHa/LczcXwW6JbQK4Uz48LsuCTGV8bZFVUezcauHj3M33tY/5w==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   froala-editor@4.2.1:
     resolution: {integrity: sha512-Ov8XdJpP6X+hernpF89CzkDHBiXEsBzFUX2ftmG2QLw+2ZqiK2RirUbUy2IABxBXZrBzHgzm8GZyZ5rd+cAU5Q==}
@@ -5574,6 +5606,13 @@ snapshots:
   frame-ticker@1.0.3:
     dependencies:
       simplesignal: 2.1.7
+
+  framer-motion@11.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      tslib: 2.7.0
+    optionalDependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   froala-editor@4.2.1: {}
 

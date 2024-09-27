@@ -27,8 +27,8 @@ export function GlobeDemo() {
         rings: 1,
         maxRings: 3,
         initialPosition: { lat: -5.2088, lng: 146.8456 }, // Jakarta, Indonesia
-        autoRotate: false,
-        autoRotateSpeed: 0,
+        // autoRotate: true,
+        // autoRotateSpeed: 2,
     };
     const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
 

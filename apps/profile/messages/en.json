@@ -1,0 +1,13 @@
+{
+    "greeting": "Halo",
+    "farewell": "Selamat tinggal",
+    "profile": {
+        "name": "Nama",
+        "age": "Usia",
+        "email": "Email"
+    },
+    "errors": {
+        "not_found": "Tidak ditemukan",
+        "server_error": "Kesalahan server"
+    }
+}

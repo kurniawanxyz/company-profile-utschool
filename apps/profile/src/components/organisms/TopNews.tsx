@@ -64,7 +64,7 @@ export default function TopNews({ }: Props) {
 
   if (!data || data.length === 0) {
     return (
-      <div className="flex items-center justify-center bg-black min-h-screen flex-col px-10 py-10" >
+      <div className="flex relative items-center justify-center bg-black min-h-screen flex-col px-10 py-10" >
         <SectionTitle title="Berita & Aktifitas" showImage={false} />
         <Img src="/images/illustrations/1.png" width={1000} alt="No news available" className=" md:w-1/4 mt-10" />
         <div className="text-white text-lg -mt-5">No news available</div>
@@ -73,7 +73,7 @@ export default function TopNews({ }: Props) {
   }
 
   return (
-    <article className="w-full bg-black min-h-screen py-10 px-10">
+    <article className="relative w-full bg-black min-h-screen py-10 px-10">
       <SectionTitle title="Berita & Aktifitas" showImage={false} />
       <div className="relative w-full flex items-center mt-5">
         <button onClick={handlePrev} className="absolute left-0 z-10 p-2 bg-gray-800 rounded-full">

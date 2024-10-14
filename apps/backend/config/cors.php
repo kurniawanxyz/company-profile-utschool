@@ -2,64 +2,33 @@
 
 return [
 
-/*
-|--------------------------------------------------------------------------
-| CORS Paths
-|--------------------------------------------------------------------------
-|
-| Define the paths where the CORS service should run. By default, the CORS
-| middleware will match any incoming request with any of the following
-| paths. You may customize this to better suit your application needs.
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Cross-Origin Resource Sharing (CORS) Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure your settings for cross-origin resource sharing
+    | or "CORS". This determines what cross-origin operations may execute
+    | in web browsers. You are free to adjust these settings as needed.
+    |
+    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    |
+    */
 
-'paths' => ['api/*'],  // Tentukan path API kamu di sini
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-/*
-|--------------------------------------------------------------------------
-| Allowed Methods
-|--------------------------------------------------------------------------
-|
-| Here you may specify which methods are allowed during CORS requests.
-| This allows you to control what methods are accessible through the API.
-|
-*/
+    'allowed_methods' => ['*'],
 
-'allowed_methods' => ['*'],  // Izinkan semua metode
+    'allowed_origins' => ['*'],
 
-/*
-|--------------------------------------------------------------------------
-| Allowed Origins
-|--------------------------------------------------------------------------
-|
-| Here you can specify which origins are allowed to access your application.
-| You can also allow access from any origin using a wildcard (*).
-|
-*/
+    'allowed_origins_patterns' => [],
 
-'allowed_origins' => ['https://admin.utschoolhub.com'],  // Tentukan origin yang diperbolehkan
+    'allowed_headers' => ['*'],
 
-/*
-|--------------------------------------------------------------------------
-| Allowed Headers
-|--------------------------------------------------------------------------
-|
-| These are the headers that are allowed to be sent by the client during
-| CORS requests. You can specify any headers that your application uses.
-|
-*/
+    'exposed_headers' => [],
 
-'allowed_headers' => ['*'],  // Izinkan semua header
+    'max_age' => 0,
 
-/*
-|--------------------------------------------------------------------------
-| Supports Credentials
-|--------------------------------------------------------------------------
-|
-| Set this to true to allow cookies to be sent across domains. This is only
-| needed when you're dealing with session-based authentication.
-|
-*/
+    'supports_credentials' => false,
 
-'supports_credentials' => false,
 ];

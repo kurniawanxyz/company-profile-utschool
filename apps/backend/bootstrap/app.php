@@ -4,6 +4,7 @@ use App\Helpers\HandleJsonResponseHelpers;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -17,9 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'verifyKey' => App\Http\Middleware\VerifyAPIKey::class,
             'public-admin' => App\Http\Middleware\PublicAdminMiddleware::class,
-            'super-admin-ini' => App\Http\Middleware\SuperAdminIniMiddleware::class
+            'super-admin-ini' => App\Http\Middleware\SuperAdminIniMiddleware::class,
+            'cors' => HandleCors::class,
         ]);
-        $middleware->prependToGroup('api', 'verifyKey');
+        $middleware->prependToGroup('api', ['verifyKey', 'cors']);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Exception $e, Request $request) {

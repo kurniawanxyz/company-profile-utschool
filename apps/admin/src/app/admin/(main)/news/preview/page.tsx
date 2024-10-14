@@ -2,7 +2,7 @@
 
 type Props = {}
 
-const page = (props: Props) => {
+export default function Preview (props: Props) {
   return (
     <div>page</div>
   )

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DirectorController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\LandingPageSettingController;
 use App\Http\Controllers\Admin\LearningPointController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NewsController;
@@ -38,7 +39,7 @@ Route::get('/list/training-program', [TrainingProgramController::class, 'simpleI
 Route::get('/list/sobat-school', [SobatSchoolController::class, 'simpleIndex']);
 Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
 Route::get('/list/learning-point', [LearningPointController::class, 'simpleIndex']);
-Route::get('/chat-bot', [LandingPageController::class, 'chatBot']);
+Route::get('/landing-page-setting', [LandingPageSettingController::class, 'index']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);
@@ -65,6 +66,7 @@ Route::prefix('/admin')->group(function () {
         Route::patch("/registration/approval/{reg_id}", [RegistrationController::class, 'manualApproval']);
 
         Route::apiResource('/image-photo', PhotoController::class)->only(['index', 'show']);
+        Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->only('index')->except('store');
     });
 
     // SUPER ADMIN
@@ -79,5 +81,6 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->except(['index', 'show']);
 
         Route::apiResource('/image-photo', PhotoController::class)->only(['store', 'destroy'])->except(['index', 'show']);
+        Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->except('index')->only('store');
     });
 });

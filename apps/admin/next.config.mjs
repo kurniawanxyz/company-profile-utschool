@@ -10,22 +10,17 @@ const nextConfig = {
     },
     async headers() {
         return [
-            {
-                source: '/api/:path*',
-                headers: [
-                  {
-                    key: 'Access-Control-Allow-Origin',
-                    value: 'https://admin.utschoolhub.com', // Origin yang diperbolehkan
-                  },
-                  {
-                    key: 'Access-Control-Allow-Methods',
-                    value: 'GET,POST,OPTIONS',
-                  },
-                ],
-                    }
-        ]
-        
-    }
+          {
+            source: '/(.*)', // Atur path yang perlu diizinkan CORS
+            headers: [
+              { key: 'Access-Control-Allow-Credentials', value: 'true' },
+              { key: 'Access-Control-Allow-Origin', value: '*' }, // Ganti '*' dengan domain yang diizinkan
+              { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS,POST' },
+              { key: 'Access-Control-Allow-Headers', value: 'X-Requested-With, Content-Type, Accept' },
+            ],
+          },
+        ];
+      },
 };
 
 export default nextConfig;

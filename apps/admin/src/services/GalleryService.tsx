@@ -9,8 +9,8 @@ export async function handleCreate(formdata:FormData){
         body: formdata
     }
     const [status,msg,result] = await handleFetch('/admin/gallery/',option,true,true)
-    if(status){
-        redirect("/admin/galleries")
+    if (status) {
+        window.location.href = "/admin/galleries"; // Redirect client-side
     }
 }
 
@@ -22,7 +22,7 @@ export async function handleUpdate(formdata:FormData){
         body: formdata
     }
     const [status,msg,result] = await handleFetch('/admin/gallery/'+id,option,true,true)
-    if(status){
-        redirect("/admin/galleries")
+    if (status) {
+        window.location.href = "/admin/galleries"; // Redirect client-side
     }
 }

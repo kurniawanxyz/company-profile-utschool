@@ -19,9 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'verifyKey' => App\Http\Middleware\VerifyAPIKey::class,
             'public-admin' => App\Http\Middleware\PublicAdminMiddleware::class,
             'super-admin-ini' => App\Http\Middleware\SuperAdminIniMiddleware::class,
-            'cors' => HandleCors::class,
+            // 'cors' => HandleCors::class,
         ]);
-        $middleware->prependToGroup('api', ['verifyKey', 'cors']);
+        $middleware->prependToGroup('api', 'verifyKey');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Exception $e, Request $request) {

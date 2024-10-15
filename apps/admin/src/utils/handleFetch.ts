@@ -26,6 +26,7 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
     const headers = {
         ...option.headers,
         "x-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
+        "Access-Control-Allow-Origin": "*",
         ...(!isUploadFile && { "Content-Type": "application/json" }),
         ...(needToken && token ? { "Authorization": `Bearer ${token}` } : {}),
     };

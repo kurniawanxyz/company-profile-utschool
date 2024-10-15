@@ -46,7 +46,7 @@ Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::prefix('/admin')->group(function () {
     // PUBLIC ADMIN
-    Route::middleware('public-admin')->group(function () {
+    // Route::middleware('public-admin')->group(function () {
         Route::post("/logout", [LoginController::class, 'logout']);
 
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->only(['index', 'show']);
@@ -67,10 +67,10 @@ Route::prefix('/admin')->group(function () {
 
         Route::apiResource('/image-photo', PhotoController::class)->only(['index', 'show']);
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->only('index')->except('store');
-    });
+    // });
 
     // SUPER ADMIN
-    Route::middleware('super-admin-ini')->group(function () {
+    // Route::middleware('super-admin-ini')->group(function () {
         Route::apiResource('/users', AdminController::class);
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->except(['index', 'show']);
         Route::apiResource('/director', DirectorController::class)->except(['index', 'show']);
@@ -82,5 +82,5 @@ Route::prefix('/admin')->group(function () {
 
         Route::apiResource('/image-photo', PhotoController::class)->only(['store', 'destroy'])->except(['index', 'show']);
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->except('index')->only('store');
-    });
+    // });
 });

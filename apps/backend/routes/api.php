@@ -23,7 +23,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
+Route::options('{any}',function(){
+    return response()->json(['status' => 'success'],200);
+})->where('any', '.*');
 Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
 Route::get('/news', [NewsController::class, 'publicIndex']);
 Route::get('/news/random', [NewsController::class, 'randomNews']);

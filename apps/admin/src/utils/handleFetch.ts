@@ -39,6 +39,7 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
     const response = await fetch(api_url, {
         ...option,
         headers,
+        mode: 'no-cors'
     });
 
     const result: responseType = await response.json();

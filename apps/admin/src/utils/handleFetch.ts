@@ -38,7 +38,6 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
             method: option.method as any,
             headers,
             data: option.body,
-            withCredentials: true,
         });
 
         const result: responseType = response.data;

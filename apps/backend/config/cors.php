@@ -20,7 +20,6 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'localhost:3000',
         'https://admin.utschoolhub.com'
     ],
 

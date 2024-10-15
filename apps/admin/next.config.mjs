@@ -8,19 +8,14 @@ const nextConfig = {
             },
         ],
     },
-    async headers() {
+    async rewrites() {
         return [
-          {
-            source: '/(.*)', // Atur path yang perlu diizinkan CORS
-            headers: [
-              { key: 'Access-Control-Allow-Credentials', value: 'true' },
-              { key: 'Access-Control-Allow-Origin', value: '*' }, // Ganti '*' dengan domain yang diizinkan
-              { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS,POST' },
-              { key: 'Access-Control-Allow-Headers', value: 'X-Requested-With, Content-Type, Accept' },
-            ],
-          },
+            {
+                source: '/external/api/:path*',
+                destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+            },
         ];
-      },
+    }
 };
 
 export default nextConfig;

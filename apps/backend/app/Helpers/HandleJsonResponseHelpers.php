@@ -19,7 +19,6 @@ class HandleJsonResponseHelpers
         ];
         self::$statusCode = $statusCode;
 
-        return response()->json(self::$struct, self::$statusCode)
-                         ->header('Access-Control-Allow-Origin', '*');
-    }
+        return response()->json(self::$struct, self::$statusCode);
+        }
 }

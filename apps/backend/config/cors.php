@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => [
         'localhost:3000',
-        'admin.utschoolhub.com'
+        'https://admin.utschoolhub.com'
     ],
 
     'allowed_origins_patterns' => [],

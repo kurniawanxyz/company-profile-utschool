@@ -58,22 +58,35 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: apps/backend/  # Adjust to your Laravel app directory
 
-      - name: Deploy Staging Server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+  deploy-staging:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: apps/backend/  # Set to Laravel app directory in monorepo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: FTP Deploy
+      # You may pin to the exact commit or the version.
+      # uses: SamKirkland/FTP-Deploy-Action@8a24039354ee91000cb948cb4a1dbdf1a1b94a3c
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
         with:
+          # ftp server
           server: api-admin.kaitodecode.com
+          # ftp username
           username: api-admin@api-admin.kaitodecode.com
-          password: Robotcanggih!*
+          # ftp password
+          password: Robotcanggih1*
+          # Server port to connect to (read your web hosts docs)
+          port: 21
+          # protocol to deploy with - ftp, ftps, or ftps-legacy
           protocol: ftp
-          local-dir: apps/backend/  # Adjust to your Laravel app directory
-          # server-dir: /path/to/remote/directory  # Set this to your hosting directory
-
-      # Alternative: Deploy via SSH/SCP
-      # - name: Deploy via SCP
-      #   env:
-      #     HOST: ${{ secrets.SCP_HOST }}
-      #     USERNAME: ${{ secrets.SCP_USERNAME }}
-      #     PASSWORD: ${{ secrets.SCP_PASSWORD }}
-      #   run: |
-      #     scp -r ./apps/laravel-app/* $USERNAME@$HOST:/path/to/remote/directory
-
+          # An array of glob patterns, these files will not be included in the publish/delete process
+          exclude: |
+            */.git
+            */.git/**
+            */node_modules/*
+            */vendor/*

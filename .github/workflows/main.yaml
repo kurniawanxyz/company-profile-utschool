@@ -61,8 +61,8 @@ jobs:
       - name: Deploy Staging Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: kaitodecode.com
-          username: api-admin@kaitodecode.com
+          server: api-admin.kaitodecode.com
+          username: api-admin@api-admin.kaitodecode.com
           password: Robotcanggih1*
           local-dir: apps/backend/  # Adjust to your Laravel app directory
           # server-dir: /path/to/remote/directory  # Set this to your hosting directory

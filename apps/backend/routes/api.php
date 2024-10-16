@@ -48,6 +48,7 @@ Route::get('/landing-page-setting', [LandingPageSettingController::class, 'index
 Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::prefix('/admin')->group(function () {
+    
     // PUBLIC ADMIN
     Route::middleware('public-admin')->group(function () {
         Route::post("/logout", [LoginController::class, 'logout']);

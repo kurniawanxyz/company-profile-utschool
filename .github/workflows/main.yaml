@@ -50,12 +50,20 @@ jobs:
       #   run: npm ci && npm run prod
 
       # Step 7: Deploy to Shared Hosting
-      - name: Deploy via FTP
+      - name: Deploy Production Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: apps/backend/  # Adjust to your Laravel app directory
+
+      - name: Deploy Staging Server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: kaitodecode.com
+          username: api-admin@kaitodecode.com
+          password: Robotcanggih1*
           local-dir: apps/backend/  # Adjust to your Laravel app directory
           # server-dir: /path/to/remote/directory  # Set this to your hosting directory
 

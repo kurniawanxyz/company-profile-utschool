@@ -29,6 +29,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: apps/backend/  # Adjust to your Laravel app directory
 
+
   deploy-staging:
     runs-on: ubuntu-latest
 

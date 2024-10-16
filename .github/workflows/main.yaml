@@ -21,35 +21,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # # Step 2: Setup PHP
-      # - name: Setup PHP
-      #   uses: shivammathur/setup-php@v2
-      #   with:
-      #     php-version: '8.3'  # Set your PHP version
-      #     extensions: mbstring, bcmath, gd, pdo, mysqli
-      #     ini-values: post_max_size=256M, upload_max_filesize=256M, memory_limit=512M
-      #     coverage: none
-
-      # # Step 3: Install Composer dependencies
-      # - name: Install Composer dependencies
-      #   run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
-
-      # # Step 4: Generate application key
-      # - name: Generate application key
-      #   run: php artisan key:generate
-
-      # # Step 5: Run tests (optional)
-      # - name: Run tests
-      #   run: php artisan test
-      #   env:
-      #     DB_CONNECTION: sqlite
-      #     DB_DATABASE: ':memory:'
-
-      # Step 6: Build assets (optional if you are using frontend assets)
-      # - name: Build assets
-      #   run: npm ci && npm run prod
-
-      # Step 7: Deploy to Shared Hosting
       - name: Deploy Production Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
@@ -77,13 +48,16 @@ jobs:
           # ftp server
           server: api-admin.kaitodecode.com
           # ftp username
-          username: api-admin@api-admin.kaitodecode.com
+          username: staging@api-admin.kaitodecode.com
           # ftp password
           password: Robotcanggih1*
           # Server port to connect to (read your web hosts docs)
           port: 21
           # protocol to deploy with - ftp, ftps, or ftps-legacy
           protocol: ftp
+
+          # Local directory to upload
+          local-dir: apps/backend/
           # An array of glob patterns, these files will not be included in the publish/delete process
           exclude: |
             */.git

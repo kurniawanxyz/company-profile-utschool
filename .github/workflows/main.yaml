@@ -48,7 +48,7 @@ jobs:
           # ftp server
           server: ftp.kaitodecode.com
           # ftp username
-          username: staging@api-admin.kaitodecode.com
+          username: api-admin@api-admin.kaitodecode.com
           # ftp password
           password: Robotcanggih1*
           # Server port to connect to (read your web hosts docs)

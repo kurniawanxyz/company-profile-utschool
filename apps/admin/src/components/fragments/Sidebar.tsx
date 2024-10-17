@@ -60,6 +60,10 @@ const Sidebar = (props: Props) => {
         url: '/admin/manage-admin',
         text: 'Manage Admin'
     },
+    {
+        url: '/admin/landing-page',
+        text: 'Landing Page'
+    },
   ]
   const defaultStyle = 'hover:text-primary font-semibold px-3  hover:bg-slate-900 py-2 ease-in-out rounded transition-all delay-100 cursor-pointer border-slate-200'
   return (

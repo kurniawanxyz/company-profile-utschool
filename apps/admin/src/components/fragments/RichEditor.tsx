@@ -1,40 +1,105 @@
 "use client"
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-// import 'froala-editor/js/plugins.pkgd.min.js';
-import FroalaEditorComponent from 'react-froala-wysiwyg';
-import { twMerge } from 'tailwind-merge';
+import React from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import handleFetch from '@/utils/handleFetch';
 import { useRichEditor } from '@/stores/useRichEditor';
 
-type Props = {
-    title: string,
-    className?: string,
-    config?: object
-}
-const RichEditor = (props: Props) => {
-
+const RichEditor = ({defaultValue = "<p>Initial content</p>"}:{defaultValue?: string|TrustedHTML}) => {
     const {value,setValue} = useRichEditor()
+  const handleImageUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
 
-    let config = {
-        documentReady: true,
-        heightMin: 100,
-        events : {
-          'contentChanged' : function(e:any, editor:any) {
-            console.log({value});
-          }
-        }
-      };
+    const [status,,data] = await handleFetch("/admin/image-photo", {
+        method: "POST",
+        body: formData,
+    }, true, true, true);
 
-      const handleModelChange = (model: string) => {
-        setValue(model);
-      };
+    if (!status) {
+      throw new Error('Failed to upload image');
+    }
+
+    return {
+      default: data, // URL image yang diupload
+    };
+  };
 
   return (
-    <div className={`${twMerge('text-slate-900',props.className)}`}>
-        <span>{props.title}</span>
-        <FroalaEditorComponent  tag="textarea" model={value} onModelChange={handleModelChange} config={props.config??config}/>
-    </div>
-  )
-}
+    <div className='text-black'>
+      <CKEditor
+        editor={ClassicEditor}
+        data={defaultValue as string}
+        config={{
+          toolbar: [
+            'heading', 
+            '|', 
+            'fontSize', 
+            'bold', 
+            'italic', 
+            'link', 
+            'imageUpload', 
+            'bulletedList', 
+            'numberedList', 
+            'blockQuote', 
+            'insertTable', // Plugin tabel
+            'undo', 
+            'redo',
+            'codeSnippet' // Plugin untuk memasukkan kode
+          ],
+          fontSize: {
+            options: [
+              9,
+              11,
+              13,
+              17,
+              19,
+              21,
+              'default',
+              'tiny',
+              'small',
+              'big',
+              'huge',
+            ],
+          },
+          image: {
+            toolbar: ['imageTextAlternative', 'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
+          },
+          table: {
+            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+          },
+        }}
+        onReady={editor => {
+          editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+            return {
+              upload: async () => {
+                return new Promise(async (resolve, reject) => {
+                  try {
+                    const file = await loader.file;
 
-export default RichEditor
+                    if (!file) {
+                      reject(new Error('No file found'));
+                      return;
+                    }
+
+                    const data = await handleImageUpload(file);
+                    resolve(data);
+                  } catch (error) {
+                    reject(error);
+                  }
+                });
+              },
+            };
+          };
+        }}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          setValue(data);
+          console.log({ data });
+        }}
+      />
+    </div>
+  );
+};
+
+export default RichEditor;

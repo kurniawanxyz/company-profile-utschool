@@ -1,5 +1,4 @@
 import Cookie from "js-cookie";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { handleUpdateToast } from "./handleUpdateToast";
 
@@ -34,14 +33,12 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
     const api_url = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
 
     try {
-        const response = await axios({
-            url: api_url,
-            method: option.method as any,
+        const response = await fetch(api_url, {
+            ...option,
             headers,
-            data: option.body,
         });
 
-        const result: responseType = response.data;
+        const result: responseType = await response.json();
 
         if (result.meta.status === 403) {
             Cookie.remove('token');
@@ -55,7 +52,7 @@ export default async function handleFetch(url: string, option: RequestInit, isUp
         }
 
         return [result.meta.success, result.meta.message, result.data];
-    } catch (error:any) {
+    } catch (error: any) {
         if (activetoas) {
             handleUpdateToast(loading, false, error.message, null);
         }

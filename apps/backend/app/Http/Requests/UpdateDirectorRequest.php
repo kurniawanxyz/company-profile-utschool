@@ -25,10 +25,10 @@ class UpdateDirectorRequest extends FormRequest
     {
         $id = $this->route('director');
         return [
-            "photo_profile" => "required|file|mimes:png,jpg,jpeg",
-            "name" => "required|string|unique:directors,name,". $id .",id",
-            "position" => "required|string",
-            "description" => "required",
+            "photo_profile" => "file|mimes:png,jpg,jpeg",
+            "name" => "string|unique:directors,name,". $id .",id",
+            "position" => "string",
+            "description" => "min:1",
             "message" => "nullable|string"
         ];
     }

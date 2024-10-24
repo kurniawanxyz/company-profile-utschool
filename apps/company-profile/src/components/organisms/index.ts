@@ -4,6 +4,8 @@ import EnrollmentBanner from "./enrollment-banner.organism";
 import AcademicBanner from "./academic-banner.organism";
 import GalleryBanner from "./gallery-banner.organism";
 import VideoBanner from "./video-banner.organism";
+import NewsBanner from "./news-banner.organism";
+import TopNews from "./top-news.organism";
 
 export {
     Navbar,
@@ -11,5 +13,7 @@ export {
     EnrollmentBanner,
     AcademicBanner,
     GalleryBanner,
-    VideoBanner
+    VideoBanner,
+    NewsBanner,
+    TopNews
 }

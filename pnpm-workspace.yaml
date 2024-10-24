@@ -2,3 +2,4 @@ packages:
   - "apps/admin"
   - "apps/backend"
   - "apps/profile"
+  - "apps/company-profile"

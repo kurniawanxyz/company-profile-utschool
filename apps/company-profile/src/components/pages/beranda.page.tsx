@@ -1,6 +1,6 @@
 import React from 'react'
 import { LandingPageLayout } from '../layouts'
-import { AcademicBanner, EnrollmentBanner } from '../organisms'
+import { AcademicBanner, EnrollmentBanner, GalleryBanner } from '../organisms'
 
 type Props = {}
 
@@ -9,6 +9,7 @@ export default function BerandaPage({}: Props) {
     <LandingPageLayout>
       <EnrollmentBanner/>
       <AcademicBanner/>
+      <GalleryBanner/>
     </LandingPageLayout>
   )
 }

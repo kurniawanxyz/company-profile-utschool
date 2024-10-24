@@ -10,8 +10,8 @@ type Props = {
 export default function Button({variant = "default",children = "Click Me", className, ...rest}: Props) {
 
     const variants = {
-        default: "px-3 py-2 bg-primary opacity-90 hover:opacity-100",
-        outline: "px-3 py-2 bg-primary",
+        default: "px-3 py-2 bg-primary opacity-90 hover:opacity-100 shadow",
+        outline: "px-3 py-2 border border-primary rounded text-primary hover:bg-primary hover:text-black transition-all duration-75",
     }
 
   return (

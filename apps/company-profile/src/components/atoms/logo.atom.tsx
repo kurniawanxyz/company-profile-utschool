@@ -10,5 +10,5 @@ type Logo = {
 
 export default function Logo({className,width = 500,height = 500, ...rest}:Logo) {
     const LOGO_URL = "/images/logos/uts/2.png"
-    return <Image src={LOGO_URL} className={cn("h-10 w-auto object-cover",className)} alt="UT SCHOOL" width={width} height={height} {...rest} />
+    return <Image src={LOGO_URL} className={cn("h-8 w-auto object-cover",className)} alt="UT SCHOOL" width={width} height={height} {...rest} />
 }

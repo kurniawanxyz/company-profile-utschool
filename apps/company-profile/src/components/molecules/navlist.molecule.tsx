@@ -10,7 +10,7 @@ type Props = {
 
 export default function NavList({className,navItem}: Props) {
   return (
-    <ul className={cn("flex gap-3", className)}>
+    <ul className={cn("flex gap-5", className)}>
         {
             navItem && navItem.map((item: NavItemType, index: number)=>(
                 <NavItem text={item.text} url={item.url} key={`navigation-${item.url}-${index}`}/>

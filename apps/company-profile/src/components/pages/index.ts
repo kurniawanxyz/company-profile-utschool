@@ -1,5 +1,5 @@
-import LandingPage from "./landing.page";
+import BerandaPage from "./beranda.page";
 
 export {
-    LandingPage
+    BerandaPage
 }

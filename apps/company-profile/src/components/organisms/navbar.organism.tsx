@@ -24,7 +24,7 @@ export default function Navbar() {
     ]
 
   return (
-    <nav className="flex border justify-between px-5 py-3 items-center">
+    <nav className="flex border justify-between px-5 py-3 items-center sticky top-0 bg-white z-50">
         <Logo />
         <NavList navItem={list} />
     </nav>

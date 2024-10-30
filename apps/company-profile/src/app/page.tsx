@@ -1,6 +1,5 @@
-import { BerandaPage } from "@/components";
-
+import { HomePage } from "@/components";
 
 export default function Home() {
-  return <BerandaPage/>
+  return <HomePage/>
 }

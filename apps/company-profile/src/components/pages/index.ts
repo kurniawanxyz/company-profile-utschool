@@ -1,5 +1,5 @@
-import BerandaPage from "./beranda.page";
+import HomePage from "./home.page";
 
 export {
-    BerandaPage
+    HomePage
 }

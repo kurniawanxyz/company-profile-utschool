@@ -1,14 +1,16 @@
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { ImgHTMLAttributes } from "react";
+import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { HTMLAttributes } from "react"
 
-type Logo = {
-    className?: string,
+type Props = {
     width?: number,
     height?: number,
-} & Omit<ImgHTMLAttributes<HTMLImageElement>, "className" | "width" | "height">
+    mode?: 'light' | 'dark',
+    className?: string
+} & Omit<HTMLAttributes<HTMLImageElement>, "width" | "height" | "className" | "src" | "alt">
 
-export default function Logo({className,width = 500,height = 500, ...rest}:Logo) {
-    const LOGO_URL = "/images/logos/uts/2.png"
-    return <Image src={LOGO_URL} className={cn("h-8 w-auto object-cover",className)} alt="UT SCHOOL" width={width} height={height} {...rest} />
+export default function Logo({ width = 160, height = 160, mode = "dark", className = "" }: Props) {
+    const image = mode === "light" ? "/images/logos/2.png" : "/images/logos/1.png"
+    const defaultStyle = "w-40 object-contain sticky z-50 top-0"
+    return <Image className={cn(defaultStyle, className)} src={image} alt={"UT School"} priority width={width} height={height} />
 }

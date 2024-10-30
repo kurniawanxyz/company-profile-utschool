@@ -1,27 +1,35 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import NavLink from '../atoms/navlink.atom'
+import { cn } from '@/lib/utils'
 
-export default function NavList() {
+type Props = {
+  className?: string
+} & Omit<HTMLAttributes<HTMLUListElement>, 'className'>
+export default function NavList(props : Props) {
   const navItems = [
     {
       href: '/',
-      label: 'Home'
-    },
-    {
-      href: '/about',
-      label: 'About'
+      label: 'Beranda'
     },
     {
       href: '/services',
-      label: 'Services'
+      label: 'Layanan'
     },
     {
-      href: '/contact',
-      label: 'Contact'
+      href: '/training',
+      label: 'Training'
+    },
+    {
+      href: '/gallery',
+      label: 'Galeri'
+    },
+    {
+      href: '/about',
+      label: 'Tentang Kami'
     }
   ]
   return (
-    <ul className='flex gap-5'>
+    <ul className={cn("flex gap-5",props.className)}>
        {
         navItems.map((item, index) => (
           <NavLink key={`navigation-${index}`} href={item.href} label={item.label} />

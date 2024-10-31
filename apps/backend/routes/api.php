@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DirectorController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
@@ -48,7 +49,7 @@ Route::get('/landing-page-setting', [LandingPageSettingController::class, 'index
 Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::prefix('/admin')->group(function () {
-    
+
     // PUBLIC ADMIN
     Route::middleware('public-admin')->group(function () {
         Route::post("/logout", [LoginController::class, 'logout']);
@@ -71,6 +72,7 @@ Route::prefix('/admin')->group(function () {
 
         Route::apiResource('/image-photo', PhotoController::class)->only(['index', 'show']);
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->only('index')->except('store');
+        Route::apiResource('/alumni', AlumniController::class)->only(['index', 'show']);
     });
 
     // SUPER ADMIN
@@ -86,5 +88,6 @@ Route::prefix('/admin')->group(function () {
 
         Route::apiResource('/image-photo', PhotoController::class)->only(['store', 'destroy'])->except(['index', 'show']);
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->except('index')->only('store');
+        Route::apiResource('/alumni', AlumniController::class)->except(['index', 'show']);
     });
 });

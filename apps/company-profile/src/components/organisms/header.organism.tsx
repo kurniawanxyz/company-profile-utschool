@@ -1,4 +1,5 @@
 import { Img } from "../atoms";
+import TrainingProgramSection from "./trainingprogram.organism";
 
 
 export default function Header() {
@@ -9,7 +10,7 @@ export default function Header() {
                 backgroundImage: "url('/images/assets/bg-atas.png')",
             }}
         >
-            <header className="p-20 flex min-h-[80vh] border">
+            <header className="p-20 flex min-h-[80vh]">
                 <div className="w-7/12 relative">
                     <Img src="/images/assets/michie.jpg" className="w-20 h-20 rounded-lg shadow-xl" quality={100} />
                     <Img src="/images/assets/panahitam.png" className="absolute bottom-10 right-20 object-contain w-40 -rotate-[25deg]" quality={100} />
@@ -29,6 +30,7 @@ export default function Header() {
                     <Img src="/images/assets/michie.jpg" className="w-20 h-20 rounded-lg shadow-xl absolute top-10 right-0 rotate-12" quality={100} />
                 </div>
             </header>
+            <TrainingProgramSection/>
         </div>
     )
 }

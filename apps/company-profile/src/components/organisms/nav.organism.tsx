@@ -13,7 +13,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className='flex flex-col md:flex-row px-4 py-3 justify-between items-center sticky top-0 gap-5 bg-white md:px-10 lg:px-20 z-'>
+    <nav className='flex flex-col md:flex-row px-4 py-3 justify-between items-center sticky top-0 gap-5 bg-white md:px-10 lg:px-20 z-50'>
       <div className='flex justify-between w-full md:w-auto items-center'>
         <Logo className='w-32 lg:w-40' />
         <div className='md:hidden'>

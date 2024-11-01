@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PostImageController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\RegistrationScheduleController;
 use App\Http\Controllers\Admin\SobatSchoolController;
+use App\Http\Controllers\Admin\SosmedController;
 use App\Http\Controllers\Admin\TrainingProgramController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LandingPageController;
@@ -24,8 +25,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::options('{any}',function(){
-    return response()->json(['status' => 'success'],200);
+Route::options('{any}', function () {
+    return response()->json(['status' => 'success'], 200);
 })->where('any', '.*');
 
 Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
@@ -44,6 +45,7 @@ Route::get('/list/sobat-school', [SobatSchoolController::class, 'simpleIndex']);
 Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
 Route::get('/list/learning-point', [LearningPointController::class, 'simpleIndex']);
 Route::get('/landing-page-setting', [LandingPageSettingController::class, 'index']);
+Route::get('/sosmed', [SosmedController::class, 'simpleIndex']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);
@@ -73,6 +75,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/image-photo', PhotoController::class)->only(['index', 'show']);
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->only('index')->except('store');
         Route::apiResource('/alumni', AlumniController::class)->only(['index', 'show']);
+        Route::apiResource('/sosmed', SosmedController::class)->only(['index', 'show']);
     });
 
     // SUPER ADMIN
@@ -89,5 +92,6 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/image-photo', PhotoController::class)->only(['store', 'destroy'])->except(['index', 'show']);
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->except('index')->only('store');
         Route::apiResource('/alumni', AlumniController::class)->except(['index', 'show']);
+        Route::apiResource('/sosmed', SosmedController::class)->except(['index', 'show']);
     });
 });

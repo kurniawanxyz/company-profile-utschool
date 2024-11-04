@@ -1,3 +1,5 @@
+"use client"
+import { InstagramEmbed } from "react-social-media-embed";
 import Video from "../atoms/video.atom";
 import { NewsSection } from "../organisms";
 import Header from "../organisms/header.organism";

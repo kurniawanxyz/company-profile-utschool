@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components";
 import {Poppins} from "next/font/google"
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
+import { NextQueryClientProvider } from "@/lib/queryClientProvider";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
   title: "UT School",
@@ -23,8 +27,13 @@ export default function RootLayout({
       <body
         className={`min-h-screen ${poopins.className}`}
       >
-        <Navbar/>
-        {children}
+        <NextQueryClientProvider>
+          <Navbar/>
+          {children}
+          <ReactQueryDevtools/>
+        </NextQueryClientProvider>
+
+        <ToastContainer autoClose={5000} stacked/>
       </body>
     </html>
   );

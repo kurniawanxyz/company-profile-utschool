@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\HandleJsonResponseHelpers;
+use App\Http\Middleware\RemoveMethodBodyRequest;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append([
+            RemoveMethodBodyRequest::class
+        ]);
         $middleware->alias([
             'verifyKey' => App\Http\Middleware\VerifyAPIKey::class,
             'public-admin' => App\Http\Middleware\PublicAdminMiddleware::class,

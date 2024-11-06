@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navbar } from "@/components";
+import { Footer, Navbar } from "@/components";
 import {Poppins} from "next/font/google"
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -32,8 +32,8 @@ export default function RootLayout({
           {children}
           <ReactQueryDevtools/>
         </NextQueryClientProvider>
-
         <ToastContainer autoClose={5000} stacked/>
+        <Footer/> 
       </body>
     </html>
   );

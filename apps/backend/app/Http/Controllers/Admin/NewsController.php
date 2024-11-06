@@ -124,7 +124,7 @@ class NewsController extends Controller
             }
 
             $thumbnail_path = $news->thumbnail;
-            $data = [...$request->all()];
+            $data = [...$request->except("_method")];
 
             if ($request->hasFile('thumbnail')) {
                 Storage::exists($thumbnail_path) && Storage::delete($thumbnail_path);

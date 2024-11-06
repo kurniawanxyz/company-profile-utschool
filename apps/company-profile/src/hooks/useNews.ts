@@ -7,3 +7,10 @@ export function useNews(){
         queryFn : async() => await fetchData('/news'),
     })
 }
+
+export function useLatestNews(){
+    return useQuery({
+        queryKey: ['latest-news'],
+        queryFn : async() => await fetchData('/news/short'),
+    })
+}

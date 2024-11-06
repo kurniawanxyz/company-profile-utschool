@@ -2,6 +2,7 @@
   "name": "api-company-profile-utschool",
   "version": "1.0.0",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "embla-carousel-autoplay": "^8.3.1"
   }
 }

@@ -8,10 +8,12 @@ type Props = {
     height?: number,
     alt?: string,
     className?: string,
-    quality?: number
+    quality?: number,
+    external?: boolean
 } & Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "width" | "height" | "alt" | "className">
 
-export default function Img({src, width = 500, height = 500, alt = "UTS",className , quality = 75 ,...rest}: Props) {
+export default function Img({src, width = 500, height = 500, alt = "UTS",className, quality = 75 ,...rest}: Props) {
     const defaultStyle = "object-cover"
-  return <Image src={src} width={width} height={height} alt={alt} className={cn(defaultStyle,className)} quality={quality} {...rest}/>
+
+      return <Image src={src} width={width} height={height} alt={alt} className={cn(defaultStyle,className)} quality={quality} {...rest}/>
 }

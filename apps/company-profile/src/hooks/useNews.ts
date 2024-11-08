@@ -18,7 +18,7 @@ export function useDetailNews(id: string){
 export function useTopNews(){
     return useQuery({
         queryKey: ['news-top'],
-        queryFn: async() => await fetchData('news')
+        queryFn: async() => await fetchData('/top-news')
     })
 }
 

@@ -5,6 +5,7 @@ import AlumniSection from "./alumni.organism";
 import NewsSection from "./newssection.organism";
 import Footer from "./footer.organism";
 import MapsCesium from "./maps.organism";
+import TopNews from "./topnew.organism";
 
 export {
     Navbar,
@@ -13,5 +14,6 @@ export {
     AlumniSection,
     NewsSection,
     Footer,
-    MapsCesium
+    MapsCesium,
+    TopNews
 }

@@ -12,12 +12,8 @@ export default function NavList(props : Props) {
       label: 'Beranda'
     },
     {
-      href: '/services',
-      label: 'Layanan'
-    },
-    {
-      href: '/training',
-      label: 'Training'
+      href: '/program',
+      label: 'Program'
     },
     {
       href: '/gallery',
@@ -26,6 +22,10 @@ export default function NavList(props : Props) {
     {
       href: '/about',
       label: 'Tentang Kami'
+    },
+    {
+      href: '/contact',
+      label: 'Hubungi Kami'
     }
   ]
   return (

@@ -8,9 +8,23 @@ export function useNews(){
     })
 }
 
+export function useDetailNews(id: string){
+    return useQuery({
+        queryKey: ['news',id],
+        queryFn: async() => await fetchData('/news/'+id)
+    })
+}
+
+export function useTopNews(){
+    return useQuery({
+        queryKey: ['news-top'],
+        queryFn: async() => await fetchData('news')
+    })
+}
+
 export function useLatestNews(){
     return useQuery({
-        queryKey: ['latest-news'],
+        queryKey: ['news-short'],
         queryFn : async() => await fetchData('/news/short'),
     })
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\LandingPageSettingRequest;
 use App\Models\LandingPageSetting;
 use DB;
 use Illuminate\Http\Request;
+use Storage;
 
 class LandingPageSettingController extends Controller
 {
@@ -29,9 +30,18 @@ class LandingPageSettingController extends Controller
             DB::beginTransaction();
             $lps = LandingPageSetting::first();
 
+            $data = $request->all();
+
+            if ($request->hasFile("video")) {
+                $lps && $lps->video && Storage::exists($lps->video) && Storage::delete($lps->video);
+
+                $fileName = $request->file("video")->hashName();
+                $data['video'] = $request->file("video")->storeAs("landing_page", $fileName);
+            }
+
             LandingPageSetting::updateOrCreate(
-                ['id' => $lps->id],
-                $request->all()
+                ['id' => $lps ? $lps->id : null],
+                $data
             );
 
             DB::commit();

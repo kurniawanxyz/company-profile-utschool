@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("telp");
             $table->time("start_operation_hour");
             $table->time("end_operation_hour");
+            $table->string("video")->nullable();
         });
     }
 

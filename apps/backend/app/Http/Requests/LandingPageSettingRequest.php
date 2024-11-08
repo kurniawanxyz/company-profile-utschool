@@ -30,6 +30,7 @@ class LandingPageSettingRequest extends FormRequest
             'telp' => 'required|string',
             'start_operation_hour' => 'required|date_format:H:i',
             'end_operation_hour' => 'required|date_format:H:i|after:start_operation_hour',
+            'video' => 'nullable|file|mimes:mp4',
         ];
     }
 

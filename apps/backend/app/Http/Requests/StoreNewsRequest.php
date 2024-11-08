@@ -24,7 +24,7 @@ class StoreNewsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "thumbnail" => "required|file|mimes:png,jpg,jpeg",
+            "thumbnail" => "required|file|mimes:png,jpg,jpeg|max:5120",
             "title" => "required|unique:news,title",
             "visibility" => "nullable|boolean",
             "description" => "required|max:200",

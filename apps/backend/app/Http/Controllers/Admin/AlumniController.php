@@ -24,7 +24,17 @@ class AlumniController extends Controller
                     ->orWhere('placement', 'LIKE', "%" . $req . "%")
                     ->get();
             }
-            $alumni = $alumni->get();
+            $alumni = $alumni->paginate(10);
+
+            return HandleJsonResponseHelpers::res(data: $alumni);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
+    public function simpleIndex(Request $request)
+    {
+        try {
+            $alumni = Alumni::latest()->get();
 
             return HandleJsonResponseHelpers::res(data: $alumni);
         } catch (\Exception $e) {
@@ -84,7 +94,7 @@ class AlumniController extends Controller
             }
 
             $data = $request->except(['_method']);
-            if($request->hasFile('photo')){
+            if ($request->hasFile('photo')) {
                 Storage::exists($alumni->photo) && Storage::delete($alumni->photo);
 
                 $fileName = $request->file('photo')->hashName();

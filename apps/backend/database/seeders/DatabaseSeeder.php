@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LearningPointSeeder::class);
         $this->call(RegistrationScheduleSeeder::class);
         $this->call(LandingPageSettingSeeder::class);
-//        $this->call(NewsSeeder::class);
+        //        $this->call(NewsSeeder::class);
+        $this->call(SosmedSeeder::class);
     }
 }

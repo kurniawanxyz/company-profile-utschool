@@ -46,6 +46,7 @@ Route::get('/list/category', [GalleryCategoryController::class, 'simpleIndex']);
 Route::get('/list/learning-point', [LearningPointController::class, 'simpleIndex']);
 Route::get('/landing-page-setting', [LandingPageSettingController::class, 'index']);
 Route::get('/sosmed', [SosmedController::class, 'simpleIndex']);
+Route::get('/alumni', [AlumniController::class, 'simpleIndex']);
 
 
 Route::post('/admin/login', [LoginController::class, 'login']);

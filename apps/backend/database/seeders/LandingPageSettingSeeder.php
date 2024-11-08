@@ -15,7 +15,7 @@ class LandingPageSettingSeeder extends Seeder
     {
         LandingPageSetting::create([
             'about' => "UT School Company Profile",
-            'email' => "utschool@gmail.sch.id",
+        'email' => "utschool@gmail.sch.id",
             'address' => "Jakarta timur, cakung",
             'telp' => "08234678789",
             'start_operation_hour' => "08:00",

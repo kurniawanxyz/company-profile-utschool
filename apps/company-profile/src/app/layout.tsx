@@ -29,11 +29,13 @@ export default function RootLayout({
       >
         <NextQueryClientProvider>
           <Navbar/>
-          {children}
+            <main>
+            {children}
+            </main>
+           <Footer/> 
           <ReactQueryDevtools/>
         </NextQueryClientProvider>
         <ToastContainer autoClose={5000} stacked/>
-        <Footer/> 
       </body>
     </html>
   );

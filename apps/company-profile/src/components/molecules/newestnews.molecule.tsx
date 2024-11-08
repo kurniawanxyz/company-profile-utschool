@@ -9,9 +9,9 @@ import { Button } from '../ui/button'
 
 export default function NewestNewsSection() {
 
-  const {isLoading, data} = useLatestNews() as { isLoading: boolean, data: { data: News[] } | null }
+  const { isLoading, data } = useLatestNews() as { isLoading: boolean, data: { data: News[] } | null }
 
-  if(isLoading){
+  if (isLoading) {
     return (
       <article className="w-8/12 border bg-white/80 px-10 py-10">
         <h2 className="text-4xl font-bold text-slate-700 text-center">Berita Terbaru</h2>
@@ -28,33 +28,38 @@ export default function NewestNewsSection() {
   return (
     <article className="w-8/12 border bg-white/80 px-20 py-10">
       <h2 className="text-4xl font-bold text-slate-700 text-center">Berita Terbaru</h2>
-        <Carousel
+      <Carousel
         plugins={[
           Autoplay({
             delay: 5000,
           })
         ]}
         className='mt-5'>
-          <CarouselNext/>
-          <CarouselPrevious/>
-          <CarouselContent>
-            {
-              data && data.data?.map((news: News, index:number) => (
-                <CarouselItem className="basis-1/2" key={index}>
-                  <div className='bg-white p-5 rounded h-80 shadow-md'>
-                    <Img src={`${process.env.NEXT_PUBLIC_BACKEND}${news.thumbnail}`} alt={news.title} className="h-56 object-cover"/>
-                    <h3 className='text-lg font-semibold '>{news.title}</h3>
-                    <p className='text-slate-600'>{news.description.length > 200 ? `${news.description.substring(0, 200)}...` : news.description}</p>
+        <CarouselNext />
+        <CarouselPrevious />
+        <CarouselContent>
+          {
+            data && data.data?.map((news: News, index: number) => (
+              <CarouselItem key={index} className='basis-1/2'>
+                <div className='bg-white p-5 rounded h-[500px] shadow-2xl flex flex-col justify-between'>
+                  <div className='w-full'>
+                  <Img src={`${process.env.NEXT_PUBLIC_BACKEND}${news.thumbnail}`} alt={news.title} className="h-[250px] w-full object-cover" />
+                    <h3 className='text-xl font-semibold mt-3'>{news.title}</h3>
+                    <span className='text-slate-600 w-full break-words whitespace-normal line-clamp-3'>{news.description}</span>
                   </div>
-                </CarouselItem>
-              ))
-            }
-          </CarouselContent>    
-        </Carousel>
-        <div className='flex justify-center mt-10'>
-          <Button className='rounded-full'>Selengkapnya</Button>
-        </div>
+                  <div className='mt-5'>
+                    <Button>Detail</Button>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))
+          }
+        </CarouselContent>
+      </Carousel>
+      <div className='flex justify-center mt-10'>
+        <Button className='rounded-full'>Selengkapnya</Button>
+      </div>
     </article>
 
-)
+  )
 }

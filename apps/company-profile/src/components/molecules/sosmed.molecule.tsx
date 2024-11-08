@@ -7,11 +7,11 @@ const InstagramEmbed = dynamic(() => import('react-social-media-embed').then(mod
 
 export default function SosmedSection() {
     return (
-        <article className="w-4/12 border bg-primary/80 px-10 py-10 flex flex-col ">
-            <h2 className="text-4xl font-bold text-slate-700 text-center mb-5">Sosial Media</h2>
-            <InstagramEmbed url='https://www.instagram.com/_this.adi/' />
+        <article className="w-4/12 border bg-primary/80  py-10">
+            <h2 className="text-4xl font-bold text-slate-700 text-center mb-5 flex justify-center flex-col items-center">Sosial Media</h2>
+                <InstagramEmbed className='w-20 h-20 mx-auto' url='https://www.instagram.com/p/DBKvWdAPMfo/' width={328} height={500} placeholderDisabled={true} />
             <button
-                className='bg-transparent border-0 shadow-none mx-auto mt-10 text-3xl text-white font-bold'
+                className='bg-transparent block shadow-none mx-auto mt-10 text-5xl text-white font-bold'
                 onClick={(e) => {
                     const button = e.currentTarget as HTMLButtonElement;
                     button.classList.add('animate-spin');

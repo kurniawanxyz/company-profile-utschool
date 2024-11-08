@@ -1,5 +1,5 @@
 import React from 'react'
-import { TopNews } from '../organisms'
+import { ListNews, TopNews } from '../organisms'
 
 export default function NewsPage() {
   return (
@@ -19,6 +19,7 @@ export default function NewsPage() {
         </header>
         <div className='p-20'>
             <TopNews/>
+            <ListNews/>
         </div>
     </div>
   )

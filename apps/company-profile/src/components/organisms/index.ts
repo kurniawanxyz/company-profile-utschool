@@ -6,6 +6,7 @@ import NewsSection from "./newssection.organism";
 import Footer from "./footer.organism";
 import MapsCesium from "./maps.organism";
 import TopNews from "./topnew.organism";
+import ListNews from "./listnews.organism";
 
 export {
     Navbar,
@@ -15,5 +16,6 @@ export {
     NewsSection,
     Footer,
     MapsCesium,
-    TopNews
+    TopNews,
+    ListNews
 }

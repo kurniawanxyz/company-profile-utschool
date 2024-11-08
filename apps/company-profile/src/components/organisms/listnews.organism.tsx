@@ -85,7 +85,7 @@ export default function ListNews() {
                                             <PaginationItem
                                                 key={index}>
                                                 <PaginationLink
-
+                                                    
                                                     className={cn('cursor-pointer', item.active && 'bg-primary')}
                                                     onClick={() => {
                                                         console.log(index)

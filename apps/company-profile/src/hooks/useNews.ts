@@ -8,10 +8,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 export function useNews(page: number){
     return useQuery({
         queryKey: ['news',page],
-        queryFn : async() =>{
-            const response = await fetchData('/news/?page='+page)
-            return response as Paginate<News[]>
-        },
+        queryFn : () => fetchData<Paginate<News[]>>('/news/?page='+page),
         placeholderData: keepPreviousData,
         retry: 2
     })
@@ -20,7 +17,7 @@ export function useNews(page: number){
 export function useDetailNews(id: string){
     return useQuery({
         queryKey: ['news',id],
-        queryFn: () => fetchData('/news/'+id),
+        queryFn: () => fetchData<News>('/news/'+id),
         
     })
 }

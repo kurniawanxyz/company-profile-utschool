@@ -33,7 +33,7 @@ Route::post('/contact-me', [LandingPageController::class, 'contactMe']);
 Route::get('/news', [LandingPageController::class, 'publicIndex']);
 Route::get('/news/random', [LandingPageController::class, 'randomNews']);
 Route::get('/news/short', [LandingPageController::class, 'simpleIndex']);
-Route::get('/news/{id}', [LandingPageController::class, 'show']);
+Route::get('/news/{id}', [NewsController::class, 'show']);
 Route::get('/top-news', [LandingPageController::class, 'topNews']);
 Route::get('/director', [DirectorController::class, 'index']);
 Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);

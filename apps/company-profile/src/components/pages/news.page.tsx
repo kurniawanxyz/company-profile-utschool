@@ -17,7 +17,7 @@ export default function NewsPage() {
                 <p className='w-2/3 text-slate-200'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid explicabo numquam quod vero architecto, non ea fuga perferendis nam expedita!</p>
             </div>
         </header>
-        <div className='p-20'>
+        <div className='p-10 lg:p-20'>
             <TopNews/>
             <ListNews/>
         </div>

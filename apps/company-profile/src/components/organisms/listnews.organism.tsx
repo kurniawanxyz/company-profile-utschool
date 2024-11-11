@@ -31,7 +31,7 @@ export default function ListNews() {
 
         return (
             <>
-                <div className='grid grid-cols-1 md:grid-cols-3 min-h-screen mt-20 gap-10'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-screen mt-20 gap-10'>
                     {
                         news && news.data.map((item, index) => (
                             <CardNews

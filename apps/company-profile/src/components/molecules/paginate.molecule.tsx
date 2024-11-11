@@ -5,7 +5,7 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { Paginate as PaginateType } from '@/types/paginate';
-import useIsMobile from '@/hooks/useInMobile';
+// import useIsMobile from '@/hooks/useInMobile';
 
 const Paginate = ({
   data,
@@ -14,16 +14,16 @@ const Paginate = ({
   data: PaginateType<any>,
   setPage: SetStateAction<any>
 }) => {
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile();
 
-  const mobileLinks = [
-    data.links[0], // Tombol Prev
-    ...data.links.slice(1, 4), // 3 indeks pertama
-    ...data.links.slice(-2), // 2 indeks terakhir
-    data.links[data.links.length - 1] // Tombol Next
-  ];
+  // const mobileLinks = [
+  //   data.links[0], // Tombol Prev
+  //   ...data.links.slice(1, 4), // 3 indeks pertama
+  //   ...data.links.slice(-2), // 2 indeks terakhir
+  //   data.links[data.links.length - 1] // Tombol Next
+  // ];
 
-  const linksToDisplay = isMobile ? mobileLinks : data.links;
+  const linksToDisplay = data.links;
 
   return (
     <Pagination className='mt-10'>

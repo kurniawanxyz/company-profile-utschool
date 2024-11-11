@@ -1,5 +1,5 @@
 import { News } from "@/types/news";
-import { Paginate } from "@/types/paginate";
+import { Paginate, ResponseJson } from "@/types/paginate";
 import fetchData from "@/utils/fetch";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
@@ -8,7 +8,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 export function useNews(page: number){
     return useQuery({
         queryKey: ['news',page],
-        queryFn : () => fetchData<Paginate<News[]>>('/news/?page='+page),
+        queryFn : () => fetchData<ResponseJson<Paginate<News[]>>>('/news/?page='+page),
         placeholderData: keepPreviousData,
         retry: 2
     })
@@ -17,8 +17,15 @@ export function useNews(page: number){
 export function useDetailNews(id: string){
     return useQuery({
         queryKey: ['news',id],
-        queryFn: () => fetchData<News>('/news/'+id),
+        queryFn: () => fetchData<ResponseJson<News>>('/news/'+id),
         
+    })
+}
+
+export function useRandomNews(){
+    return useQuery({
+        queryKey: ['random-news'],
+        queryFn: () => fetchData<ResponseJson<News[]>>('/news/random')
     })
 }
 

@@ -1,6 +1,6 @@
-export interface Paginate<T> {
+export interface ResponseJson<T> {
     meta: Meta
-    data: Data<T>
+    data: T
   }
   
   export interface Meta {
@@ -9,7 +9,7 @@ export interface Paginate<T> {
     status: number
   }
   
-  export interface Data<T> {
+  export interface Paginate<T> {
     current_page: number
     first_page_url: string
     from: number

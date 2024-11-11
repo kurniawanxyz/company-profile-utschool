@@ -2,23 +2,15 @@
 import { useNews } from '@/hooks/useNews'
 import React, { useState } from 'react'
 import { Skeleton } from '../ui/skeleton'
-import { CardNews } from '../molecules'
-import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '../ui/pagination'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import { cn } from '@/lib/utils'
-
+import { CardNews, Paginate } from '../molecules'
 
 
 export default function ListNews() {
 
     const [page, setPage] = useState(1)
 
-    const { isLoading, isSuccess, data, isFetching, isPlaceholderData } = useNews(page)
-    function handleSetPage(number: number) {
-        if (!isPlaceholderData) {
-            setPage(number)
-        }
-    }
+    const { isLoading, isSuccess, data, isFetching } = useNews(page)
+
 
     if (isLoading || isFetching) {
         return (
@@ -49,59 +41,7 @@ export default function ListNews() {
                         ))
                     }
                 </div>
-                <Pagination className='mt-10'>
-                    <PaginationContent className='gap-5'>
-                        {
-                            news.links.map((item, index) => (
-                                <React.Fragment key={index}>
-                                    {
-                                        index === 0 && (
-                                            <PaginationItem
-                                                key={index}>
-                                                <PaginationLink
-                                                    className={cn('cursor-pointer', item.active && 'bg-primary')}
-                                                    onClick={() => item.url && setPage(old => Math.max(old - 1, 1))}
-                                                >
-                                                    <FaArrowLeft />
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                        )
-                                    }
-                                    {
-                                        index === (news.links.length - 1) && (
-                                            <PaginationItem
-                                            key={index}>
-                                            <PaginationLink
-                                                className={cn('cursor-pointer', item.active && 'bg-primary')}
-                                                onClick={() => item.url && setPage(old => old+1)}
-                                            >
-                                            <FaArrowRight />
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                        )
-                                    }
-                                    {
-                                        index != 0 && index != (news.links.length - 1) && (
-                                            <PaginationItem
-                                                key={index}>
-                                                <PaginationLink
-                                                    
-                                                    className={cn('cursor-pointer', item.active && 'bg-primary')}
-                                                    onClick={() => {
-                                                        console.log(index)
-                                                        handleSetPage((index))
-                                                    }}
-                                                >
-                                                    {item.label}
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                        )
-                                    }
-                                </React.Fragment>
-                            ))
-                        }
-                    </PaginationContent>
-                </Pagination>
+                <Paginate data={data.data} setPage={setPage}/>
             </>
         )
     }

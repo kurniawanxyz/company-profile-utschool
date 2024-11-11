@@ -43,8 +43,7 @@ export default function NewestNewsSection() {
               <CarouselItem key={index} className='basis-1/2'>
                 <div className='bg-white p-5 rounded h-[500px] shadow-2xl flex flex-col justify-between'>
                   <div className='w-full'>
-                  {/* <Img src={`${process.env.NEXT_PUBLIC_BACKEND}${news.thumbnail}`} alt={news.title} className="h-[250px] w-full object-cover" /> */}
-                  <Img src={`${news.thumbnail}`} alt={news.title} className="h-[250px] w-full object-cover" />
+                  <Img src={`${process.env.NEXT_PUBLIC_BACKEND}${news.thumbnail}`} alt={news.title} className="h-[250px] w-full object-cover" />
                     <h3 className='text-xl font-semibold mt-3 line-clamp-2'>{news.title}</h3>
                     <span className='text-slate-600 w-full break-words whitespace-normal line-clamp-3'>{news.description}</span>
                   </div>

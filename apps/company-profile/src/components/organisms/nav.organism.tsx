@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { Logo } from '../atoms'
 import { NavList, NavSecondList, SearchInput } from '../molecules'

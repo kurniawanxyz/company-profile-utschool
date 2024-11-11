@@ -34,7 +34,7 @@ class NewsFactory extends Factory
             "visibility" => $this->faker->randomElement([true, false]),
             "thumbnail" => 'news_thumbnail/' . $fileName,
             "title" => $this->faker->sentence(),
-            "description" => $this->faker->text(200),
+            "description" => $this->faker->randomHtml(),
             "content" => $this->faker->text(3000),
         ];
     }

@@ -9,6 +9,7 @@ import TopNews from "./topnew.organism";
 import ListNews from "./listnews.organism";
 import RandomNews from "./randomnews.organism";
 import ProfileUtSchool from "./profileuts.organism";
+import MottoUtSchool from "./motto.organism";
 
 export {
     Navbar,
@@ -21,5 +22,6 @@ export {
     TopNews,
     ListNews,
     RandomNews,
-    ProfileUtSchool
+    ProfileUtSchool,
+    MottoUtSchool
 }

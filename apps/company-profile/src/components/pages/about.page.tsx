@@ -1,4 +1,4 @@
-import { ProfileUtSchool } from '../organisms'
+import { MottoUtSchool, ProfileUtSchool } from '../organisms'
 
 
 export default function AboutPage() {
@@ -6,6 +6,7 @@ export default function AboutPage() {
     <article className='min-h-screen p-20'>
         <h1 className='text-5xl font-bold'>Profil UT School</h1>
         <ProfileUtSchool/>
+        <MottoUtSchool/>
     </article>
   )
 }

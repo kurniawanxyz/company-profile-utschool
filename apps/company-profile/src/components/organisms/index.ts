@@ -8,6 +8,7 @@ import MapsCesium from "./maps.organism";
 import TopNews from "./topnew.organism";
 import ListNews from "./listnews.organism";
 import RandomNews from "./randomnews.organism";
+import ProfileUtSchool from "./profileuts.organism";
 
 export {
     Navbar,
@@ -19,5 +20,6 @@ export {
     MapsCesium,
     TopNews,
     ListNews,
-    RandomNews
+    RandomNews,
+    ProfileUtSchool
 }

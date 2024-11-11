@@ -16,16 +16,16 @@ export const navItems = [
       label: 'Tentang Kami',
       items: [
         {
-          href: "/",
+          href: "/about",
           label: "Tentang Kami"
         },
         {
           href: "/",
-          label: "Instruktur"
+          label: "Profil Pimpinan"
         },
         {
           href: "/",
-          label: "Direktur"
+          label: "Partner Industri"
         },
       ]
     },

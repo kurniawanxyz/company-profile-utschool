@@ -30,6 +30,16 @@ class DirectorController extends Controller
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
         }
     }
+    public function simpleIndex(Request $request)
+    {
+        try {
+            $director = Director::all();
+
+            return HandleJsonResponseHelpers::res("Successfully get data!", $director);
+        } catch (\Exception $e) {
+            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

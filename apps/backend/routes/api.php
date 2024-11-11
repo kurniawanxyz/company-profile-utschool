@@ -36,6 +36,7 @@ Route::get('/news/short', [LandingPageController::class, 'simpleIndex']);
 Route::get('/news/{id}', [NewsController::class, 'show']);
 Route::get('/top-news', [LandingPageController::class, 'topNews']);
 Route::get('/director', [DirectorController::class, 'index']);
+Route::get('/director/{id}', [DirectorController::class, 'show']);
 Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
 Route::get('/gallery', [GalleryController::class, 'index']);
 Route::post('/registration', [RegistrationController::class, 'registration']);

@@ -5,6 +5,8 @@ import NewestNewsSection from "./newestnews.molecule";
 import SosmedSection from "./sosmed.molecule";
 import CardNews from "./newscard.molecules";
 import Paginate from "./paginate.molecule";
+import NavSecondList from "./navsecondlist.molecule";
+
 export {
     NavList,
     SearchInput,
@@ -12,5 +14,6 @@ export {
     NewestNewsSection,
     SosmedSection,
     CardNews,
-    Paginate
+    Paginate,
+    NavSecondList
 }

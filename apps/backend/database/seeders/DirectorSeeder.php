@@ -18,21 +18,18 @@ class DirectorSeeder extends Seeder
         $imageUrl = 'https://picsum.photos/640/480';
         $imageContent = Http::get($imageUrl)->body();
 
+        $f = fake("id_ID");
         $fileName = 'director-' . uniqid() . '.jpg';
 
         Storage::disk('public')->put('directors/' . $fileName, $imageContent);
-
-        $f = fake("id_ID");
-        for ($i = 1; $i <= 6; $i++) {
-            Director::make(
-                [
-                    "photo_profile" => "director/". $fileName,
-                    "name" => $f->name(),
-                    "position" => $f->title(),
-                    "message" => $f->sentence(),
-                    "description" => $f->text()
-                ],
-            );
-        }
+        Director::make(
+            [
+                "photo_profile" => "director/" . $fileName,
+                "name" => "Muhammad Hamdan Aziz",
+                "position" => "Direktur UT School",
+                "message" => $f->sentence(),
+                "description" => $f->text()
+            ],
+        );
     }
 }

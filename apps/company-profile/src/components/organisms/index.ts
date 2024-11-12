@@ -11,6 +11,7 @@ import RandomNews from "./randomnews.organism";
 import ProfileUtSchool from "./profileuts.organism";
 import MottoUtSchool from "./motto.organism";
 import VisiMisi from "./visimisi.organism";
+import ListDirector from "./listdirector.organism";
 
 export {
     Navbar,
@@ -25,5 +26,6 @@ export {
     RandomNews,
     ProfileUtSchool,
     MottoUtSchool,
-    VisiMisi
+    VisiMisi,
+    ListDirector
 }

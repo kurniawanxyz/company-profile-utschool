@@ -46,7 +46,7 @@ export default function Navbar() {
     <nav className='sticky top-0 z-50'>
       <div className='flex flex-col md:flex-row px-4 py-3 justify-between items-center gap-5 bg-white md:px-10 lg:px-20 relative z-[60]'>
         <div className='flex justify-between w-full md:w-auto items-center'>
-          <Logo className='w-32 lg:w-40' />
+          <Logo className='w-32 lg:w-40'  />
           <div className='md:hidden'>
             <button onClick={toggleMenu}>
               {isOpen ? <FaTimes className='h-6 w-6' /> : <FaBars className='h-6 w-6' />}

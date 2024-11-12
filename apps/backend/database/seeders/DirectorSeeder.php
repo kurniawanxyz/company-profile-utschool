@@ -22,7 +22,7 @@ class DirectorSeeder extends Seeder
         $fileName = 'director-' . uniqid() . '.jpg';
 
         Storage::disk('public')->put('directors/' . $fileName, $imageContent);
-        Director::make(
+        Director::create(
             [
                 "photo_profile" => "director/" . $fileName,
                 "name" => "Muhammad Hamdan Aziz",

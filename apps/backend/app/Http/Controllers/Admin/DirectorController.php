@@ -33,7 +33,7 @@ class DirectorController extends Controller
     public function simpleIndex(Request $request)
     {
         try {
-            $director = Director::all();
+            $director = Director::first();
 
             return HandleJsonResponseHelpers::res("Successfully get data!", $director);
         } catch (\Exception $e) {

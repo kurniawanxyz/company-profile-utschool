@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f41f6d73249a6bfaf5f02f5075b8aedb",
+    "content-hash": "2bac48cbb46411841793b2520a03b1c6",
     "packages": [
         {
             "name": "brick/math",
@@ -2911,6 +2911,57 @@
                 }
             ],
             "time": "2024-03-06T16:17:14+00:00"
+        },
+        {
+            "name": "paulhennell/faker-news",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paulhennell/faker-news.git",
+                "reference": "0172a92e358d8f753d439c5ac1336658708f4c6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paulhennell/faker-news/zipball/0172a92e358d8f753d439c5ac1336658708f4c6d",
+                "reference": "0172a92e358d8f753d439c5ac1336658708f4c6d",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Faker\\Provider\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Hennell",
+                    "email": "git@hennell.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Faker provider for fake news!",
+            "homepage": "https://github.com/paulhennell/faker-news",
+            "keywords": [
+                "data",
+                "faker",
+                "faker-news",
+                "paulhennell"
+            ],
+            "support": {
+                "source": "https://github.com/paulhennell/faker-news/tree/v2.0.0"
+            },
+            "time": "2022-06-03T14:25:28+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",

@@ -13,6 +13,7 @@ import MottoUtSchool from "./motto.organism";
 import VisiMisi from "./visimisi.organism";
 import ListDirector from "./listdirector.organism";
 import Sambutan from "./sambutan.organism";
+import DetailDirector from "./detaildirector.organism";
 
 export {
     Navbar,
@@ -29,5 +30,6 @@ export {
     MottoUtSchool,
     VisiMisi,
     ListDirector,
-    Sambutan
+    Sambutan,
+    DetailDirector
 }

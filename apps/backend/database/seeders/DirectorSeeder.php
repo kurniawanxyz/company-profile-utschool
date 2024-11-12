@@ -6,7 +6,6 @@ use App\Models\Director;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Storage;
 
 class DirectorSeeder extends Seeder

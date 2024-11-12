@@ -14,5 +14,5 @@ export default function Logo({ width = 160, height = 160, mode = "dark", classNa
     // const [loading, setLoading] = useState(true);
     const image = mode === "light" ? "/images/logos/2.png" : "/images/logos/1.png"
     const defaultStyle = "w-40 object-contain sticky z-50 top-0"
-    return <Image className={cn(defaultStyle, className)} src={image} priority alt={"UT School"} width={width} height={height} />
+    return <Image className={cn(defaultStyle, className)}  src={image} priority alt={"UT School"} width={width} height={height} />
 }

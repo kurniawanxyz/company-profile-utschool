@@ -15,11 +15,11 @@ class InstructorSeeder extends Seeder
      */
     public function run(): void
     {
-        $imageUrl = 'https://picsum.photos/640/480';
-        $imageContent = Http::get($imageUrl)->body();
-        $f = fake("id_ID");
 
         for ($i = 1; $i <= 10; $i++) {
+            $imageUrl = 'https://picsum.photos/640/480';
+            $imageContent = Http::get($imageUrl)->body();
+            $f = fake("id_ID");
             $fileName = 'instructor-' . uniqid() . '.jpg';
             Storage::disk('public')->put('instructors/' . $fileName, $imageContent);
 

@@ -4,6 +4,7 @@ import { useAlumni } from "@/hooks/useAlumni"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel"
 import { } from "../ui/card"
 import { Img } from "../atoms"
+import Autoplay from "embla-carousel-autoplay"
 
 export default function AlumniSection() {
   const { data, isSuccess } = useAlumni()
@@ -12,7 +13,13 @@ export default function AlumniSection() {
     const alumni = data.data
     return (
       <div>
-        <Carousel className="w-full max-w-sm ">
+        <Carousel
+                  plugins={[
+                    Autoplay({
+                      delay: 5000,
+                    })
+                  ]}
+        className="w-full max-w-sm ">
           <CarouselContent>
             {alumni.map((item) => (
               <CarouselItem className="basis-1/2" key={item.id}>

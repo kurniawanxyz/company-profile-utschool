@@ -14,6 +14,7 @@ import VisiMisi from "./visimisi.organism";
 import ListDirector from "./listdirector.organism";
 import Sambutan from "./sambutan.organism";
 import DetailDirector from "./detaildirector.organism";
+import Instructor from "./instructor.organism";
 
 export {
     Navbar,
@@ -31,5 +32,6 @@ export {
     VisiMisi,
     ListDirector,
     Sambutan,
-    DetailDirector
+    DetailDirector,
+    Instructor
 }

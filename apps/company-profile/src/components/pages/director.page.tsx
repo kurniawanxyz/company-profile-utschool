@@ -3,6 +3,8 @@ import { Img } from '../atoms'
 import { Sambutan } from '../organisms'
 
 export default function DirectorPage() {
+
+
   return (
     <div className='min-h-screen'>
       <header className='w-full h-[40vh] bg-black flex justify-center items-center flex-col'>

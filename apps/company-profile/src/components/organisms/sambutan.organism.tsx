@@ -1,6 +1,7 @@
 import React from 'react'
 import { Devider } from '../atoms'
 import DetailDirector from './detaildirector.organism'
+import Instructor from './instructor.organism'
 
 export default function Sambutan() {
   return (
@@ -10,6 +11,7 @@ export default function Sambutan() {
             <Devider width={200} className='border-primary'/>
         </div>
       <DetailDirector/>
+      <Instructor/>
     </article>
   )
 }

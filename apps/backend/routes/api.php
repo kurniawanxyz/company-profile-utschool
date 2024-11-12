@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DirectorController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\LandingPageSettingController;
 use App\Http\Controllers\Admin\LearningPointController;
 use App\Http\Controllers\Admin\LoginController;
@@ -37,6 +38,7 @@ Route::get('/news/{id}', [NewsController::class, 'show']);
 Route::get('/top-news', [LandingPageController::class, 'topNews']);
 Route::get('/director', [DirectorController::class, 'simpleIndex']);
 Route::get('/director/{id}', [DirectorController::class, 'show']);
+Route::get('/instructor', [InstructorController::class, 'simpleIndex']);
 Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
 Route::get('/gallery', [GalleryController::class, 'index']);
 Route::post('/registration', [RegistrationController::class, 'registration']);
@@ -78,6 +80,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->only('index')->except('store');
         Route::apiResource('/alumni', AlumniController::class)->only(['index', 'show']);
         Route::apiResource('/sosmed', SosmedController::class)->only(['index', 'show']);
+        Route::apiResource('/instructor', InstructorController::class)->only(['index', 'show']);
     });
 
     // SUPER ADMIN
@@ -95,5 +98,6 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/landing-page-setting', LandingPageSettingController::class)->except('index')->only('store');
         Route::apiResource('/alumni', AlumniController::class)->except(['index', 'show']);
         Route::apiResource('/sosmed', SosmedController::class)->except(['index', 'show']);
+        Route::apiResource('/instructor', InstructorController::class)->except(['index', 'show']);
     });
 });

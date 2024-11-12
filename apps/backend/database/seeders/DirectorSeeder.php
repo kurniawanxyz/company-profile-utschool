@@ -26,7 +26,7 @@ class DirectorSeeder extends Seeder
         Storage::disk('public')->put('directors/' . $fileName, $imageContent);
         Director::create(
             [
-                "photo_profile" => "director/" . $fileName,
+                "photo_profile" => "directors/" . $fileName,
                 "name" => "Muhammad Hamdan Aziz",
                 "position" => "Direktur UT School",
                 "message" => $f->sentence(),

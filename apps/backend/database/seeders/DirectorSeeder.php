@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Director;
-use Http;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Storage;
 
 class DirectorSeeder extends Seeder
@@ -20,6 +21,7 @@ class DirectorSeeder extends Seeder
 
         $f = fake("id_ID");
         $fileName = 'director-' . uniqid() . '.jpg';
+
 
         Storage::disk('public')->put('directors/' . $fileName, $imageContent);
         Director::create(

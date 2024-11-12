@@ -17,7 +17,7 @@ class NewsSeeder extends Seeder
 
 
 
-        News::factory()->count(20)->create([
+        News::factory()->count(10)->create([
             "visibility" => true
         ]);
 

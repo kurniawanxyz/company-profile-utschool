@@ -33,6 +33,7 @@ export default function Instructor() {
                     opts={{
                         // align: "center",
                         loop: true,
+                        dragFree: false,
                     }}
                     // plugins={[Autoplay({ delay: 5000 })]}
                     className="w-[80%] mx-auto mb-10"

@@ -15,6 +15,7 @@ import ListDirector from "./listdirector.organism";
 import Sambutan from "./sambutan.organism";
 import DetailDirector from "./detaildirector.organism";
 import Instructor from "./instructor.organism";
+import ListGallery from "./listgallery.organism";
 
 export {
     Navbar,
@@ -33,5 +34,6 @@ export {
     ListDirector,
     Sambutan,
     DetailDirector,
-    Instructor
+    Instructor,
+    ListGallery
 }

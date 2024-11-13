@@ -12,6 +12,7 @@ class Gallery extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = [];
+    
     public function gallery_category(): BelongsTo
     {
         return $this->belongsTo(GalleryCategory::class);

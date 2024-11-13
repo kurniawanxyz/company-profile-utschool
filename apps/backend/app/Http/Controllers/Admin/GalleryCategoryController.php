@@ -23,7 +23,7 @@ class GalleryCategoryController extends Controller
                 $gc = $gc->where('text', "LIKE", "%". $req ."%");
             }
 
-            $gc = $gc->paginate(10);
+            $gc = $gc->get();
             return HandleJsonResponseHelpers::res("Successfully get gallery category data!", $gc);
         } catch (\Exception $e) {
             return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);

@@ -29,7 +29,7 @@ class GalleryFactory extends Factory
 
 
         return [
-            "image_path" => $fileName
+            "image_path" => 'gallery/'.$fileName
         ];
     }
 }

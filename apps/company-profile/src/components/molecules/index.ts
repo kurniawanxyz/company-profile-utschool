@@ -6,6 +6,7 @@ import SosmedSection from "./sosmed.molecule";
 import CardNews from "./newscard.molecules";
 import Paginate from "./paginate.molecule";
 import NavSecondList from "./navsecondlist.molecule";
+import FilterCategory from "./filtercategory.molecules";
 
 export {
     NavList,
@@ -15,5 +16,6 @@ export {
     SosmedSection,
     CardNews,
     Paginate,
-    NavSecondList
+    NavSecondList,
+    FilterCategory
 }

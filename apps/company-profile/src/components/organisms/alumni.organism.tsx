@@ -19,14 +19,13 @@ export default function AlumniSection() {
                       delay: 5000,
                     })
                   ]}
-        className="w-full max-w-sm ">
+        className="w-2/3">
           <CarouselContent>
             {alumni.map((item) => (
-              <CarouselItem className="basis-1/2" key={item.id}>
+              <CarouselItem className="basis-1/2 md:basis-1/3" key={item.id}>
                 <div>
                   <div className="px-1">
                     <Img src="/images/assets/alumni.png" className="" />
-
                   </div>
                   <div className="bg-primary rounded px-2 py-2 border border-black mb-2">
                     <h3 className="text-sm text-center font-semibold">{item.name}</h3>

@@ -2,24 +2,33 @@
 import { useInstructor } from "@/hooks/useInstructor"
 import {
     Carousel,
+    CarouselApi,
     CarouselContent,
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { Devider, Img } from "../atoms"
-// import Autoplay from "embla-carousel-autoplay"
 import { cn } from "@/lib/utils"
-import { useState,  } from "react"
+import { useCallback, useEffect, useState, } from "react"
 
 export default function Instructor() {
     const { isSuccess, data } = useInstructor()
     const [centerIndex, setCenterIndex] = useState(0)
+    const [api, setApi] = useState<CarouselApi>()
 
-    // useEffect(() => {
-    //     const totalItems = data?.data?.length || 0
-    //     setCenterIndex(Math.floor(totalItems / 2))
-    // }, [data])
+    const onSelect = useCallback(() => {
+        if (!api) return
+        const currentIndex = api.selectedScrollSnap()
+        setCenterIndex(currentIndex)
+    }, [api])
+
+    useEffect(() => {
+        if (!api) return
+        api.on("select", onSelect) // Listen to the 'select' event
+        onSelect() // Initialize centerIndex on mount
+    }, [api, onSelect])
+
 
     if (isSuccess) {
         const instructors = data.data
@@ -33,8 +42,10 @@ export default function Instructor() {
                     opts={{
                         // align: "center",
                         loop: true,
-                        dragFree: false,
+                        align: "center",
+
                     }}
+                    setApi={setApi}
                     // plugins={[Autoplay({ delay: 5000 })]}
                     className="w-[80%] mx-auto mb-10"
                 >
@@ -59,30 +70,15 @@ export default function Instructor() {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <div
-                        onClick={() => {
-                            setCenterIndex((prevIndex) =>
-                                prevIndex === 0 ? instructors.length - 1 : prevIndex - 1
-                            )
-                        }}
 
-                    >
-                        <CarouselPrevious
-                        />
-
-                    </div>
-                    <div
-     onClick={() => {
-                        setCenterIndex((prevIndex) =>
-                            prevIndex === instructors.length - 1 ? 0 : prevIndex + 1
-                        )
-                    }}
->
-                    <CarouselNext
-                   
+                    <CarouselPrevious
                     />
 
-                    </div>
+
+                    <CarouselNext
+
+                    />
+
                 </Carousel>
             </div>
         )

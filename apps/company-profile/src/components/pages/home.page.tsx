@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <Header/>
-      <Video url="/videos/1.mp4" className="h-screen" playing loop={true} muted/>
+      <Video url="/videos/1.mp4" playing controls={false} loop={true} muted/>
       <NewsSection/>
       {/* <MapsCesium/> */}
     </>

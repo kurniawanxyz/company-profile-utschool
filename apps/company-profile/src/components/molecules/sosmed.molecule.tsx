@@ -20,7 +20,7 @@ export default function SosmedSection() {
     if(isSuccess){
         const sosmed = data.data.at(current);
         return (
-            <article className="w-4/12 border bg-primary/80  py-10">
+            <article className="w-full lg:w-4/12 border bg-primary opacity-80  py-10">
                 <h2 className="text-4xl font-bold text-slate-700 text-center mb-5 flex justify-center flex-col items-center">Sosial Media</h2>
                 {
                     sosmed?.type === "Instagram" && (

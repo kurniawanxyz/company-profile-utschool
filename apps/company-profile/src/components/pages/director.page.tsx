@@ -1,6 +1,7 @@
 import { Button } from '../ui/button'
 import { Img } from '../atoms'
 import { Sambutan } from '../organisms'
+// import { GlobeDemo } from '../organisms/globe.organism'
 
 export default function DirectorPage() {
 
@@ -24,6 +25,7 @@ export default function DirectorPage() {
         src='/images/assets/randoms/5.jpg'/>
       </div>
       <Sambutan/>
+      {/* <GlobeDemo/> */}
     </div>
   )
 }

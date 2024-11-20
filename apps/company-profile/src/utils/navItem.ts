@@ -12,7 +12,7 @@ export const navItems = [
       label: 'Galeri',
     },
     {
-      href: '#',
+      href: null,
       label: 'Tentang Kami',
       items: [
         {
@@ -30,7 +30,7 @@ export const navItems = [
       ]
     },
     {
-      href: '/contact',
+      href: null,
       label: 'Hubungi Kami',
       items: [
         {
@@ -48,7 +48,7 @@ export const navItems = [
       ]
     }
   ] as unknown as ({
-    href: string,
+    href: string | null,
     label: string,
     items?: {
       href: string,

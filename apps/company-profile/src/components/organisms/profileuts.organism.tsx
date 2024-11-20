@@ -3,9 +3,9 @@ import { Img } from '../atoms'
 
 export default function ProfileUtSchool() {
     return (
-        <div className='mt-10 grid grid-cols-2'>
+        <div className='mt-10 grid md:grid-cols-2 gap-5'>
             <Img src='/images/assets/randoms/1.png' className='rounded-xl shadow-md' />
-            <div className=''>
+            <div className='mt-5 md:mt-0'>
                 <div className='w-fit bg-primary px-5 py-3'>
                     <h2 className='text-xl'>Tentang Kami</h2>
                 </div>

@@ -28,6 +28,14 @@ export default function NavLink({href, label, item}: Props) {
       }
 
   return (
-        <li onMouseEnter={()=> handleHover(true, label)} className=''><Link href={href}>{label}</Link></li>
+        <li onMouseEnter={()=> handleHover(true, label)} className='cursor-pointer'>
+          {
+            href ? (
+              <Link href={href}>{label}</Link>
+            ) : (
+              <span>{label}</span>
+            )
+          }
+        </li>
     )
 }

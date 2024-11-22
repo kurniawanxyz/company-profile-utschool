@@ -3,7 +3,7 @@ import { useNavbarStore } from '@/stores'
 import Link from 'next/link'
 
 type Props = {
-    href: string,
+    href: string | null,
     label: string,
     item?: {
         href: string,

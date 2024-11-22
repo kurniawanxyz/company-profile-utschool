@@ -76,7 +76,7 @@ export default function Header() {
             <header className="p-10 lg:p-20 flex flex-col md:flex-row lg:min-h-[80vh]">
                 <div className="w-full md:w-7/12">
                     <div className="mb-10 relative">
-                        <Img src="/images/assets/michie.jpg" className="w-12 h-12 lg:w-20 lg:h-20 mb-4 rounded-lg shadow-xl" quality={100} />
+                        <Img src="/images/assets/excavator.png" className="w-12 h-12 lg:w-20 lg:h-20 mb-4 rounded-lg shadow-xl" quality={100} />
                         <Img src="/images/assets/panahitam.png" className="absolute -bottom-5 lg:-bottom-10 right-0 lg:right-10 -rotate-[55deg] lg:-rotate-45 object-contain w-24 lg:w-40" quality={100} />
                         <Img src="/images/assets/panahoranye.png" className="absolute top-8 right-0 lg:top-0 lg:right-0 rotate-[25deg] lg:rotate-0 object-contain w-20 lg:w-40 " quality={100} />
                         <h1 className="flex flex-col text-slate-700">
@@ -95,12 +95,12 @@ export default function Header() {
                         animate={{ y: [-100, -95, -100] }}
                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.25 }}
                         ref={scopeSeconImage}
-                        src="/images/assets/michie.jpg"
+                        src="/images/assets/excavator.png"
                         className="w-12 h-12 z-10 lg:w-20 lg:h-20 rounded-lg shadow-xl absolute opacity-0"
                     />
                     <motion.img
                         ref={scopeThirdImage}
-                        src="/images/assets/michie.jpg"
+                        src="/images/assets/excavator.png"
                         className="w-12 h-12 z-10 lg:w-20 lg:h-20 rounded-lg shadow-xl absolute right-1/3 opacity-0"
                         animate={{ y: [20, 25, 20] }}
                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.5 }}
@@ -108,7 +108,7 @@ export default function Header() {
                     <motion.img
                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.75 }}
                         animate={{ y: [-230, -225, -230] }} ref={scopeFourthImage} 
-                        src="/images/assets/michie.jpg" 
+                        src="/images/assets/excavator.png" 
                         className="w-12 h-12 z-10 lg:w-20 lg:h-20 rounded-lg shadow-xl absolute right-5 lg:right-0 opacity-0"
                          />
                 </div>

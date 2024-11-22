@@ -33,7 +33,7 @@ export default function Instructor() {
     if (isSuccess) {
         const instructors = data.data
         return (
-            <div>
+            <div className="px-10 lg:px-10">
                 <div className="mb-10">
                     <h2 className="text-center text-2xl font-bold">Instruktur</h2>
                     <Devider className="w-40 mx-auto border-primary" />
@@ -51,7 +51,7 @@ export default function Instructor() {
                 >
                     <CarouselContent>
                         {instructors.map((item, index) => (
-                            <CarouselItem key={item.id} className="md:basis-1/4 w-[200px] h-[300px]  ">
+                            <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/4 w-[200px] h-[300px]  ">
                                 <div
                                     className={cn(
                                         "relative  w-full h-full rounded  overflow-hidden shadow-lg transition-transform duration-300",

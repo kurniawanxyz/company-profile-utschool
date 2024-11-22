@@ -7,6 +7,7 @@ import CardNews from "./newscard.molecules";
 import Paginate from "./paginate.molecule";
 import NavSecondList from "./navsecondlist.molecule";
 import FilterCategory from "./filtercategory.molecules";
+import HeaderProgram from "./headerprogra.molecule";
 
 export {
     NavList,
@@ -17,5 +18,6 @@ export {
     CardNews,
     Paginate,
     NavSecondList,
-    FilterCategory
+    FilterCategory, 
+    HeaderProgram
 }

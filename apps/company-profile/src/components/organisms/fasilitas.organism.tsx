@@ -32,7 +32,7 @@ export default function Fasilitas() {
             <p>Fasilitas unggulan yang digunakan untuk proses ajar mengajar yang dimiliki UT School</p>
 
             <Carousel 
-            className='mt-8 flex items-center justify-center '
+            className='mt-8 h-80 flex items-center justify-center '
                 opts={{
                     align: "center"
                 }}
@@ -41,7 +41,7 @@ export default function Fasilitas() {
                     {
                         listFeatures.map((item, index)=>(
                         <CarouselItem
-                            className='  md:basis-1/2 w-40'
+                            className=' lg:h-80  md:basis-1/2 w-40'
                             key={`fitur-${index}`}
                         >
                             <div className='w-full h-40 lg:h-full relative rounded-md overflow-hidden shadow-md'>

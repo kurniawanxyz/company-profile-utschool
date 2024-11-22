@@ -4,8 +4,22 @@ export const navItems = [
       label: 'Beranda',
     },
     {
-      href: '/program',
+      href: null,
       label: 'Program',
+      items: [
+        {
+          href: "/program/mechanic",
+          label: "Mekanik"
+        },
+        {
+          href: "/program/operator",
+          label: "Operator"
+        },
+        {
+          href: "/program/programmer",
+          label: "IT Programmer"
+        },
+      ]
     },
     {
       href: '/gallery',

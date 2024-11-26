@@ -95,47 +95,24 @@ class DirectorController extends Controller
                 return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
             }
 
-            $photo_profile = $director->photo_profile;
-            $data = [...$request->all()];
+            $data = $request->all();
+            $fileFields = ['photo_profile', 'image1', 'image2', 'image3', 'video'];
 
-            if($request->hasFile('photo_profile')){
-                Storage::exists($photo_profile) && Storage::delete($photo_profile);
+            foreach ($fileFields as $field) {
+                if ($request->hasFile($field)) {
+                    if (!empty($director->{$field}) && Storage::exists($director->{$field})) {
+                        Storage::delete($director->{$field});
+                    }
 
-                $fileName = $request->file('photo_profile')->hashName();
-                $data['photo_profile'] = $request->file('photo_profile')->storeAs('directors_photo_profiles', $fileName);
+                    $fileName = $request->file($field)->hashName();
+                    $data[$field] = $request->file($field)->storeAs('director_assets', $fileName);
+                }
             }
 
             $director->update($data);
 
             DB::commit();
             return HandleJsonResponseHelpers::res("Successfully update director!");
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            return HandleJsonResponseHelpers::res("There is a server error!", $e->getMessage(), 500, false);
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        try {
-            DB::beginTransaction();
-
-            $director = Director::where('id', $id)->first();
-            if (!$director) {
-                return HandleJsonResponseHelpers::res("Data not found!", [], 404, false);
-            }
-
-            $photo_profile = $director->photo_profile;
-            Storage::exists($photo_profile) && Storage::delete($photo_profile);
-
-            $director->delete();
-
-            DB::commit();
-            return HandleJsonResponseHelpers::res("Successfully delete director!");
         } catch (\Exception $e) {
             DB::rollBack();
 

@@ -26,6 +26,10 @@ class UpdateDirectorRequest extends FormRequest
         $id = $this->route('director');
         return [
             "photo_profile" => "file|mimes:png,jpg,jpeg",
+            "image1" => "file|mimes:png,jpg,jpeg",
+            "image2" => "file|mimes:png,jpg,jpeg",
+            "image3" => "file|mimes:png,jpg,jpeg",
+            "video" => "file|mimes:mp4",
             "name" => "string|unique:directors,name,". $id .",id",
             "position" => "string",
             "description" => "min:1",

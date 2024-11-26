@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('photo_profile');
             $table->string('name');
             $table->string('position');
+            $table->string('image1')->nullable();
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
+            $table->string('video')->nullable();
             $table->text('message')->nullable();
             $table->longText('description');
         });

@@ -65,7 +65,7 @@ Route::prefix('/admin')->group(function () {
         Route::apiResource('/news', NewsController::class);
         Route::apiResource('/registration/schedule', RegistrationScheduleController::class)->only(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
-        Route::apiResource('/director', DirectorController::class)->only(['index', 'show']);
+        Route::apiResource('/director', DirectorController::class)->only(['index', 'show'])->except(['destroy', 'store']);
         Route::apiResource('/batch', BatchController::class)->only(['index', 'show']);
         Route::apiResource('/training-program', TrainingProgramController::class)->only(['index', 'show']);
         Route::apiResource('/learning-point', LearningPointController::class)->only(['index', 'show']);
@@ -87,7 +87,7 @@ Route::prefix('/admin')->group(function () {
     Route::middleware('super-admin-ini')->group(function () {
         Route::apiResource('/users', AdminController::class);
         Route::apiResource('/gallery-category', GalleryCategoryController::class)->except(['index', 'show']);
-        Route::apiResource('/director', DirectorController::class)->except(['index', 'show']);
+        Route::apiResource('/director', DirectorController::class)->except(['index', 'show', 'destroy', 'store']);
         Route::apiResource('/training-program', TrainingProgramController::class)->except(['index', 'show']);
         Route::apiResource('/batch', BatchController::class)->except(['index', 'show']);
         Route::apiResource('/learning-point', LearningPointController::class)->except(['index', 'show']);

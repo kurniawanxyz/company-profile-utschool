@@ -4,6 +4,8 @@ import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react"
+import NextQueryProvider from "@/providers/NextQueryProvider";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const raleway = Raleway({ 
   subsets: ["latin"],
@@ -17,12 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={raleway.className}>
-        {children}
-        <ToastContainer/>  
-        <Analytics/>
-      </body>
-    </html>
+    <NextQueryProvider>
+      <html lang="en">
+        <body className={raleway.className}>
+          {children}
+          <ToastContainer/>  
+          <Analytics/>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </body>
+      </html>
+    </NextQueryProvider>
   );
 }

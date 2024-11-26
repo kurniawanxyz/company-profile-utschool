@@ -1,104 +1,223 @@
+/* eslint-disable react/no-children-prop */
 "use client";
-import { DirectorType } from "@/types/DirectorType";
 import Banner from "@/components/elements/Banner";
-import Card from "@/components/elements/Card";
-import DataNotFound from "@/components/fragments/DataNotFound";
-import SearchInput from "@/components/fragments/SearchInput";
-import useModalStore from "@/stores/useModalStore";
-import { linkPaginate, usePaginateStore } from "@/stores/usePaginateStore";
-import Image from "next/image";
-import { ChangeEvent, useEffect, useState } from "react";
-import { FaPen } from "react-icons/fa";
-import { FaTrashCan } from "react-icons/fa6";
-import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
+import { useGetDirector, useUpdateDirector } from "@/hooks/useDirector";
+import { FieldApi, useForm } from "@tanstack/react-form";
+import { DirectorType } from "@/types/DirectorType";
+import Card from "@/components/elements/Card";
+import Img from "@/components/elements/Img";
+import { Input, TextArea } from "@/components/elements";
+import { ChangeEvent } from "react";
+
+function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
+  return (
+    <>
+      {field.state.meta.isTouched && field.state.meta.errors.length ? (
+        <em>{field.state.meta.errors.join(",")}</em>
+      ) : null}
+      {field.state.meta.isValidating ? "Validating..." : null}
+    </>
+  );
+}
 
 const DirectorPage = () => {
-  const [search,setSearch] = useState<string>('');
-  const { fetchPaginateData, paginate, setPaginateData, handlePaginate } = usePaginateStore();
-  const { openDeleteModal, isDeleted } = useModalStore();
   const backendurl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const router = useRouter();
-  useEffect(() => {
-    fetchPaginateData(`/admin/director`);
-  }, [fetchPaginateData, isDeleted]);
+  const { isSuccess, isLoading, data } = useGetDirector();
+  const mutateDirector = useUpdateDirector(data?.data.id as string)  
 
-
-  function handleChangeSearch(e:ChangeEvent<HTMLInputElement>){
-    setSearch(e.target.value)
-  }
-
-  function handleSubmitSearch(){
-    const url = `${paginate.path}?query=${search}`
-    setPaginateData(url)
-  }
-
+  const form = useForm<DirectorType>({
+    onSubmit: async ({ value }) => {
+      // console.log(value)
+      mutateDirector.mutate({data: value})
+    },
+    defaultValues: {
+      id: data?.data.id as string,
+      name: data?.data.name as string,
+      image1: data?.data.image1 as string,
+      description: data?.data.description as string,
+      image2: data?.data.image2 as string,
+      image3: data?.data.image3 as string,
+      message: data?.data.message as string,
+      photo_profile: data?.data.photo_profile as string,
+      video: data?.data.video as string,
+      position: data?.data.position as string,
+    },
+  });
 
   return (
     <>
-      <Banner
-        title="Directors"
-        btnTambah={true}
-        urlTambah="/admin/directors/create"
-      />
+      <Banner title="Directors" />
 
-      <SearchInput
-      onChange={(e)=>handleChangeSearch(e)}
-      onSubmit={handleSubmitSearch}
-      className="mt-3"
-      />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          form.handleSubmit();
+        }}
+      >
+        <div className="grid grid-cols-2 gap-5 p-5">
+          {/* Name */}
+          <form.Field
+            name="name"
+            children={(field) => (
+              <Input
+                label="Name"
+                type="text"
+                value={field.state.value || ""}
+                onChange={(e) => field.handleChange(e.target.value)} name={""} />
+            )}
+          />
 
-      {paginate.data.length == 0 && <DataNotFound className="mt-5" />}
+          {/* Position */}
+          <form.Field
+            name="position"
+            children={(field) => (
+              <Input
+                label="Position"
+                type="text"
+                value={field.state.value || ""}
+                onChange={(e) => field.handleChange(e.target.value)} name={""} />
+            )}
+          />
 
-      <div className="grid grid-cols-4 gap-3 mt-5">
-        {paginate.data.length >= 0 &&
-          paginate.data.map((item: DirectorType, index: number) => (
-            <Card
-              key={index}
-              className="hover:shadow-xl hover:scale-105 delay-75 transition-all group "
-            >
-              <Image
-                src={`${backendurl + item.photo_profile}`}
-                alt={item.name}
-                width={200}
-                height={200}
-                className="rounded w-full h-60 object-cover bg-top  mx-auto mt-3"
+          {/* Message */}
+          <form.Field
+            name="message"
+            children={(field) => (
+              <TextArea
+                name=""
+                label="Message"
+                value={field.state.value || ""}
+                onChange={(e: any) => field.handleChange(e.target.value)}
               />
-              <div className="w-full  rounded">
-                <h2 className="text-slate-500 text-lg font-semibold text-center">
-                  {item.name}
-                </h2>
-                <p className="text-slate-400 text-center">{item.position}</p>
-              </div>
-              <div className="w-full rounded h-10 bg-slate-900 flex justify-around mt-5">
-                <button onClick={()=>router.push("/admin/directors/edit/"+item.id)} className="flex items-center gap-1 hover:text-primary cursor-pointer">
-                  <FaPen /> Edit
-                </button>
-                <button
-                  onClick={() => openDeleteModal(`/admin/director/${item.id}`)}
-                  className="flex items-center gap-1 hover:text-red-500 cursor-pointer"
-                >
-                  <FaTrashCan /> Delete
-                </button>
-              </div>
-            </Card>
+            )}
+          />
+
+          {/* Description */}
+          <form.Field
+            name="description"
+            children={(field) => (
+              <TextArea
+                label="Description"
+                value={field.state.value || ""}
+                onChange={(e) => field.handleChange(e.target.value)} name={""} />
+            )}
+          />
+
+          {/* Photo Profile */}
+          <form.Field
+            name="photo_profile"
+            children={(field) => (
+              <Card>
+                <Img
+                  className="w-full h-40 object-cover mb-5"
+                  src={
+                    field.state.value
+                      ? process.env.NEXT_PUBLIC_API_URL + field.state.value
+                      : "/images/illustration/404.png"
+                  }
+                  alt="Photo Profile Preview"
+                />
+                <Input
+                  accept="image/*"
+                  label="Photo Profile"
+                  type="file"
+                  name="photo_profile"
+                  onChange={(e: any) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const previewUrl = URL.createObjectURL(file);
+                      field.handleChange(previewUrl);
+                    }
+                  }}
+                />
+              </Card>
+            )}
+          />
+
+          {/* Video */}
+          {/* Video */}
+          <form.Field
+            name="video"
+            children={(field) => (
+              <Card>
+                {field.state.value ? (
+                  <video
+                    className="w-full h-40 object-cover mb-5"
+                    controls
+                    src={field.state.value}
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <div className="w-full h-40 bg-gray-200 flex items-center justify-center text-gray-500">
+                    No Video Preview
+                  </div>
+                )}
+                <Input
+                  accept="video/*"
+                  label="Upload Video"
+                  type="file"
+                  name="video"
+                  onChange={(e: any) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const previewUrl = URL.createObjectURL(file);
+                      field.handleChange(previewUrl);
+                    }
+                  }}
+                />
+              </Card>
+            )}
+          />
+
+        </div>
+
+        {/* Images */}
+        <div className="grid grid-cols-3 p-5 gap-5">
+          {["image1", "image2", "image3"].map((image: any, index) => (
+            <form.Field
+              name={image}
+              key={index}
+              children={(field) => (
+                <Card>
+                  <Img
+                    className="w-full h-60 object-cover mb-5"
+                    src={
+                      field.state.value
+                        ?  field.state.value
+                        : "/images/illustration/404.png"
+                    }
+                    alt={`Preview ${image}`}
+                  />
+                  <Input
+                    accept="image/*"
+                    label={`Header ${index + 1}`}
+                    type="file"
+                    name={image}
+                    onChange={(e: any) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const previewUrl = URL.createObjectURL(file);
+                        field.handleChange(previewUrl);
+                      }
+                    }}
+                  />
+                </Card>
+              )}
+            />
           ))}
-      </div>
-      <div className="flex gap-3 border justify-center mt-4">
-        {paginate.links &&
-          paginate.links.map((item: linkPaginate, index: number) => (
-            <button
-              onClick={() => item.url && handlePaginate(item.url,"query",search)}
-              className={`${twMerge("bg-slate-700/80 hover:bg-slate-700 shadow rounded-full p-2 w-10 h-10 duration-75 ease-in-out transition-all", item.active && "bg-primary/80 hover:bg-primary", item.url === null && "opacity-50 cursor-not-allowed")}`}
-              key={`button-paginate-${index}`}
-              disabled={item.url === null}
-            >
-              {index != 0 && index != paginate.links.length - 1 && item.label}
-              {index === 0 && "<"}
-              {index === paginate.links.length - 1 && ">"}
-            </button>
-          ))}
-      </div>
+        </div>
+
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-600 text-white rounded"
+        >
+          Submit
+        </button>
+      </form>
     </>
   );
 };

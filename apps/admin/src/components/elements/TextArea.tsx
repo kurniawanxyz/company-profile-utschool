@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { TextareaHTMLAttributes } from 'react'
 
 type Props = {
     label: string,
     name: string,
     value? : string,
     defaultValue?: string
-}
+} & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>,"label" | "name" | "value" | "defaultValue">
 
 const TextArea = (props: Props) => {
   return (

@@ -53,7 +53,7 @@ const GalleryCategoriesPage = (props: Props) => {
           </tr>
         </thead>
         <tbody>
-          {paginate.data.length == 0 && (
+          {paginate && paginate.data.length == 0 && (
             <tr
               className="bg-slate-400 w-full text-slate-200 text-center"
               key={`gallery-categories`}
@@ -85,7 +85,7 @@ const GalleryCategoriesPage = (props: Props) => {
         </tbody>
       </table>
 
-      <div className="flex gap-3 border justify-center mt-4">
+      {/* <div className="flex gap-3 border justify-center mt-4">
         {(paginate.links && paginate.data.length > 0) &&
           paginate.links.map((item: linkPaginate, index: number) => (
             <button
@@ -99,7 +99,7 @@ const GalleryCategoriesPage = (props: Props) => {
               {index === paginate.links.length - 1 && ">"}
             </button>
           ))}
-      </div>
+      </div> */}
     </>
   );
 };

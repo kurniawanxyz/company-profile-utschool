@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-screen ${poopins.className}`}
+        className={` ${poopins.className}`}
       >
         <NextQueryClientProvider>
           <Navbar/>

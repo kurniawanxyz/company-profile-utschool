@@ -38,7 +38,7 @@ export const navItems = [
           label: "Direktur"
         },
         {
-          href: "/",
+          href: "/partner",
           label: "Partner Industri"
         },
       ]

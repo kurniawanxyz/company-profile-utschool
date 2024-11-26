@@ -14,8 +14,8 @@ import {format} from "date-fns"
 
 type Props = {};
 
-const formatDate = (dateString:string) => {
-  return format(new Date(dateString), 'PPPpp'); // Contoh format: "Sep 20, 2024 at 10:20 AM"
+const formatDate = (dateString:string) =>{
+  return format(new Date(dateString), 'PPpp'); // Contoh format: "Sep 20, 2024 at 10:20 AM"
 };
 
 function NewsPage({}: Props) {

@@ -17,7 +17,9 @@ class SuperAdminIniMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth('sanctum')->check()) {
-            return HandleJsonResponseHelpers::res("Access denied", "You don't have access!", 403, false);
+            return HandleJsonResponseHelpers::res("Access denied", "You don't have access!", 401, false);
+        }else{
+
         }
 
         if (auth('sanctum')->user()->role != 'super_admin') {

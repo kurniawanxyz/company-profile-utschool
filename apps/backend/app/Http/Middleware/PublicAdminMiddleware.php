@@ -20,6 +20,6 @@ class PublicAdminMiddleware
             return $next($request);
         }
 
-        return HandleJsonResponseHelpers::res("Access denied", "You don't have access!", 403, false);
+        return HandleJsonResponseHelpers::res("Access denied", "You don't have access!", 401, false);
     }
 }
